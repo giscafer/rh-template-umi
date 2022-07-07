@@ -39,4 +39,4 @@ $ yarn dev
 
 ## License
 
-MIT @author [giscafer](https://giscafer.com)
+MIT author[@giscafer](https://giscafer.com)

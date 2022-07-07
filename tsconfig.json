@@ -1,6 +1,7 @@
 {
   "extends": "./src/.umi/tsconfig.json",
-  "compilerOptions":{
-    "ignoreNodeBuiltInModules":true,
+  "compilerOptions": {
+    "ignoreNodeBuiltInModules": true,
+    "target": "ES5"
   }
 }
