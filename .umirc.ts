@@ -9,9 +9,10 @@ export default defineConfig({
   request: {},
   mfsu: false,
   layout: {
-    title: '@umijs/max',
+    rightRender: true,
+    title: 'RootHub Scaffold',
   },
-/*   plugins: ["@alitajs/plugin-theme"],
+  /*   plugins: ["@alitajs/plugin-theme"],
   dynamicTheme: {
     type: "antd",
     themeVariables: ["@primary-color"],
@@ -19,4 +20,3 @@ export default defineConfig({
   routes: routes,
   npmClient: 'yarn',
 });
-

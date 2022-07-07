@@ -1,13 +1,14 @@
 import Footer from '@/components/Footer';
 import { THEME_KEY } from '@/config/constant';
+import { colorSet } from '@/config/theme';
+import { saveToken } from '@/shared/auth/auth';
 import { encrypt } from '@/shared/utils/encrypt';
+import { queryStringToObject } from '@/shared/utils/queryString';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { Alert, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { history, Link, useModel } from 'umi';
-import { colorSet } from '@/config/theme';
 import styles from './index.less';
-import { saveToken } from '@/shared/auth/auth';
 
 interface ILoginResult {
   status?: 'fail' | 'success';
@@ -31,8 +32,8 @@ const LoginMessage: React.FC<{
 const goto = () => {
   if (!history) return;
   setTimeout(() => {
-    const { query } = (history.location as any);
-    const { redirect } = query as { redirect: string };
+    // 重定向
+    const { redirect } = queryStringToObject(window.location.href as string);
     history.push(redirect || '/');
   }, 10);
 };
@@ -40,12 +41,12 @@ const goto = () => {
 const Login: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [userLoginState, setUserLoginState] = useState<ILoginResult>({});
-  const { userLogin } = useModel('base.user');
   const { initialState, setInitialState } = useModel('@@initialState');
+  const { userLogin } = useModel('base.user');
 
   useEffect(() => {
     const color = window?.localStorage.getItem(THEME_KEY) || colorSet[0];
-    (window as any).less.modifyVars({ 'primary-color': color });
+    (window as any).less?.modifyVars?.({ 'primary-color': color });
   }, []);
 
   const fetchUserInfo = async () => {
@@ -126,6 +127,7 @@ const Login: React.FC = () => {
         <div className={styles.main}>
           <div className={styles.loginTitle}>账号登录</div>
           <ProForm
+            initialValues={{ mobile: '13333333333', password: 'xxxxx' }}
             onFinish={async (values) => {
               handleSubmit(values);
             }}

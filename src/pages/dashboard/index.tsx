@@ -1,7 +1,7 @@
-import React from "react";
+import Analysis from './analysis';
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return <Analysis />;
 }
 
 export default Dashboard;

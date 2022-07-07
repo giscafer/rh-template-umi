@@ -1,4 +1,3 @@
-import { Card, message } from 'antd';
 import ProForm, {
   ProFormDateRangePicker,
   ProFormDependency,
@@ -8,9 +7,11 @@ import ProForm, {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-form';
-import { useRequest } from 'umi';
-import type { FC } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
+import { useRouteData } from '@umijs/max';
+import { Card, message } from 'antd';
+import type { FC } from 'react';
+import { useRequest } from 'umi';
 import { fakeSubmitForm } from './service';
 import styles from './style.less';
 
@@ -26,10 +27,15 @@ const BasicForm: FC<Record<string, any>> = () => {
     run(values);
   };
 
+  const { route }: any = useRouteData();
   return (
     <PageContainer
       fixedHeader
-      header={{ breadcrumb: {}, onBack: () => window.history.back() }}
+      header={{
+        title: route.name,
+        breadcrumb: {},
+        onBack: () => window.history.back(),
+      }}
     >
       <Card bordered={false}>
         <ProForm

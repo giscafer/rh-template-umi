@@ -1,4 +1,4 @@
-const routes= [
+const routes = [
   {
     path: '/user',
     layout: false,
@@ -70,6 +70,7 @@ const routes= [
   {
     name: '权限演示',
     path: '/access',
+    icon: 'rh-icon-permission',
     component: './access',
   },
   {
@@ -77,9 +78,12 @@ const routes= [
     redirect: '/welcome',
   },
   {
+    path: '/demo',
+    component: './demo',
+  },
+  {
     component: './404',
   },
 ];
 
-
-export default routes
+export default routes;

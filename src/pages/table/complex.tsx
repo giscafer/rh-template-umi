@@ -1,8 +1,9 @@
-import { RhTable, RhFileImportModal } from '@/components';
+import { RhFileImportModal, RhTable } from '@/components';
 import { httpGet } from '@/shared/http';
 import { DownOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { TableDropdown } from '@ant-design/pro-table';
+import { useRouteData } from '@umijs/max';
 import { Button, Dropdown, Menu, message, Space, Tag } from 'antd';
 import React, { useRef, useState } from 'react';
 import { history } from 'umi';
@@ -110,7 +111,7 @@ const columns: any[] = [
       text: any,
       record: { id: any; url: string | undefined },
       _: any,
-      action: { startEditable: (arg0: any) => void; reload: () => void }
+      action: { startEditable: (arg0: any) => void; reload: () => void },
     ) => [
       <a
         key="editable"
@@ -135,7 +136,7 @@ const columns: any[] = [
   },
 ];
 
-export default (props: any) => {
+export default () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isImportModalVisible, setIsImportModalVisible] = useState(false);
   const actionRef = React.useRef<any>();
@@ -146,11 +147,12 @@ export default (props: any) => {
     status?: string;
   }>({});
 
+  const { route }: any = useRouteData();
   return (
     <PageContainer
       fixedHeader
       header={{
-        title: props.route.name,
+        title: route.name,
         breadcrumb: {},
         extra: [
           <Button

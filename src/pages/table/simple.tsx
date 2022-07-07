@@ -1,6 +1,7 @@
 import RhTable from '@/components/RhTable';
 import { httpGet } from '@/shared/http';
 import { PageContainer } from '@ant-design/pro-layout';
+import { useRouteData } from '@umijs/max';
 import React from 'react';
 
 const columns: any[] = [
@@ -38,7 +39,7 @@ const columns: any[] = [
       text: string,
       record: { id: any; url: string | undefined },
       _: any,
-      action: { startEditable: (arg0: any) => void }
+      action: { startEditable: (arg0: any) => void },
     ) => [
       <a
         key="editable"
@@ -55,13 +56,14 @@ const columns: any[] = [
   },
 ];
 
-export default (props: any) => {
+export default () => {
   const actionRef = React.useRef<any>();
+  const { route }: any = useRouteData();
   return (
     <PageContainer
       fixedHeader
       header={{
-        title: props.route.name,
+        title: route.name,
         breadcrumb: {},
         extra: [],
       }}
@@ -77,7 +79,7 @@ export default (props: any) => {
         request={async (params = {}) => {
           // 这里只是举例
           const list: any = await httpGet(
-            'https://proapi.azurewebsites.net/github/issues'
+            'https://proapi.azurewebsites.net/github/issues',
           );
 
           return {

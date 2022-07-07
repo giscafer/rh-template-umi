@@ -1,21 +1,19 @@
-
-
-import { THEME_KEY } from "@/config/constant";
-import { colorSet } from "@/config/theme";
-import { Dropdown, Menu } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import { THEME_KEY } from '@/config/constant';
+import { colorSet } from '@/config/theme';
+import { Dropdown, Menu } from 'antd';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const ColorPanel = ({ color }: { color: string }) => (
   <div
     style={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       margin: 4,
     }}
   >
     <div
-      style={{ width: 20, height: 20, background: color, borderRadius: "50%" }}
+      style={{ width: 20, height: 20, background: color, borderRadius: '50%' }}
     />
   </div>
 );
@@ -25,7 +23,7 @@ const ThemeSwitcher: React.FC<Record<string, never>> = () => {
   const [theme, setTheme] = useState(defaultTheme);
 
   const onChange = useCallback((color: string) => {
-    (window as any).less.modifyVars({ "primary-color": color });
+    (window as any).less?.modifyVars?.({ 'primary-color': color });
     window.localStorage.setItem(THEME_KEY, color);
     setTheme(color);
   }, []);
@@ -33,8 +31,8 @@ const ThemeSwitcher: React.FC<Record<string, never>> = () => {
   useEffect(() => {
     const themeCache = window.localStorage.getItem(THEME_KEY);
 
-    (window as any).less.modifyVars({
-      "primary-color": themeCache || colorSet[0],
+    (window as any).less?.modifyVars?.({
+      'primary-color': themeCache || colorSet[0],
     });
     setTheme(themeCache || colorSet[0]);
   }, []);

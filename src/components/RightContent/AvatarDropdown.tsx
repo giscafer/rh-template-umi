@@ -1,17 +1,18 @@
-import React, { useCallback } from "react";
+import { queryStringToObject } from '@/shared/utils/queryString';
 import {
   LogoutOutlined,
   SettingOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { Avatar, Menu, Spin } from "antd";
-import { history, useModel } from "umi";
-import { stringify } from "querystring";
-import HeaderDropdown from "../HeaderDropdown";
-import styles from "./index.less";
-import RhApi from "@/rh/apis";
+} from '@ant-design/icons';
+import { Avatar, Menu, Spin } from 'antd';
+import { stringify } from 'querystring';
+import React, { useCallback } from 'react';
+import { history, useModel } from 'umi';
+import HeaderDropdown from '../HeaderDropdown';
+import styles from './index.less';
 
-const { userLogout } = RhApi.Base;
+// TODO: 登出接口
+const userLogout = () => Promise.resolve(true);
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -22,12 +23,12 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await userLogout();
-  const { query = {}, pathname } = history.location;
-  const { redirect } = query;
+  const { pathname } = history.location;
+  const { redirect } = queryStringToObject(window.location.href as string);
   // Note: There may be security issues, please note
-  if (window.location.pathname !== "/user/login" && !redirect) {
+  if (window.location.pathname !== '/user/login' && !redirect) {
     history.replace({
-      pathname: "/user/login",
+      pathname: '/user/login',
       search: stringify({
         redirect: pathname,
       }),
@@ -36,7 +37,7 @@ const loginOut = async () => {
 };
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
-  const { initialState, setInitialState } = useModel("@@initialState");
+  const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick = useCallback(
     (event: {
@@ -46,14 +47,14 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       domEvent: React.MouseEvent<HTMLElement>;
     }) => {
       const { key } = event;
-      if (key === "logout" && initialState) {
+      if (key === 'logout' && initialState) {
         setInitialState({ ...initialState, currentUser: undefined });
         loginOut();
         return;
       }
       history.push(`/account/${key}`);
     },
-    [initialState, setInitialState]
+    [initialState, setInitialState],
   );
 
   const loading = (
@@ -72,7 +73,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
     return loading;
   }
 
-  const { currentUser } = initialState;
+  const { currentUser = {} } = initialState;
 
   if (!currentUser || !currentUser.username) {
     return loading;
