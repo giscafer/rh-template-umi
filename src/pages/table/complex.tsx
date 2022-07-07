@@ -1,5 +1,4 @@
 import { RhFileImportModal, RhTable } from '@/components';
-import { httpGet } from '@/shared/http';
 import { DownOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { TableDropdown } from '@ant-design/pro-table';
@@ -217,9 +216,9 @@ export default () => {
         actionRef={actionRef}
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         request={async (params = {}) => {
-          return httpGet('https://proapi.azurewebsites.net/github/issues', {
-            params,
-          });
+          return fetch('https://proapi.azurewebsites.net/github/issues').then(
+            (resp) => resp.json(),
+          );
         }}
         rowSelection={{
           selectedRowKeys,

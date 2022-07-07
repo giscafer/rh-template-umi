@@ -30,7 +30,8 @@ const BasicForm: FC<Record<string, any>> = () => {
   const { route }: any = useRouteData();
   return (
     <PageContainer
-      fixedHeader
+      ghost={false}
+      // fixedHeader
       header={{
         title: route.name,
         breadcrumb: {},

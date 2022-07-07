@@ -74,7 +74,7 @@ export class RNHttpAdapterImp implements HttpAdapter {
     // 校验token
     const token = await this.getToken();
 
-    let { accessToken = '', refreshToken, tokenExpireTime } = token;
+    let { accessToken = '', refreshToken, tokenExpireTime } = token || {};
     if (!isMockMode) {
       if (!token || !token?.accessToken) {
         this.handleLogout();
@@ -82,10 +82,10 @@ export class RNHttpAdapterImp implements HttpAdapter {
       }
       // 判断当前日期是否晚于tokenExpireTime，如果是表示token已经过期，需要用refreshToken去换一个新的token
       if (dayjs().isAfter(dayjs(tokenExpireTime))) {
-        const result = await fetch(`${this.baseURL}/auth/token/refresh?refreshToken=${refreshToken}`).then((response) =>
-          response.json(),
-        );
-        const { data } = result;
+        const result = await fetch(
+          `${this.baseURL}/auth/token/refresh?refreshToken=${refreshToken}`,
+        ).then((response) => response.json());
+        const { data } = result || {};
         accessToken = data.accessToken;
         saveToken(data);
       }
@@ -101,7 +101,9 @@ export class RNHttpAdapterImp implements HttpAdapter {
     signOut();
   }
 
-  handleResponse(response: AxiosResponse<any> & { config: { silent?: boolean } }) {
+  handleResponse(
+    response: AxiosResponse<any> & { config: { silent?: boolean } },
+  ) {
     const res = response.data || {};
     const { silent = false } = response.config;
 
@@ -110,7 +112,10 @@ export class RNHttpAdapterImp implements HttpAdapter {
       return res;
     } else if (res.code === RES_UNAUTHORIZED_CODE) {
       if (!silent) {
-        message.info('您已经登出，您可以取消以停留在此页面，或再次登录', ERR_MESSAGE_SHOW_DURATION);
+        message.info(
+          '您已经登出，您可以取消以停留在此页面，或再次登录',
+          ERR_MESSAGE_SHOW_DURATION,
+        );
       }
       this.handleLogout();
     } else if (res.code === RES_PERMISSION_DENIED_CODE) {
@@ -121,7 +126,10 @@ export class RNHttpAdapterImp implements HttpAdapter {
     return this.handleErrorResponse(res, { silent });
   }
 
-  handleErrorResponse(error: AxiosError & { desc?: string; msg?: string }, axiosConfig: { silent?: any; }): Promise<any> {
+  handleErrorResponse(
+    error: AxiosError & { desc?: string; msg?: string },
+    axiosConfig: { silent?: any },
+  ): Promise<any> {
     // 后端不统一处理
     const msg = error.desc || error.message || error.msg;
     if (!axiosConfig?.silent) {

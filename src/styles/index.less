@@ -1,5 +1,4 @@
 @import './variables.less';
-@import './helper.css';
 @import './reset/index.less';
 @import './common.less';
 
@@ -62,6 +61,7 @@ body {
 .ant-pro-global-header-layout-mix {
   color: @heading-color !important;
   background-color: #fff !important;
+
   .ant-pro-global-header-logo h1 {
     color: @heading-color !important;
   }
@@ -72,14 +72,17 @@ body {
   .ant-modal-confirm-btns {
     display: none;
   }
+
   &.ant-modal-confirm .ant-modal-body {
     padding: 18px 32px 24px;
   }
+
   .ant-modal-confirm-body {
     .ant-modal-confirm-title {
       font-weight: 600;
       font-size: 18px;
     }
+
     .ant-modal-confirm-content {
       margin-top: 18px;
     }
@@ -92,18 +95,21 @@ body {
       z-index: 70;
       display: block;
       width: calc(100% + 20px);
-      padding: 18px 0 8px 0;
+      padding: 18px 0 8px;
       background-color: #fff;
     }
+
     .ant-modal-body {
       position: relative;
       max-height: 60vh; // 默认
       padding-top: 0;
       overflow: auto;
+
       .ant-modal-confirm-body .ant-modal-confirm-content {
         margin-top: 10px;
       }
     }
+
     .ant-modal-close {
       z-index: 1000;
     }
@@ -127,9 +133,11 @@ body {
     & > .ant-col {
       display: flex;
       color: #21252e;
+
       & > span:first-child {
         white-space: nowrap;
       }
+
       & > span:last-child {
         color: #505363;
         word-break: break-word;

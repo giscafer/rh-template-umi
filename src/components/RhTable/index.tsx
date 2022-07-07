@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  * @author giscafer
  * @email giscafer@outlook.com
@@ -6,6 +6,7 @@
  * @desc 通用封装，目的是为了精简写法和改造UI规范，唯一不变原则： ProTable 原 Api 一致性不变
  */
 
+import RhEmpty from '@/components/RhEmpty';
 import TableMulSelect from '@/components/RhTableMulSelected';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ProFormColumnsType, ProFormInstance } from '@ant-design/pro-form';
@@ -23,9 +24,15 @@ import ProTable from '@ant-design/pro-table';
 import type { ProColumns } from '@ant-design/pro-table/lib/typing';
 import { useDebounceFn } from 'ahooks';
 import { Popconfirm } from 'antd';
-import RhEmpty from '@/components/RhEmpty';
+import { SortOrder } from 'antd/lib/table/interface';
 import { isNumber, noop } from 'lodash';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useVT } from 'virtualizedtableforantd4';
 import useColumnCache from './cache';
 import ColumnSetting from './ColumnSetting';
@@ -34,7 +41,11 @@ import EditableRow from './editable/row';
 import './index.less';
 import { RhActionType, RhColumns, RhTableProps } from './types';
 
-const RhTable = <DataType extends Record<string, any>, Params extends ParamsType = ParamsType, ValueType = 'text'>(
+const RhTable = <
+  DataType extends Record<string, any>,
+  Params extends ParamsType = ParamsType,
+  ValueType = 'text',
+>(
   props: RhTableProps<DataType, Params, ValueType>,
 ) => {
   const {
@@ -57,7 +68,7 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
     customToolBarRender,
     ...restProps
   } = props;
-  const [renderColumns, setRenderColumns] = useState([]);
+  const [renderColumns, setRenderColumns] = useState<any[]>([]);
   const queryFilterFormRef = useRef<ProFormInstance>();
   const lightFilterFormRef = useRef<ProFormInstance>();
   const defaultActionRef = useRef<RhActionType>();
@@ -68,11 +79,15 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
     };
   });
 
-  const actionRef = (props.actionRef || defaultActionRef) as React.MutableRefObject<RhActionType>;
+  const actionRef = (props.actionRef ||
+    defaultActionRef) as React.MutableRefObject<RhActionType>;
 
   const onConfirmRef = useRef<() => void>();
   // 缓存列配置
-  const { columnCache, setColumnCache, clearColumnCache } = useColumnCache(props.id, columns);
+  const { columnCache, setColumnCache, clearColumnCache } = useColumnCache(
+    props.id,
+    columns,
+  );
 
   const tableReload = useCallback(() => {
     actionRef.current.pageInfo.current = 1;
@@ -140,7 +155,11 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
           formItemProps = {},
         } = column;
 
-        if (columnSearch === false || hideInSearch === true || valueType === 'option') {
+        if (
+          columnSearch === false ||
+          hideInSearch === true ||
+          valueType === 'option'
+        ) {
           return false;
         }
 
@@ -204,77 +223,117 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
   }, []);
 
   const queryFilterColumns = useMemo(() => {
-    return filterColumns.filter((column) => column.filterType === 'query').sort(sorter) as ProFormColumnsType[];
+    return filterColumns
+      .filter((column) => column.filterType === 'query')
+      .sort(sorter) as ProFormColumnsType[];
   }, [filterColumns, sorter]);
 
   // light查询列定义
   const lightFilterColumns = useMemo(() => {
-    return filterColumns.filter((column) => column.filterType === 'light').sort(sorter) as ProFormColumnsType[];
+    return filterColumns
+      .filter((column) => column.filterType === 'light')
+      .sort(sorter) as ProFormColumnsType[];
   }, [filterColumns, sorter]);
 
-  const renderProFormItem = useCallback((column) => {
-    const {
-      valueType,
-      dataIndex,
-      title,
-      valueEnum,
-      renderFormItem,
-      fieldProps = { size: 'large' },
-      ...resetProps
-    } = column;
+  const renderProFormItem = useCallback(
+    (column: {
+      [x: string]: any;
+      valueType: any;
+      dataIndex: any;
+      title: any;
+      valueEnum: any;
+      renderFormItem: any;
+      fieldProps?: { size: string } | undefined;
+    }) => {
+      const {
+        valueType,
+        dataIndex,
+        title,
+        valueEnum,
+        renderFormItem,
+        fieldProps = { size: 'large' } as any,
+        ...resetProps
+      } = column;
 
-    if (renderFormItem) {
-      return renderFormItem();
-    }
+      if (renderFormItem) {
+        return renderFormItem();
+      }
 
-    if (valueType === 'digit') {
-      return <ProFormDigit key={dataIndex} name={dataIndex} label={title} fieldProps={fieldProps} />;
-    }
-
-    if (valueType === 'date') {
-      return <ProFormDatePicker key={dataIndex} name={dataIndex} label={title} fieldProps={fieldProps} />;
-    }
-
-    if (valueType === 'dateRange') {
-      return <ProFormDateRangePicker key={dataIndex} name={dataIndex} label={title} fieldProps={fieldProps} />;
-    }
-
-    if (valueType === 'select' || valueEnum) {
-      const showEnumSelect: boolean = (valueEnum && Object.keys(valueEnum).length > 0) || !!fieldProps?.options?.length;
-      return (
-        showEnumSelect && (
-          <ProFormSelect
-            ref={() => {}}
+      if (valueType === 'digit') {
+        return (
+          <ProFormDigit
             key={dataIndex}
             name={dataIndex}
             label={title}
-            valueEnum={valueEnum}
             fieldProps={fieldProps}
-            {...resetProps}
           />
-        )
-      );
-    }
-    if (valueType === 'text' || !valueType) {
-      return (
-        <ProFormText
-          key={dataIndex}
-          name={dataIndex}
-          label={title}
-          fieldProps={fieldProps}
-          footerRender={(onConfirm) => {
-            onConfirmRef.current = onConfirm;
-            return false;
-          }}
-        />
-      );
-    }
+        );
+      }
 
-    return null;
-  }, []);
+      if (valueType === 'date') {
+        return (
+          <ProFormDatePicker
+            key={dataIndex}
+            name={dataIndex}
+            label={title}
+            fieldProps={fieldProps}
+          />
+        );
+      }
+
+      if (valueType === 'dateRange') {
+        return (
+          <ProFormDateRangePicker
+            key={dataIndex}
+            name={dataIndex}
+            label={title}
+            fieldProps={fieldProps}
+          />
+        );
+      }
+
+      if (valueType === 'select' || valueEnum) {
+        const showEnumSelect: boolean =
+          (valueEnum && Object.keys(valueEnum).length > 0) ||
+          !!fieldProps?.options?.length;
+        return (
+          showEnumSelect && (
+            <ProFormSelect
+              key={dataIndex}
+              name={dataIndex}
+              label={title}
+              valueEnum={valueEnum}
+              fieldProps={fieldProps}
+              {...resetProps}
+            />
+          )
+        );
+      }
+      if (valueType === 'text' || !valueType) {
+        return (
+          <ProFormText
+            key={dataIndex}
+            name={dataIndex}
+            label={title}
+            fieldProps={fieldProps}
+            footerRender={(onConfirm) => {
+              onConfirmRef.current = onConfirm;
+              return false;
+            }}
+          />
+        );
+      }
+
+      return null;
+    },
+    [],
+  );
 
   const onRequest = useCallback(
-    async (pageInfo, sort) => {
+    async (
+      pageInfo: { current: any; pageSize: any },
+      sort: Record<string, SortOrder>,
+    ) => {
       if (!restProps.hideLoading) {
         setLoading(true);
       }
@@ -316,10 +375,11 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
         success: true,
         total,
         current: res.page,
-        data: res.list || [],
+        data: res.list || res.data || [],
       };
       if (res.rows) {
-        tableRes.totalPages = Math.ceil(Number(res.page) / Number(res.rows)) || 0;
+        tableRes.totalPages =
+          Math.ceil(Number(res.page) / Number(res.rows)) || 0;
       }
       return tableRes;
     },
@@ -349,10 +409,14 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
     );
   }, [columnCache, setColumnCache, clearColumnCache]);
 
-  const { cleanMethod, leftExtraBtn = [], rightExtraBtn = [] } = tableAlertRenderProps;
+  const {
+    cleanMethod,
+    leftExtraBtn = [],
+    rightExtraBtn = [],
+  } = tableAlertRenderProps;
 
   if (restProps.editable) {
-    restProps.onRow = ((record) => {
+    restProps.onRow = ((record: any) => {
       return {
         record,
       };
@@ -391,8 +455,11 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
                 }
               }
               // 判断是否需要联动子节点
-              if (selectedColumns.linkChildrenKey && selectedColumns.linkChildrenKey.length > 0) {
-                const resetValueObject = {};
+              if (
+                selectedColumns.linkChildrenKey &&
+                selectedColumns.linkChildrenKey.length > 0
+              ) {
+                const resetValueObject: any = {};
                 selectedColumns.linkChildrenKey?.forEach((item: any) => {
                   resetValueObject[item] = undefined;
                 });
@@ -405,8 +472,12 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
         )}
 
         {lightFilterColumns.length > 0 && (
-          <LightFilter className="rh-table-light-filter-form" formRef={lightFilterFormRef} onFinish={run}>
-            {lightFilterColumns.map((column) => {
+          <LightFilter
+            className="rh-table-light-filter-form"
+            formRef={lightFilterFormRef}
+            onFinish={run as any}
+          >
+            {lightFilterColumns.map((column: any) => {
               return renderProFormItem(column);
             })}
             <div style={{ padding: '1px 0 0 3px' }}>
@@ -422,7 +493,9 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
           </LightFilter>
         )}
         {customToolBarRender && (
-          <div className={`rh-table-toolbar ${restProps.toolBarClassName ?? ''}`}>
+          <div
+            className={`rh-table-toolbar ${restProps.toolBarClassName ?? ''}`}
+          >
             {customToolBarRender().map((item: any) => item)}
           </div>
         )}
@@ -432,7 +505,11 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
         rowKey={restProps.rowKey || 'id'}
         options={false}
         loading={
-          !restProps.hideLoading && request ? loading : restProps.loading !== undefined ? restProps.loading : false
+          !restProps.hideLoading && request
+            ? loading
+            : restProps.loading !== undefined
+            ? restProps.loading
+            : false
         }
         form={{
           ignoreRules: false,
@@ -440,7 +517,9 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
         dateFormatter="string"
         tableAlertRender={({ selectedRowKeys, onCleanSelected }) => {
           if (tableAlertRenderProps?.tableMulSelectProps?.display) {
-            return <TableMulSelect {...tableAlertRenderProps.tableMulSelectProps} />;
+            return (
+              <TableMulSelect {...tableAlertRenderProps.tableMulSelectProps} />
+            );
           }
           const clean = cleanMethod || onCleanSelected;
           return (
@@ -488,14 +567,22 @@ const RhTable = <DataType extends Record<string, any>, Params extends ParamsType
         scroll={scroll}
         toolBarRender={toolBarRender}
         components={virtual ? vt : restProps.components}
-        request={request && onRequest}
+        request={request && (onRequest as any)}
         pagination={
           pagination !== false
             ? {
                 pageSize: 10,
                 showTotal: (total) => `总共 ${total} 条`,
                 size: 'default',
-                pageSizeOptions: ['10', '20', '50', '100', '200', '500', '1000'],
+                pageSizeOptions: [
+                  '10',
+                  '20',
+                  '50',
+                  '100',
+                  '200',
+                  '500',
+                  '1000',
+                ],
                 showQuickJumper: true,
                 showSizeChanger: true,
                 ...pagination,

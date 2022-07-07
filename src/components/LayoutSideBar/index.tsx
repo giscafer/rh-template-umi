@@ -33,7 +33,7 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
       setIsSideCollapsed(collapsed);
       leftDistanceFn(collapsed);
     },
-    [menuData]
+    [menuData],
   );
 
   /*   useEffect(() => {

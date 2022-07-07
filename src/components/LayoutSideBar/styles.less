@@ -1,9 +1,11 @@
 .sideBar {
   position: fixed;
   left: 0;
+  top: 56px;
   z-index: 100;
-  height: 100vh;
-  box-shadow: 2px 0 2px rgba(0, 0, 0, 0.1);
+  height: calc(~'100vh - 56px');
+  box-shadow: 2px 0 2px rgb(0 0 0 / 10%);
+
   :global {
     .ant-layout-sider-children {
       overflow-y: auto !important;

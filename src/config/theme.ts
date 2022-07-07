@@ -2,12 +2,12 @@
 
 const { getThemeVariables } = require('antd/dist/theme');
 const theme = getThemeVariables({
-  // compact: true,
+  compact: true,
 });
 
 Object.assign(theme, {
   // -------- Colors -----------
-  // 'primary-color': '#00B259',
+  'primary-color': '#386BD7',
   'info-color': '#3377FF',
   'success-color': '#00B259',
   'warning-color': '#EFC100',

@@ -1,15 +1,24 @@
 import { defineConfig } from '@umijs/max';
+import proxy from './proxy';
 import routes from './src/config/routes';
+import theme from './src/config/theme';
 
 export default defineConfig({
-  antd: {},
+  antd: {
+    // configProvider
+    configProvider: {
+      size: 'default',
+    },
+  },
   access: {},
   model: {},
   initialState: {},
   request: {},
   mfsu: false,
+  theme,
   layout: {
-    rightRender: true,
+    layout: 'mix',
+    fixedHeader: true,
     title: 'RootHub Scaffold',
   },
   /*   plugins: ["@alitajs/plugin-theme"],
@@ -18,5 +27,6 @@ export default defineConfig({
     themeVariables: ["@primary-color"],
   }, */
   routes: routes,
+  proxy: proxy[process.env.NODE_ENV || 'development'],
   npmClient: 'yarn',
 });

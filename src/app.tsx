@@ -1,8 +1,8 @@
 // 运行时配置
 
+import LayoutSideBar from '@/components/LayoutSideBar';
 import RightContent from '@/components/RightContent';
 import menuData from '@/config/menus';
-import SideBar from '@/layouts/SideBar';
 import { RunTimeLayoutConfig } from '@umijs/max';
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
@@ -14,8 +14,12 @@ export async function getInitialState(): Promise<Record<string, any>> {
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
   return {
+    layout: 'mix',
+    className: 'roothub',
+    fixedHeader: true,
+    backgroundColor: '#fff',
+    // disableContentMargin: false,
     rightContentRender: () => <RightContent />,
-    disableContentMargin: false,
     /*  waterMarkProps: {
       content: initialState?.currentUser?.name,
     }, */
@@ -23,7 +27,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
       const { location } = menuProps;
       const { pathname } = location;
       return (
-        <SideBar collapsible={false} menuData={menuData} pathName={pathname} />
+        <LayoutSideBar
+          collapsible={false}
+          menuData={menuData}
+          pathName={pathname}
+        />
       );
     },
     // 默认布局调整
