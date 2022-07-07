@@ -1,0 +1,621 @@
+{
+  "type": "table-modal",
+  "title": "属性",
+  "api": "/api/v1/datasource/${datasourceId}/propertyList",
+  "primaryField": "propertyId",
+  "body": [
+    {
+      "type": "tab-table",
+      "className": "m-t",
+      "columnSetting": false,
+      "rowKey": "propertyId",
+      "editable": true,
+      "recordCreatorProps": {
+        "visibleOn": "data.propertyType==='macro' || data.propertyType==='pmc'",
+        "position": "top",
+        "creatorButtonText": "新增",
+        "buttonProps": {
+          "type": "primary"
+        }
+      },
+      "data": {
+        "tabList": []
+      },
+      "dataSource": [
+        {
+          "propertyId": "NCStatus",
+          "name": "程序运行状态",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/CNCState",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "Mode",
+          "name": "工作模式",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/CNCMode",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "ActFeed",
+          "name": "切削速度",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/FeedRate",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "OvFeed",
+          "name": "切削倍率",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/FeedOverride",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "CutTime",
+          "name": "切削时间",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/CutTime",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "CycSec",
+          "name": "加工时间",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/SingleWorkTime",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "PartCnt",
+          "name": "产量",
+          "valueType": "UInt",
+          "authority": "Read",
+          "address": "/Channel1/WorkPartAllCount",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "WorkPartCnt",
+          "name": "当日产量",
+          "valueType": "UInt",
+          "authority": "Read",
+          "address": "/Channel1/WorkPartCount",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "OperateTime",
+          "name": "总运行时间",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/OperateTime",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "PowerOnTime",
+          "name": "开机时间",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/PowerOnTime",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "RequiredPartCount",
+          "name": "目标加工数",
+          "valueType": "UInt",
+          "authority": "Read",
+          "address": "/Channel1/RequiredPartCount",
+          "propertyType": "system"
+        },
+        {
+          "propertyId": "AlarmMsg",
+          "name": "报警信息",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/Alarm",
+          "propertyType": "alarm"
+        },
+        {
+          "propertyId": "Alarm",
+          "name": "报警",
+          "valueType": "Short",
+          "authority": "Read",
+          "address": "/Channel1/AlarmState",
+          "propertyType": "alarm"
+        },
+        {
+          "propertyId": "Emg",
+          "name": "急停",
+          "valueType": "Short",
+          "authority": "Read",
+          "address": "/Channel1/EStop",
+          "propertyType": "alarm"
+        },
+        {
+          "propertyId": "OvSpin",
+          "name": "主轴倍率",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/SpindleOverride",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "ActSpin",
+          "name": "主轴速度",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/SpindleSpeed",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "SpinLoad",
+          "name": "主轴负载",
+          "valueType": "Float",
+          "authority": "Read",
+          "address": "/Channel1/SpindleLoad",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "SpinTemp",
+          "name": "主轴温度",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/SpindleTemperatureValue",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "SCode",
+          "name": "主轴指定转速",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/SpindleSetSpeed",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "FCode",
+          "name": "切削指定速度",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/FeedSetSpeed",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_AbsPos",
+          "name": "X轴绝对坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/XAbsolutePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_Current",
+          "name": "X轴电流",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/XCurrent",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_Temp",
+          "name": "X轴温度",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/XTemperature",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_MachPos",
+          "name": "X轴机械坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/XMachinePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_RelPos",
+          "name": "X轴相对坐标",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/XRelativePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_RemPos",
+          "name": "X轴剩余距离",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/XDistancePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "X_Load",
+          "name": "X轴负载",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/XLoad",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_AbsPos",
+          "name": "Y轴绝对坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/YAbsolutePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_Current",
+          "name": "Y轴电流",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/YCurrent",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_Temp",
+          "name": "Y轴温度",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/YTemperature",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_MachPos",
+          "name": "Y轴机械坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/YMachinePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_RelPos",
+          "name": "Y轴相对坐标",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/YRelativePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_RemPos",
+          "name": "Y轴剩余距离",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/YDistancePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Y_Load",
+          "name": "Y轴负载",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/YLoad",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_AbsPos",
+          "name": "Z轴绝对坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/ZAbsolutePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_Current",
+          "name": "Z轴电流",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/ZCurrent",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_Temp",
+          "name": "Z轴温度",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/ZTemperature",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_MachPos",
+          "name": "Z轴机械坐标",
+          "valueType": "Double",
+          "authority": "Read",
+          "address": "/Channel1/ZMachinePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_RelPos",
+          "name": "Z轴相对坐标",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ZRelativePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "Z_RemPos",
+          "name": "Z轴剩余距离",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ZDistancePosition",
+          "propertyType": "axis"
+        },
+        {
+          "propertyId": "TCode",
+          "name": "刀具号",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ToolNum",
+          "propertyType": "knife"
+        },
+        {
+          "propertyId": "ToolCount",
+          "name": "加工刀具可用的最大加工次数",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ToolCount",
+          "propertyType": "knife"
+        },
+        {
+          "propertyId": "ToolLife",
+          "name": "加工刀具已加工次数",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ToolLife",
+          "propertyType": "knife"
+        },
+        {
+          "propertyId": "MainPgm",
+          "name": "主程序号",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/MainProgramName",
+          "propertyType": "program"
+        },
+        {
+          "propertyId": "CurSeq",
+          "name": "程序行号",
+          "valueType": "Int",
+          "authority": "Read",
+          "address": "/Channel1/ProgramLineNumber",
+          "propertyType": "program"
+        },
+        {
+          "propertyId": "CurNcBlk",
+          "name": "当前程序块",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/ProgramContent",
+          "propertyType": "program"
+        },
+        {
+          "propertyId": "CurPgmMsg",
+          "name": "当前程序注释",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/ProgramComment",
+          "propertyType": "program"
+        },
+        {
+          "propertyId": "CurPgm",
+          "name": "当前程序号",
+          "valueType": "String",
+          "authority": "Read",
+          "address": "/Channel1/ProgramName",
+          "propertyType": "program"
+        }
+      ],
+      "fields": [
+        {
+          "id": "index",
+          "label": "序号",
+          "valueType": "index",
+          "fixed": "left",
+          "width": 50
+        },
+        {
+          "id": "propertyId",
+          "label": "属性ID",
+          "width": 120,
+          "quickEdit": {
+            "renderType": "input",
+            "required": true,
+            "validator": [
+              {
+                "type": "pattern",
+                "value": "^[a-zA-Z][a-zA-Z0-9_-]{2,64}$",
+                "message": "请输入字母开头，数字、字母和-_特殊字符的组合"
+              }
+            ]
+          }
+        },
+        {
+          "id": "name",
+          "label": "属性名称",
+          "width": 120,
+          "quickEdit": {
+            "renderType": "input",
+            "required": true
+          }
+        },
+        {
+          "id": "address",
+          "label": "采集地址",
+          "width": 180,
+          "quickEdit": {
+            "renderType": "input",
+            "required": true
+          }
+        },
+        {
+          "id": "valueType",
+          "label": "数据类型",
+          "width": 110,
+          "valueType": "select",
+          "valueEnum": [
+            {
+              "label": "Bool",
+              "value": "Bool"
+            },
+            {
+              "label": "Byte",
+              "value": "Byte"
+            },
+            {
+              "label": "String",
+              "value": "String"
+            },
+            {
+              "label": "Word",
+              "value": "Word"
+            },
+            {
+              "label": "UWord",
+              "value": "UWord"
+            },
+            {
+              "label": "DWord",
+              "value": "DWord"
+            },
+            {
+              "label": "UDWord",
+              "value": "UDWord"
+            },
+            {
+              "label": "Int",
+              "value": "Int"
+            },
+            {
+              "label": "UInt",
+              "value": "UInt"
+            },
+            {
+              "label": "Short",
+              "value": "Short"
+            },
+            {
+              "label": "Float",
+              "value": "Float"
+            },
+            {
+              "label": "Double",
+              "value": "Double"
+            }
+          ],
+          "quickEdit": {
+            "renderType": "select",
+            "required": true
+          },
+          "dependencies": [
+            {
+              "type": "linkage",
+              "expression": "${propertyType==='pmc'}",
+              "defaultValue": "Word",
+              "valueEnum": [
+                {
+                  "label": "Bool",
+                  "value": "Bool"
+                },
+                {
+                  "label": "Byte",
+                  "value": "Byte"
+                },
+                {
+                  "label": "Word",
+                  "value": "Word"
+                },
+                {
+                  "label": "DWord",
+                  "value": "DWord"
+                }
+              ]
+            },
+            {
+              "type": "linkage",
+              "expression": "${propertyType==='macro'}",
+              "defaultValue": "Float",
+              "valueEnum": [
+                {
+                  "label": "Float",
+                  "value": "Float"
+                }
+              ]
+            }
+          ]
+        },
+
+        {
+          "id": "authority",
+          "label": "读写类型",
+          "width": 110,
+          "valueType": "select",
+          "defaultValue": "All",
+          "valueEnum": [
+            {
+              "label": "读写",
+              "value": "All"
+            },
+            {
+              "label": "只读",
+              "value": "Read"
+            },
+            {
+              "label": "只写",
+              "value": "Write"
+            }
+          ],
+          "quickEdit": {
+            "renderType": "select",
+            "required": true
+          }
+        }
+      ],
+      "tabs": {
+        "id": "channel",
+        "source": "${tabList}"
+      },
+      "toolbar": {
+        "className": "flex-between",
+        "body": [
+          {
+            "id": "propertyType",
+            "renderType": "radio",
+            "fixed": "left",
+            "valueEnum": [
+              {
+                "label": "系统",
+                "value": "system"
+              },
+              {
+                "label": "报警",
+                "value": "alarm"
+              },
+              {
+                "label": "轴",
+                "value": "axis"
+              },
+              {
+                "label": "刀具",
+                "value": "knife"
+              },
+              {
+                "label": "程序",
+                "value": "program"
+              },
+              {
+                "label": "PMC",
+                "value": "pmc"
+              },
+              {
+                "label": "宏变量",
+                "value": "macro"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

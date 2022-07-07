@@ -1,0 +1,153 @@
+// button 组件样式覆盖
+@default-hover-bg-color: @primary-color;
+@default-active-bg-color: @primary-color;
+@primary-hover-bg-color: #437fff;
+@primary-active-bg-color: #2e5bb8;
+@danger-text-color: #e60000;
+@danger-hover-bg-color: #e60000;
+@danger-active-bg-color: #e60000;
+@primary-disabled-color: #bbd6fc;
+@btnHeight: 32px;
+
+.ant-input-search-button {
+  height: @btnHeight+4 !important;
+}
+.ant-btn {
+  min-width: 96px;
+  // 覆写 start
+  height: @btnHeight;
+  padding: 8px 16px;
+  // color: #505363;
+  line-height: 10px;
+  // outline: none !important;
+  // 覆写end
+  &.ant-btn-icon-only {
+    width: 32px;
+    min-width: 32px;
+    padding: 2.4px 0 !important;
+    &:hover {
+      background-color: @white-color !important;
+    }
+  }
+  &[disabled] {
+    background-color: @white-color !important;
+    border-color: #d4d9e2;
+  }
+  &:not([disabled]):hover {
+    color: @white-color;
+    background-color: @default-hover-bg-color;
+  }
+  &:not([disabled]):active {
+    color: @white-color;
+    background-color: @default-active-bg-color;
+    border-color: @white-color;
+    outline: @default-active-bg-color solid 1px;
+  }
+  &.ant-btn-three:not([disabled]) {
+    color: @default-hover-bg-color;
+    border: 1px solid @default-hover-bg-color;
+    &:hover {
+      color: @white-color;
+      background-color: @default-hover-bg-color;
+    }
+    &:active {
+      color: @white-color;
+      background-color: @default-active-bg-color;
+      border-color: @white-color;
+      outline: @default-active-bg-color solid 1px;
+    }
+  }
+  &.ant-btn-three[disabled] {
+    color: #def4e9;
+    border-color: #def4e9;
+  }
+  &.ant-btn-text {
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    &:not([disabled]) {
+      color: @default-hover-bg-color;
+      &:hover {
+        color: @primary-hover-bg-color;
+      }
+      &:active {
+        color: @primary-active-bg-color;
+        border: solid 1px @primary-active-bg-color;
+      }
+    }
+    &[disabled] {
+      border-color: @white-color;
+    }
+    &::after {
+      display: none;
+    }
+  }
+}
+.ant-btn-sm {
+  min-width: 80px;
+  height: 28px;
+  padding: 4px 10px !important;
+}
+.ant-btn-lg {
+  min-width: 104px;
+  height: 36px;
+  padding: 10px 24px;
+}
+.ant-btn-big {
+  min-width: 128px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+}
+.ant-btn-primary {
+  color: @white-color !important;
+  &:not([disabled]):hover {
+    background-color: @primary-hover-bg-color;
+  }
+  &:not([disabled]):active {
+    background-color: @primary-active-bg-color;
+    border-color: @primary-active-bg-color;
+    outline: @primary-active-bg-color solid 1px;
+  }
+  &[disabled] {
+    background-color: @primary-disabled-color !important;
+    border: none !important;
+  }
+}
+.ant-btn-dangerous {
+  color: @danger-text-color !important;
+  text-shadow: none;
+  background-color: @white-color;
+  border-color: @danger-text-color;
+  &:not([disabled]):hover {
+    color: @white-color !important;
+    background-color: @danger-hover-bg-color;
+  }
+  &:not([disabled]):active {
+    background-color: @danger-active-bg-color;
+    border-color: @white-color;
+    outline: @danger-active-bg-color solid 1px;
+  }
+  &[disabled] {
+    color: @danger-disabled-color !important;
+    border: 1px solid @danger-disabled-color !important;
+  }
+}
+.ant-btn-circle {
+  min-width: 28px;
+}
+// ghost
+.ant-btn-background-ghost {
+  background-color: transparent;
+  &.ant-btn-primary {
+    color: @primary-color !important;
+    &:hover {
+      color: @white-color !important;
+    }
+    &[disabled] {
+      color: @primary-disabled-color !important;
+      background-color: #fff !important;
+      border: 1px solid @primary-disabled-color !important;
+    }
+  }
+}

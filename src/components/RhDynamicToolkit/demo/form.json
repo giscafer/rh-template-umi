@@ -1,0 +1,78 @@
+{
+  "type": "form",
+  "title": "属性配置",
+  "api": "/api/v1/datasource/${datasourceId}/property",
+  "primaryField": "propertyId",
+  "body": [
+    {
+      "id": "propertyId",
+      "label": "属性ID",
+      "dataType": "string",
+      "renderType": "input",
+      "required": true,
+      "disabledOn": "data.propertyId",
+      "validator": [{ "type": "maxLength", "value": "40" }]
+    },
+    {
+      "id": "name",
+      "label": "属性名称",
+      "dataType": "string",
+      "renderType": "input",
+      "required": true,
+      "validator": [{ "type": "maxLength", "value": "40" }]
+    },
+    {
+      "id": "scanCycle",
+      "label": "扫描周期（ms）",
+      "dataType": "int",
+      "renderType": "input",
+      "required": true,
+      "defaultValue": 1000,
+      "validator": [{ "type": "min", "value": 1000 }]
+    },
+    {
+      "id": "transformType",
+      "label": "是否开启量程转换",
+      "dataType": "string",
+      "renderType": "radio",
+      "required": true,
+      "valueEnum": [
+        { "label": "开启", "value": "Linear" },
+        { "label": "不开启", "value": "None" }
+      ]
+    },
+    {
+      "id": "rawMin,rawMax",
+      "label": "原始值范围",
+      "dataType": "string",
+      "renderType": "numberRange",
+      "required": true,
+      "dependencies": [
+        {
+          "type": "visible",
+          "fieldName": "transformType",
+          "valueList": ["Linear"]
+        }
+      ]
+    },
+    {
+      "id": "targetMin,targetMax",
+      "label": "目标值范围",
+      "dataType": "string",
+      "renderType": "numberRange",
+      "required": true,
+      "dependencies": [
+        {
+          "type": "visible",
+          "fieldName": "transformType",
+          "valueList": ["Linear"]
+        }
+      ]
+    },
+    {
+      "id": "description",
+      "label": "描述",
+      "renderType": "textArea"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+// checkbox组件样式覆盖
+
+.ant-checkbox-inner,
+.ant-checkbox-indeterminate .ant-checkbox-inner {
+  border: 1px solid @checkbox-border-color !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: @primary-color !important;
+  border: 1px solid @primary-color !important;
+}
+.ant-checkbox-disabled + span {
+  color: @disabled-font-color !important;
+}
+// .ant-checkbox-checked .ant-checkbox-inner::after {
+//   border: 1px solid @white-color;
+//   border-top: 0;
+//   border-left: 0;
+//   margin-top: -1px;
+// }
+
+html .ant-checkbox-disabled.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: white;
+}

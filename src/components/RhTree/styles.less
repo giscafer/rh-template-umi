@@ -1,0 +1,223 @@
+@import '../../styles/variables.scss';
+
+@bgColor: #f9f9fb;
+@hoverColor: #eee;
+.rh-editable-tree {
+  width: 100%;
+  height: 600px;
+  overflow-y: auto;
+  background: transparent;
+  // border: 1px solid #e8e8e8;
+  // box-shadow: 2px 8px 30px 0 rgba(115, 119, 139, 0.2);
+  .ant-tree-node-content-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+    padding: 0;
+  }
+  .ant-tree-treenode {
+    width: 100%;
+  }
+
+  .ant-tree {
+    height: 100%;
+    background: transparent;
+    .ant-tree-node-content-wrapper {
+      .ant-tree-title {
+        line-height: 36px;
+      }
+    }
+    .ant-tree-treenode {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 0 0 16px;
+      color: #31415f;
+    }
+    .ant-tree-treenode:hover {
+      background-color: @hoverColor;
+      .tree-leaf .action {
+        margin-right: 0;
+      }
+    }
+    .ant-tree-treenode-selected {
+      background-color: #eee;
+    }
+  }
+
+  .ant-tree-switcher-leaf-line {
+    &::after {
+      width: 26px;
+      margin-left: -18px;
+      border-color: hsv(0, 0, 94%);
+    }
+    &::before {
+      right: unset;
+      left: 14px;
+      margin-left: -20px;
+      border-color: hsv(0, 0, 94%);
+    }
+  }
+
+  .ant-tree-title {
+    width: 90%;
+    img {
+      margin-right: 6px;
+    }
+  }
+
+  .rh-editable-tree-menu {
+    position: absolute;
+    right: 14px;
+    display: inline-block;
+    color: #9ea5b2;
+  }
+
+  .rh-tree-parent-no-children {
+    .ant-tree-switcher-leaf-line {
+      &::before {
+        border: none;
+      }
+      &::after {
+        border: none;
+      }
+    }
+  }
+
+  .ant-tree-list {
+    padding: 4px 0;
+    overflow-x: hidden;
+    height: 100%;
+  }
+
+  .ant-tree-switcher {
+    line-height: 32px;
+    .ant-tree-switcher-icon {
+      font-size: 14px;
+      vertical-align: middle;
+    }
+  }
+
+  .ant-tree-show-line {
+    .ant-tree-indent-unit::before {
+      border: none;
+    }
+    .ant-tree-switcher {
+      background: transparent;
+      &:hover {
+        background-color: @hoverColor !important;
+      }
+      .ant-tree-switcher-noop:hover {
+        background-color: @hoverColor;
+      }
+    }
+  }
+  .ant-tree-switcher-noop {
+    .ant-tree-switcher-line-icon {
+      display: none;
+    }
+  }
+
+  .tree-leaf {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    .action {
+      position: absolute;
+      top: 3px;
+      right: 0;
+      height: 36px;
+      margin-right: -200px;
+      padding: 0 10px;
+      line-height: 34px;
+      background-color: #f7f8fb;
+      box-shadow: -2px 0 4px 0 rgba(0, 21, 41, 0.08);
+      transition: margin 0.3s ease-in-out;
+      .icon {
+        margin-right: 5px;
+        &:nth-last-child(1) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .leaf-icon {
+    margin-right: 4px;
+  }
+
+  .ant-tree-indent-unit {
+    width: 18px;
+  }
+
+  .ant-tree .ant-tree-node-content-wrapper:hover,
+  .ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
+    color: @primary-color;
+    background: none;
+  }
+
+  .ant-tree .ant-tree-node-content-wrapper.ant-tree-node-selected {
+    font-weight: bold;
+  }
+
+  .site-tree-search-value {
+    color: #f50;
+  }
+  .searchInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 8px;
+  }
+
+  .ant-tree-title-fix {
+    max-width: 80%;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .ant-tree-title-extra {
+    position: absolute;
+    right: 10px;
+  }
+
+  .ant-tree-statistics {
+    height: 22px;
+    margin-bottom: 10px;
+    padding: 10px;
+    &:hover {
+      color: @primary-color;
+    }
+  }
+  .ant-tree-statistics-click {
+    color: @primary-color;
+  }
+
+  .ant-tree-statistics-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    font-size: 16px !important;
+  }
+
+  .ant-tree-statistics-boder {
+    width: 100%;
+    height: 1px;
+    margin-bottom: 10px;
+    border: 1px solid #979797;
+    opacity: 0.1;
+  }
+
+  // tree-select
+  .rh-tree-select-panel {
+    border: 1px solid @border-color-grey;
+    .ant-tree-treenode {
+      border-bottom: 1px solid @border-color-grey;
+    }
+  }
+}

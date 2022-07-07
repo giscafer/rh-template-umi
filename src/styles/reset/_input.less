@@ -1,0 +1,57 @@
+// input组件样式覆盖
+.ant-input-number-focused,
+.ant-input-affix-wrapper-focused {
+  box-shadow: 0 0 @outline-blur-size @outline-width @outline-color !important;
+  textarea:focus,
+  input:focus {
+    box-shadow: none !important;
+  }
+}
+
+.ant-form-item-control-input-content {
+  textarea:focus {
+    box-shadow: 0 0 @outline-blur-size @outline-width @outline-color !important;
+  }
+  .ant-input-affix-wrapper-disabled {
+    background-color: @disabled-bg-color;
+    border-color: @disabled-border-color;
+  }
+
+  .ant-input[disabled],
+  .ant-input-disabled,
+  .ant-input-number-disabled {
+    color: @disabled-font-color !important;
+    background-color: @disabled-bg-color;
+    &::placeholder {
+      color: @disabled-placeholder-color !important;
+    }
+  }
+}
+
+.ant-form-item-has-error {
+  .ant-input-number-focused,
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none !important;
+  }
+  textarea:focus {
+    box-shadow: none !important;
+  }
+}
+
+.ant-input-lg {
+  font-size: 14px !important;
+}
+
+.ant-input-group-wrapper.ant-input-search {
+  .ant-input-wrapper.ant-input-group > .ant-input {
+    height: 36px;
+  }
+  .ant-input-wrapper.ant-input-group > .ant-input-affix-wrapper {
+    height: 36px;
+    box-shadow: none !important;
+  }
+}
+
+.ant-input-suffix {
+  color: #9ea5b2;
+}

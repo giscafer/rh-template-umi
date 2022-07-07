@@ -1,0 +1,38 @@
+[
+  {
+    "propertyId": "AlarmMsg",
+    "name": "AlarmMsg",
+    "description": "AlarmMsg",
+    "scanCycle": 10001,
+    "collection": {
+      "address": "/Channel1/Alarm",
+      "channel": "Channel1",
+      "valueType": "String",
+      "authority": "Read"
+    }
+  },
+  {
+    "propertyId": "Alarm",
+    "name": "Alarm",
+    "description": "Alarm",
+    "scanCycle": 10001,
+    "collection": {
+      "address": "/Channel1/AlarmState",
+      "channel": "Channel1",
+      "valueType": "Short",
+      "authority": "Read"
+    }
+  },
+  {
+    "propertyId": "WorkPartCnt",
+    "name": "WorkPartCnt",
+    "description": "WorkPartCnt",
+    "scanCycle": 10001,
+    "collection": {
+      "address": "/Channel1/WorkPartCount",
+      "channel": "Channel1",
+      "valueType": "UInt",
+      "authority": "Read"
+    }
+  }
+]

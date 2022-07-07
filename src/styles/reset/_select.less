@@ -1,0 +1,46 @@
+// select组件样式覆盖
+
+.ant-select-focused,
+.ant-select:focus,
+.ant-select:active {
+  box-shadow: 0 0 @outline-blur-size @outline-width @outline-color !important;
+}
+
+.ant-form-item-has-error {
+  .ant-select-focused,
+  .ant-select:focus,
+  .ant-select:active {
+    box-shadow: none !important;
+  }
+}
+.ant-form-item-control-input-content {
+  .ant-select-disabled {
+    .ant-select-selector {
+      color: @disabled-font-color !important;
+      background-color: @disabled-bg-color !important;
+      border-color: @disabled-border-color !important;
+      .ant-select-selection-item {
+        color: @disabled-font-color !important;
+      }
+    }
+    .ant-select-selection-placeholder {
+      color: @disabled-placeholder-color !important;
+    }
+  }
+}
+
+.ant-select-lg {
+  font-size: 14px;
+}
+
+// 重置多选下拉框-选中选项
+.ant-select--multiple {
+  .ant-select__choice {
+    color: @white-color;
+    background-color: @primary-color !important;
+    border-radius: 16px;
+    .ant-select-remove-icon {
+      color: @white-color;
+    }
+  }
+}

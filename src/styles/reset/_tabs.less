@@ -1,0 +1,27 @@
+// tabs 组件样式覆盖
+.ant-tabs-ink-bar {
+  height: 3px;
+}
+.ant-tabs-nav .ant-tabs-tab-active {
+  font-weight: 500;
+}
+.ant-tabs.ant-tabs-card {
+  .ant-tabs-bar {
+    border-bottom: none;
+  }
+  .ant-tabs-card-bar {
+    .ant-tabs-tab {
+      margin-right: 0;
+      color: @text-color-secondary;
+      background-color: @tabs-background-color;
+      border: none;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+    .ant-tabs-tab-active {
+      color: #fff !important;
+      background-color: @primary-color;
+    }
+  }
+}

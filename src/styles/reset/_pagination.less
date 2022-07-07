@@ -1,0 +1,32 @@
+// pagination组件样式覆盖
+@pagination-border-color: @border-color-base;
+.ant-pagination {
+  color: @text-color-secondary !important;
+  .ant-select-open {
+    .ant-select-selection {
+      border-color: @primary-color !important;
+      box-shadow: 0 0 0 1px @primary-color !important;
+    }
+  }
+  .ant-pagination-item {
+    margin-right: 8px !important;
+    border-color: @pagination-border-color !important;
+    &.ant-pagination-item-before-jump-next {
+      margin-right: 0 !important;
+    }
+  }
+  .ant-pagination-item-active {
+    background: @primary-color !important;
+    border-color: @primary-color !important;
+    a {
+      color: @white-color !important;
+    }
+  }
+  .ant-select-dropdown-menu-item {
+    padding: 9px 12px;
+  }
+  .ant-select-selection--single .ant-select-selection__rendered {
+    margin-right: 26px;
+    margin-left: 12px;
+  }
+}

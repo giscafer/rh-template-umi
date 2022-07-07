@@ -1,0 +1,37 @@
+// menu组件样式覆盖
+
+.ant-menu-item:hover {
+  background-color: @item-hover-bg;
+}
+
+.ant-menu-submenu-popup .ant-menu-vertical.ant-menu-sub {
+  .sub-menu-collapsed-title:first-child {
+    color: @text-color;
+    font-weight: 600;
+    background-color: @white-color;
+    border-bottom: 1px solid @white-color-3;
+
+    &:hover {
+      color: @text-color;
+      background-color: @white-color;
+    }
+  }
+
+  .ant-menu-item-selected.ant-menu-item {
+    color: @primary-color;
+    background-color: @white-color-2;
+  }
+
+  .ant-menu-item:hover,
+  .ant-menu-item-active {
+    color: @primary-color;
+    background-color: @white-color-1;
+  }
+
+  .ant-menu-item {
+    height: 40px;
+    margin: 0;
+    padding: 0 14px;
+    line-height: 40px;
+  }
+}
