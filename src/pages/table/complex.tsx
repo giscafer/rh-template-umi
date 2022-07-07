@@ -27,13 +27,14 @@ const columns: any[] = [
   {
     dataIndex: 'index',
     width: 48,
-    hideInSearch: true,
   },
   {
     title: '标题',
     dataIndex: 'title',
     copyable: true,
     ellipsis: true,
+    hideInSearch: false,
+    search: true,
     filterType: 'query',
     tip: '标题过长会自动收缩',
   },
@@ -41,6 +42,7 @@ const columns: any[] = [
     title: '状态',
     dataIndex: 'state',
     filters: true,
+    hideInSearch: false,
     filterType: 'query',
     onFilter: true,
     valueType: 'select',
@@ -67,9 +69,7 @@ const columns: any[] = [
     title: '标签',
     dataIndex: 'labels',
     filterType: 'light',
-    renderFormItem: (_: any, { defaultRender }: any) => {
-      return defaultRender(_);
-    },
+    hideInSearch: false,
     render: (_: any, record: { labels: { name: any; color: any }[] }) => (
       <Space>
         {record.labels.map(({ name, color }) => (
@@ -84,6 +84,7 @@ const columns: any[] = [
     title: '创建时间',
     key: 'showTime',
     filterType: 'light',
+    hideInSearch: false,
     dataIndex: 'created_at',
     valueType: 'dateTime',
     sorter: true,
@@ -92,8 +93,6 @@ const columns: any[] = [
     title: '创建时间',
     dataIndex: 'created_at',
     valueType: 'dateRange',
-    hideInTable: true,
-    hideInSearch: true,
     search: {
       transform: (value: any[]) => {
         return {

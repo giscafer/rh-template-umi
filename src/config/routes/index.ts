@@ -74,6 +74,12 @@ const routes = [
     component: './access',
   },
   {
+    name: 'Github',
+    path: 'https://github.com/giscafer/rh-template-umi.git',
+    icon: 'rh-icon-permission',
+    isExternal: true,
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },

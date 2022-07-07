@@ -6,7 +6,7 @@
 
 ![](./demo.png)
 
-## 依赖
+## 技术栈
 
 - Umi 4.x ([Umi Max 简介](https://next.umijs.org/zh-CN/docs/max/introduce))
 - axios
@@ -18,6 +18,12 @@
 - Antd 样式覆写，满足 UI 风格
   <!-- - Swagger Doc Api TypeScript 接口代码生成 -->
   <!-- - 主题换色 -->
+
+## TODO
+
+- [ ] 配置化表格开发封装
+- [ ] 动态表单
+- [ ] 高效中后台前端开发方案
 
 ## 使用说明
 

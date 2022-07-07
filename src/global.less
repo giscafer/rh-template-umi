@@ -1,2 +1,36 @@
 @import '~antd/es/style/themes/default.less';
 @import './styles/index.less';
+
+html,
+body,
+#root {
+  height: 100vh;
+
+  > .ant-pro-basicLayout-fix-siderbar {
+    > .ant-layout-has-sider {
+      height: 100vh;
+      overflow: hidden;
+
+      .ant-layout-sider-trigger {
+        height: 40px;
+        color: @white-color;
+        background-color: @primary-color !important;
+      }
+
+      .ant-layout {
+        main.ant-pro-basicLayout-content {
+          .ant-pro-page-container-warp {
+            z-index: 999;
+          }
+
+          .ant-pro-grid-content {
+            overflow-y: auto;
+            height: 100vh;
+            padding-bottom: 100px;
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+  }
+}

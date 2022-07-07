@@ -8,6 +8,7 @@ const columns: any[] = [
     title: '标题',
     dataIndex: 'title',
     ellipsis: true,
+    hideInSearch: false,
     filterType: 'query',
     tip: '标题过长会自动收缩',
   },

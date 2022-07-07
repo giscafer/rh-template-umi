@@ -492,6 +492,8 @@ const RhTable = <
             </div>
           </LightFilter>
         )}
+      </div>
+      <div className="custom-toolbar">
         {customToolBarRender && (
           <div
             className={`rh-table-toolbar ${restProps.toolBarClassName ?? ''}`}

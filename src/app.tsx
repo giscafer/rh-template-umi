@@ -35,7 +35,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
       );
     },
     // 默认布局调整
-    menuHeaderRender: undefined,
+    // menuHeaderRender: undefined,
     ...initialState?.settings,
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
