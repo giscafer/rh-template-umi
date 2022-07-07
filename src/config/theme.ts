@@ -2,7 +2,7 @@
 
 const { getThemeVariables } = require('antd/dist/theme');
 const theme = getThemeVariables({
-  compact: true,
+  compact: false, // 紧凑模式关闭
 });
 
 Object.assign(theme, {

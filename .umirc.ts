@@ -5,9 +5,9 @@ import theme from './src/config/theme';
 
 export default defineConfig({
   antd: {
-    // configProvider
+    // https://ant.design/components/config-provider-cn/
     configProvider: {
-      size: 'default',
+      componentSize: 'middle',
     },
   },
   access: {},
