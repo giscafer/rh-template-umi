@@ -1,8 +1,6 @@
 # rh-template-umi
 
-`@umijs/max` 模板项目，更多功能参考 [Umi Max 简介](https://next.umijs.org/zh-CN/docs/max/introduce)
-
-基于 Umi 的工程脚手架，http://umi.leekhub.com
+基于 Umi 的中后台工程脚手架，http://umi.giscafer.com
 
 ![](./demo.png)
 
@@ -14,8 +12,8 @@
 
 ## 功能特点
 
-- [@/components](http://components.leekhub.com/) 组件
-- Antd 样式覆写，满足 UI 风格
+- 内置常用组件
+- Antd 样式覆写
   <!-- - Swagger Doc Api TypeScript 接口代码生成 -->
   <!-- - 主题换色 -->
 
