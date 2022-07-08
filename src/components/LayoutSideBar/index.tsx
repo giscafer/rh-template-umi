@@ -15,6 +15,8 @@ import styles from './styles.less';
 
 const contentSelector =
   '#root > div.ant-design-pro > section.ant-layout > div.ant-layout';
+// mfsu奇葩bug问题
+const mfsuBugFlag = process.env.NODE_ENV === 'development' && commonConfig.mfsu;
 
 function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   const [isSideCollapsed, setIsSideCollapsed] = useState<boolean>(false);
@@ -22,14 +24,12 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   // 动态改content左边margin
   const leftDistanceFn = useCallback((collapse: any) => {
     const contentEl: any = document.querySelector(contentSelector);
-    if (
-      collapse &&
-      process.env.NODE_ENV === 'development' && // mfsu奇葩bug问题
-      commonConfig.mfsu
-    ) {
-      contentEl.className = 'ant-layout sidebar-collapse';
+    if (collapse) {
+      contentEl.className = `ant-layout ${
+        mfsuBugFlag ? 'sidebar-collapse' : ''
+      }`;
     } else {
-      contentEl.className = 'ant-layout';
+      contentEl.className = `ant-layout ${mfsuBugFlag ? 'sidebar-expand' : ''}`;
     }
   }, []);
 
