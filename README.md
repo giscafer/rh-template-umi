@@ -1,6 +1,6 @@
 # rh-template-umi
 
-基于 Umi 的中后台工程脚手架，http://umi.giscafer.com
+基于 Umi 的中后台工程脚手架，在线预览：https://rh-umi.vercel.app
 
 ![](./demo.png)
 
@@ -19,6 +19,7 @@
 
 ## TODO
 
+- [x] yarn workspaces
 - [ ] 配置化表格开发封装
 - [ ] 动态表单
 - [ ] 高效中后台前端开发方案

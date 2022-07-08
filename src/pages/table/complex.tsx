@@ -1,7 +1,8 @@
-import { RhFileImportModal, RhTable } from '@/components';
+import RhFileImportModal from '@/components/FileImportModal';
 import { DownOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { TableDropdown } from '@ant-design/pro-table';
+import { RhTable } from '@roothub/components';
 import { useRouteData } from '@umijs/max';
 import { Button, Dropdown, Menu, message, Space, Tag } from 'antd';
 import React, { useRef, useState } from 'react';

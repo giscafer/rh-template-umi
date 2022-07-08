@@ -1,0 +1,26 @@
+@pro-column-setting-prefix-cls: ~'rh-table-column-setting';
+
+.@{pro-column-setting-prefix-cls} {
+  &-overlay {
+    width: 400px;
+    .ant-popover-title {
+      border-bottom: 0;
+    }
+    .ant-popover-inner-content {
+      padding: 0;
+    }
+  }
+
+  &-row-dragging {
+    z-index: 9999;
+    background: #fafafa !important;
+    border: 1px solid #ccca !important;
+  }
+
+  &-row-dragging td {
+    padding: 16px !important;
+  }
+  &-row-dragging .drag-visible {
+    visibility: visible !important;
+  }
+}

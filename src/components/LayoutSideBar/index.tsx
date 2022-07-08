@@ -7,7 +7,7 @@
  */
 
 import IconFont from '@/components/IconFont';
-import RhSidebar from '@/components/RhSidebar';
+import { RhSidebar } from '@roothub/components';
 import { Layout } from 'antd';
 import { useCallback, useState } from 'react';
 import styles from './styles.less';

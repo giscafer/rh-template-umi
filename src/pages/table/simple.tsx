@@ -1,5 +1,5 @@
-import RhTable from '@/components/RhTable';
 import { PageContainer } from '@ant-design/pro-layout';
+import { RhTable } from '@roothub/components';
 import { useRouteData } from '@umijs/max';
 import React from 'react';
 

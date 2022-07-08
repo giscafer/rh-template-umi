@@ -2,6 +2,9 @@
   "extends": "./src/.umi/tsconfig.json",
   "compilerOptions": {
     "ignoreNodeBuiltInModules": true,
-    "target": "ES5"
+    "target": "ES5",
+    "paths": {
+      "@roothub/components": ["packages/rh-components/src/index"]
+    }
   }
 }

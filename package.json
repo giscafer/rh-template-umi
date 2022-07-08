@@ -1,7 +1,10 @@
 {
   "name": "rh-template-umi",
-  "private": false,
+  "private": true,
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "max build",
     "dev": "max dev",
@@ -41,6 +44,8 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "core-js": "^3.23.3",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2",

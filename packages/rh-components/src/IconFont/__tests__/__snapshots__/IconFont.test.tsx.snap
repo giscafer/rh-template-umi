@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconFont renders correctly 1`] = `
+<AntdIcon>
+  <use
+    xlinkHref="#rh-icon-node-channel"
+  />
+</AntdIcon>
+`;

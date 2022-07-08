@@ -1,9 +1,9 @@
-import { queryStringToObject } from '@/shared/utils/queryString';
 import {
   LogoutOutlined,
   SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { queryStringToObject } from '@roothub/shared/utils/queryString';
 import { Avatar, Menu, Spin } from 'antd';
 import { stringify } from 'querystring';
 import React, { useCallback } from 'react';

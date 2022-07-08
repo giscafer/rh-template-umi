@@ -1,10 +1,10 @@
 import Footer from '@/components/Footer';
 import { THEME_KEY } from '@/config/constant';
 import { colorSet } from '@/config/theme';
-import { saveToken } from '@/shared/auth/auth';
-import { encrypt } from '@/shared/utils/encrypt';
-import { queryStringToObject } from '@/shared/utils/queryString';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
+import { saveToken } from '@roothub/shared/auth/auth';
+import { encrypt } from '@roothub/shared/utils/encrypt';
+import { queryStringToObject } from '@roothub/shared/utils/queryString';
 import { Alert, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { history, Link, useModel } from 'umi';
