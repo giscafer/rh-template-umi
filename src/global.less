@@ -10,7 +10,20 @@ body,
     > .ant-layout-has-sider {
       height: 100vh;
       overflow: hidden;
+      // 配合菜单 start (不开启mfsu有问题）
+      > .ant-layout {
+        margin-left: 224px !important;
+      }
 
+      > .ant-layout.sidebar-collapse {
+        margin-left: 56px !important;
+
+        .ant-pro-footer-bar {
+          width: calc(100% - 56px) !important;
+          left: 56px !important;
+        }
+      }
+      // 配合菜单 end
       .ant-layout-sider-trigger {
         height: 40px;
         color: @white-color;

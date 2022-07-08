@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'development') {
     name: 'Demo页（dev）',
   });
   cloneRoutes.push({
-    key: 'components',
+    key: 'components1',
     path: '//localhost/~docs',
     name: '组件文档（dev）',
     icon: 'github',

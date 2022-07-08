@@ -2,12 +2,10 @@ import { defineConfig } from '@umijs/max';
 import proxy from './proxy';
 import routes from './src/config/routes';
 import theme from './src/config/theme';
+
 const fs = require('fs-extra');
 const path = require('path');
 const glob = require('glob');
-
-const resolvePackage = (relativePath: string) =>
-  path.join(__dirname, relativePath);
 
 const getWorkspaceAlias = () => {
   const basePath = path.resolve(__dirname, './');
@@ -27,11 +25,12 @@ const getWorkspaceAlias = () => {
     });
   }
   console.log('alias=', results);
-
   return results;
 };
 
 export default defineConfig({
+  routes,
+  theme,
   antd: {
     // https://ant.design/components/config-provider-cn/
     configProvider: {
@@ -42,8 +41,7 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
-  mfsu: false,
-  theme,
+  mfsu: {},
   layout: {
     layout: 'mix',
     fixedHeader: true,
@@ -54,7 +52,6 @@ export default defineConfig({
     type: "antd",
     themeVariables: ["@primary-color"],
   }, */
-  routes: routes,
   proxy: proxy[process.env.NODE_ENV || 'development'],
   npmClient: 'yarn',
   // https://github.com/umijs/umi/issues/6576
