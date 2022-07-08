@@ -12,10 +12,18 @@
 
 ## 功能特点
 
+- 自定义 Sidebar 菜单
 - 内置常用组件
 - Antd 样式覆写
   <!-- - Swagger Doc Api TypeScript 接口代码生成 -->
   <!-- - 主题换色 -->
+
+yarn workspaces
+
+```yml
+packages/rh-components # 组件库，导入别名： @roothub/components
+packages/rh-shared # 函数共享库，导入别名： @roothub/shared
+```
 
 ## TODO
 
