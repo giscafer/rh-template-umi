@@ -134,11 +134,7 @@ function RhDynamicTableModal({
       return null;
     }
     if (!schema?.body) {
-      return (
-        <p className="red">
-          协议采集配置解析错误：可能是脏数据或者配置错误，建议使用最新协议安装包进行升级或重装!
-        </p>
-      );
+      return <p className="red">jsonSchema格式解析错误，请检查！</p>;
     }
     if (schema.type !== 'table-modal') {
       console.warn?.(

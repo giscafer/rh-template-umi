@@ -1,5 +1,5 @@
 /**
- * @author houbin.lao
+ * @author giscafer
  * @homepage
  * @created 2022-06-09 16:09:38
  * @description 上传按钮组件，统一样式和接口上传逻辑包装
@@ -89,7 +89,8 @@ export const RhUploadButton: React.FC<UploadProps> = React.forwardRef(
 
       const beforeFlag = await onBeforeUpload(file);
       if (!beforeFlag) {
-        setErrorMessage(`协议安装包解析失败！`);
+        // TODO: 将信息动态控制
+        setErrorMessage('处理失败！');
       }
       return isAccept && isLt10M && beforeFlag;
     };

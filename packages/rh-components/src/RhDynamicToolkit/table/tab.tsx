@@ -5,7 +5,7 @@
  * @description
  * Focas 批量新增属性
  * 功能说明:
- * 1、动态json渲染，tab，radio，table配置动态渲染，table在 focas 协议中是 datasource 配置好的，将来可能要支持走接口请求
+ * 1、动态json渲染，tab，radio，table配置动态渲染，table在 中是 datasource 配置好的，将来可能要支持走接口请求
  * 2、根据轴数进行动态新增轴参数
  * 3、不同tab下（channel）渲染模版数据，支持分别选择记录新增
  */
