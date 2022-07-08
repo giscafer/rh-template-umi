@@ -1,7 +1,6 @@
 import { defineConfig } from '@umijs/max';
+import commonConfig from './config';
 import proxy from './proxy';
-import routes from './src/config/routes';
-import theme from './src/config/theme';
 
 const fs = require('fs-extra');
 const path = require('path');
@@ -16,7 +15,7 @@ const getWorkspaceAlias = () => {
     workspaces.forEach((pattern) => {
       const packagesPath = new glob.sync(pattern, { cwd: basePath });
 
-      packagesPath.forEach((name) => {
+      packagesPath.forEach((name: string) => {
         const pkg = fs.readJSONSync(
           path.resolve(basePath, name, './package.json'),
         );
@@ -29,8 +28,7 @@ const getWorkspaceAlias = () => {
 };
 
 export default defineConfig({
-  routes,
-  theme,
+  ...commonConfig,
   antd: {
     // https://ant.design/components/config-provider-cn/
     configProvider: {
@@ -39,14 +37,8 @@ export default defineConfig({
   },
   access: {},
   model: {},
-  initialState: {},
   request: {},
-  mfsu: {},
-  layout: {
-    layout: 'mix',
-    fixedHeader: true,
-    title: 'RootHub Scaffold',
-  },
+
   /*   plugins: ["@alitajs/plugin-theme"],
   dynamicTheme: {
     type: "antd",

@@ -11,9 +11,9 @@ export type HeaderDropdownProps = {
     | 'bottomLeft'
     | 'bottomRight'
     | 'topLeft'
-    | 'topCenter'
+    | 'top'
     | 'topRight'
-    | 'bottomCenter';
+    | 'bottom';
 } & Omit<DropDownProps, 'overlay'>;
 
 const HeaderDropdown: React.FC<HeaderDropdownProps> = ({

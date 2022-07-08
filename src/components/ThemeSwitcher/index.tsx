@@ -39,7 +39,7 @@ const ThemeSwitcher: React.FC<Record<string, never>> = () => {
 
   return (
     <Dropdown
-      placement="bottomCenter"
+      placement="bottom"
       overlay={
         <Menu>
           {colorSet.map((color) => (
