@@ -29,18 +29,18 @@ const routes = [
     routes: [
       {
         path: '/table/simple',
-        name: '简单表格',
+        name: '有标题表格',
         component: './table/simple',
+      },
+      {
+        path: '/table/complex',
+        name: '复杂查询无标题',
+        component: './table/complex',
       },
       {
         name: ' CRUD 示例',
         path: '/table/curd',
         component: './table/curd',
-      },
-      {
-        path: '/table/complex',
-        name: '复杂表格',
-        component: './table/complex',
       },
       {
         path: '/table/mock',

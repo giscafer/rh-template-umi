@@ -1,8 +1,6 @@
-import { ListToolBarProps } from '@ant-design/pro-components';
+import { TableMulSelectProps } from '@/components/RhTableMulSelected';
 import { ActionType, ProColumns, ProTableProps } from '@ant-design/pro-table';
 import { PageInfo } from '@ant-design/pro-utils/lib/typing';
-import { ButtonProps } from 'antd';
-import { TableMulSelectProps } from '../RhTableMulSelected';
 export declare type RecordKey = React.Key | React.Key[];
 
 // ExtraBtn type
@@ -19,30 +17,8 @@ interface RightExtraBtnByKeyType {
 
 type rightExtraBtn = ExtraBtnAType | RightExtraBtnByKeyType[];
 
-export type RhActionMeta = {
-  name: string;
-  action: string;
-  isMore?: boolean;
-  className?: boolean;
-} & ButtonProps;
-
-export type RhToolbarMeta = {
-  actions?: RhActionMeta[];
-} & ListToolBarProps;
-
-/**
- * 配置化开发表格meta type
- */
-export type RhTableMeta = {
-  columns: RhColumns[];
-
-  toolbar?: RhToolbarMeta;
-  tableActions?: RhActionMeta[];
-};
-
 // RhTable 自加的属性
 export type RhTableSelfProps = {
-  meta?: RhTableMeta;
   /**
    * 隐藏request 请求 loading效果
    */
@@ -129,7 +105,7 @@ export type RhColumns<T = any, ValueType = 'text'> = ProColumns<
    * @string 'query' | 'light'
    * @default 'query'
    */
-  searchType?: 'query' | 'light';
+  filterType?: 'query' | 'light';
   /**
    * 联动的孩子key，但父节点修改时，清空子节点的数据
    * 目前只用于下拉选择框

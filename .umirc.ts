@@ -46,7 +46,7 @@ export default defineConfig({
   }, */
   proxy: proxy[process.env.NODE_ENV || 'development'],
   npmClient: 'yarn',
-  monorepoRedirect: {},
+  monorepoRedirect: { srcDir: ['packages', 'src'] },
   // https://github.com/umijs/umi/issues/6576
   chainWebpack: (config: any, { webpack }) => {
     const alias = getWorkspaceAlias();

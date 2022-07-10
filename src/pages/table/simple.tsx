@@ -8,15 +8,14 @@ const columns: any[] = [
     title: '标题',
     dataIndex: 'title',
     ellipsis: true,
-    hideInSearch: false,
-    filterType: 'query',
+    searchType: 'query',
     tip: '标题过长会自动收缩',
   },
   {
     title: '状态',
     dataIndex: 'state',
+    searchType: 'query',
     valueType: 'select',
-    hideInSearch: true,
     valueEnum: {
       all: '全部',
       open: '未解决',
@@ -27,7 +26,6 @@ const columns: any[] = [
   {
     title: '创建时间',
     key: 'showTime',
-    filterType: 'query',
     dataIndex: 'created_at',
     valueType: 'dateTime',
     hideInSearch: true,
@@ -70,6 +68,7 @@ export default () => {
     >
       <RhTable<any>
         rowKey="id"
+        headerTitle="这里是表格标题"
         columns={columns}
         actionRef={actionRef}
         pagination={{

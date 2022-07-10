@@ -9,7 +9,8 @@ export type RhTitleProps = {
    * 文本信息
    * @type string
    */
-  title: string;
+  title: string | number;
+
   /**
    * 布局方式，和 showCollapse 互斥
    * @type 'column' | 'default'

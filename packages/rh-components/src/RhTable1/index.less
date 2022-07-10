@@ -1,39 +1,27 @@
+.rh-table-light-filter-form {
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+
+  .ant-pro-form-light-filter-item {
+    margin-top: 0 !important;
+  }
+}
+
+.rh-table-query-filter-form {
+  width: 100%;
+}
+
 .rh-table {
   position: relative;
-  &-header {
-    display: flex;
-    justify-content: space-between;
-  }
+
   .rh-table-query {
     position: relative;
-    min-width: 500px;
+
     .rh-table-toolbar {
       position: absolute;
       top: 4px;
       right: 0;
-    }
-    &-filter-form {
-      width: 100%;
-      > .ant-row {
-        > .ant-col {
-          // todo 媒体查询
-          width: 340px;
-        }
-      }
-      .ant-form-item {
-        margin-bottom: 16px;
-        .ant-form-item-control {
-          max-width: 100% !important;
-        }
-      }
-    }
-    &-light-form {
-      .ant-form-item {
-        margin-bottom: 0;
-      }
-      .ant-pro-form-light-filter-item {
-        margin-top: 0 !important;
-      }
     }
   }
 
@@ -41,6 +29,16 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+
+  .rh-table-query-filter-form {
+    .ant-form-item {
+      margin-bottom: 16px;
+
+      .ant-form-item-control {
+        max-width: 100% !important;
+      }
+    }
   }
 
   .ant-pro-table-alert {
