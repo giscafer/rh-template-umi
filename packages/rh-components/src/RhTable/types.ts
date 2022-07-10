@@ -3,6 +3,7 @@ import { ActionType, ProColumns, ProTableProps } from '@ant-design/pro-table';
 import { PageInfo } from '@ant-design/pro-utils/lib/typing';
 import { BaseButtonProps } from 'antd/lib/button/button';
 import { TableMulSelectProps } from '../RhTableMulSelected';
+import { RhObservable } from './hooks/useTable';
 
 export declare type RecordKey = React.Key | React.Key[];
 
@@ -60,6 +61,11 @@ export type RhTableSelfProps = {
    * 配置化开发表格属性
    */
   meta?: RhTableMeta;
+  /**
+   * rxjs Subject Observable
+   * 用于事件流处理，使用 useTable hook获取
+   */
+  observable$?: RhObservable<any>;
 
   /**
    * 查询表单渲染位置 'header' | 'toolbar'

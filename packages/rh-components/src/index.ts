@@ -5,6 +5,7 @@ import RhModalForm, { useModalForm } from './RhModalForm';
 import RhSearchInput from './RhSearchInput';
 import RhSidebar from './RhSidebar';
 import RhTable from './RhTable';
+import useTable from './RhTable/hooks/useTable';
 import RhTree from './RhTree';
 
 export {
@@ -16,5 +17,6 @@ export {
   useModalForm,
   RhSidebar,
   RhTable,
+  useTable,
   RhTree,
 };

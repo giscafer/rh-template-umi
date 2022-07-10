@@ -19,6 +19,7 @@ import RhEmpty from '../RhEmpty';
 import TableMulSelect from '../RhTableMulSelected';
 import RhTitle from '../RhTitle';
 import useRowSelection from './hooks/useRowSelection';
+import { DefaultObservable } from './hooks/useTable';
 import './index.less';
 import SearchForm from './SearchForm';
 import {
@@ -35,6 +36,7 @@ const RhTable = <
   ValueType = 'text',
 >({
   meta,
+  observable$ = DefaultObservable,
   ...props
 }: RhTableProps<DataType, Params, ValueType>) => {
   const mergeProps = Object.assign({}, props, meta || {});
@@ -173,7 +175,7 @@ const RhTable = <
               overlay={
                 <Menu
                   onClick={async ({ key }) => {
-                    console.log('key', key);
+                    observable$.next({ action: key });
                   }}
                   items={menuItems}
                 />
@@ -186,7 +188,15 @@ const RhTable = <
           );
         }
         return (
-          <Button key={action} type={type} size={size} {...rest}>
+          <Button
+            key={action}
+            type={type}
+            size={size}
+            {...rest}
+            onClick={() => {
+              observable$.next({ action });
+            }}
+          >
             {name}
           </Button>
         );

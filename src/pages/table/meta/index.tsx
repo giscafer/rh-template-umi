@@ -6,14 +6,18 @@
  */
 
 import { PageContainer } from '@ant-design/pro-layout';
-import { RhTable } from '@roothub/components';
+import { RhTable, useTable } from '@roothub/components';
 import { useRouteData } from '@umijs/max';
 import React from 'react';
 import tableMeta from './table.meta';
+import workflow from './workflow';
 
 export default () => {
   const actionRef = React.useRef<any>();
   const { route }: any = useRouteData();
+
+  const { observable$ } = useTable(workflow);
+
   return (
     <PageContainer
       fixedHeader
@@ -26,6 +30,7 @@ export default () => {
     >
       <RhTable<any>
         meta={tableMeta}
+        observable$={observable$}
         actionRef={actionRef}
         pagination={{
           pageSize: 10,
@@ -33,9 +38,7 @@ export default () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         request={async (params = {}) => {
           // 这里只是举例，建议用httpGet
-          const list: any = await fetch(
-            'https://proapi.azurewebsites.net/github/issues',
-          ).then((resp) => resp.json());
+          const list: any = await fetch('https://proapi.azurewebsites.net/github/issues').then((resp) => resp.json());
           return {
             data: list.data,
             success: true,
