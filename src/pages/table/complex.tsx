@@ -213,6 +213,7 @@ export default () => {
       <RhTable<GithubIssueItem>
         columns={columns}
         actionRef={actionRef}
+        toolBarRender={false}
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         request={async (params = {}) => {
           return fetch('https://proapi.azurewebsites.net/github/issues').then(

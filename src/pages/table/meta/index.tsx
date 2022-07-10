@@ -19,6 +19,7 @@ export default () => {
       fixedHeader
       header={{
         title: route.name,
+        subTitle: "searchPlacement:'toolbar' 控制精简搜索条件布局在toolbar区域",
         breadcrumb: {},
         extra: [],
       }}

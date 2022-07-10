@@ -6,11 +6,13 @@
  * 唯一不变原则： ProTable 原 Api 一致性不变
  */
 
+import { DownOutlined } from '@ant-design/icons';
+import { ListToolBarProps } from '@ant-design/pro-components';
 import type { ParamsType } from '@ant-design/pro-provider';
 import ProTable from '@ant-design/pro-table';
-import { Popconfirm } from 'antd';
+import { Button, Dropdown, Menu, Popconfirm } from 'antd';
 import { SortOrder } from 'antd/lib/table/interface';
-import { isFunction, isNumber } from 'lodash';
+import { cloneDeep, isFunction, isNumber } from 'lodash';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
@@ -18,30 +20,40 @@ import TableMulSelect from '../RhTableMulSelected';
 import RhTitle from '../RhTitle';
 import './index.less';
 import QueryLightFilter from './QueryLightFilter';
-import { RhActionType, RhColumns, RhTableProps } from './types';
+import {
+  RhActionMeta,
+  RhActionType,
+  RhColumns,
+  RhTableProps,
+  RhToolbarMeta,
+} from './types';
 
 const RhTable = <
   DataType extends Record<string, any>,
   Params extends ParamsType = ParamsType,
   ValueType = 'text',
->(
-  props: RhTableProps<DataType, Params, ValueType>,
-) => {
+>({
+  meta,
+  ...props
+}: RhTableProps<DataType, Params, ValueType>) => {
+  const mergeProps = Object.assign({}, props, meta || {});
+
   const {
+    headerTitle,
+    scroll,
+    toolbar,
     columns = [],
+    searchPlacement = 'header',
     virtual = false,
     resetPageIndex = true,
     resetPageInParams = false,
     extraParams = {},
-    headerTitle,
-    request,
-    scroll,
     tableAlertRenderProps = {},
     pagination = {},
-    searchSpan,
     locale = { emptyText: RhEmpty },
+    request,
     ...restProps
-  } = props;
+  } = mergeProps;
 
   const queryRef = useRef<any>();
   const defaultActionRef = useRef<RhActionType>();
@@ -52,7 +64,7 @@ const RhTable = <
     };
   });
 
-  const actionRef = (props.actionRef ||
+  const actionRef = (mergeProps.actionRef ||
     defaultActionRef) as React.MutableRefObject<RhActionType>;
 
   const handleReload = useCallback(() => {
@@ -116,30 +128,74 @@ const RhTable = <
     return <RhTitle title={headerTitle} />;
   }, [headerTitle]);
 
-  const headerNode = useMemo(() => {
-    if (!headerTitleNode) {
-      return (
-        <QueryLightFilter
-          ref={queryRef}
-          columns={columns as RhColumns[]}
-          span={searchSpan}
-          onChange={handleReload}
-        />
-      );
-    }
-
+  const queryFilterNode = useMemo(() => {
     return (
-      <div className="rh-table-header">
-        {headerTitleNode}
-        <QueryLightFilter
-          ref={queryRef}
-          columns={columns as RhColumns[]}
-          span={searchSpan}
-          onChange={handleReload}
-        />
-      </div>
+      <QueryLightFilter
+        ref={queryRef}
+        columns={columns as RhColumns[]}
+        onChange={handleReload}
+      />
     );
-  }, [headerTitleNode]);
+  }, [columns, handleReload]);
+
+  const headerNode = useMemo(() => {
+    return <div className="rh-table-header">{queryFilterNode}</div>;
+  }, [queryFilterNode]);
+
+  const toolbarNode = useMemo(() => {
+    if (!meta?.toolbar) {
+      return toolbar;
+    }
+    const metaToolBar: RhToolbarMeta = cloneDeep(meta?.toolbar);
+    if (meta.toolbar.actions?.length) {
+      const actions = metaToolBar?.actions;
+      const actionsNode = actions?.map((item: RhActionMeta) => {
+        const {
+          action,
+          name,
+          children,
+          size = 'large',
+          type = 'primary',
+          ...rest
+        } = item;
+        if (children?.length) {
+          const menuItems = children.map((c) => ({
+            label: c.name,
+            key: c.action ?? c.name,
+          }));
+          console.log(menuItems);
+
+          // 下拉按钮
+          return (
+            <Dropdown
+              overlay={
+                <Menu
+                  onClick={async ({ key }) => {
+                    console.log('key', key);
+                  }}
+                  items={menuItems}
+                />
+              }
+            >
+              <Button type={type} size={size} {...rest}>
+                {name} <DownOutlined />
+              </Button>
+            </Dropdown>
+          );
+        }
+        return (
+          <Button key={action} type={type} size={size} {...rest}>
+            {name}
+          </Button>
+        );
+      });
+      metaToolBar.actions = actionsNode as any;
+      if (searchPlacement === 'toolbar') {
+        metaToolBar.filter = queryFilterNode;
+      }
+      return metaToolBar;
+    }
+  }, [meta?.toolbar, toolbar, searchPlacement]);
 
   const {
     cleanMethod,
@@ -149,10 +205,16 @@ const RhTable = <
 
   return (
     <div className="rh-table">
-      {headerNode}
+      {searchPlacement === 'header' && headerNode}
       <ProTable
         rowKey={restProps.rowKey || 'id'}
-        options={false}
+        locale={locale as any}
+        actionRef={actionRef}
+        columns={columns}
+        search={false}
+        scroll={scroll}
+        headerTitle={headerTitleNode}
+        toolbar={toolbarNode as ListToolBarProps}
         loading={isFunction(request) ? loading : restProps.loading}
         form={{
           ignoreRules: false,
@@ -199,12 +261,6 @@ const RhTable = <
             return item;
           });
         }}
-        locale={locale as any}
-        actionRef={actionRef}
-        columns={columns}
-        search={false}
-        scroll={scroll}
-        // toolBarRender={false}
         {...restProps}
         components={virtual ? vt : restProps.components}
         request={handleRequest as any}

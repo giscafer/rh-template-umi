@@ -29,13 +29,18 @@ const routes = [
     routes: [
       {
         path: '/table/simple',
-        name: '有标题表格',
+        name: '精简查询表格',
         component: './table/simple',
       },
       {
         path: '/table/complex',
-        name: '复杂查询无标题',
+        name: '复杂查询表格',
         component: './table/complex',
+      },
+      {
+        path: '/table/meta',
+        name: '配置方式开发',
+        component: './table/meta/index',
       },
       {
         name: ' CRUD 示例',

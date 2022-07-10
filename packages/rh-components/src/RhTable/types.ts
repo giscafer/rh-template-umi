@@ -1,8 +1,9 @@
 import { ListToolBarProps } from '@ant-design/pro-components';
 import { ActionType, ProColumns, ProTableProps } from '@ant-design/pro-table';
 import { PageInfo } from '@ant-design/pro-utils/lib/typing';
-import { ButtonProps } from 'antd';
+import { BaseButtonProps } from 'antd/lib/button/button';
 import { TableMulSelectProps } from '../RhTableMulSelected';
+
 export declare type RecordKey = React.Key | React.Key[];
 
 // ExtraBtn type
@@ -23,26 +24,37 @@ export type RhActionMeta = {
   name: string;
   action: string;
   isMore?: boolean;
-  className?: boolean;
-} & ButtonProps;
+  className?: string;
+  children?: any[];
+} & Omit<BaseButtonProps, 'key' | 'children'>;
 
 export type RhToolbarMeta = {
   actions?: RhActionMeta[];
-} & ListToolBarProps;
+} & Omit<ListToolBarProps, 'actions'>;
 
 /**
  * 配置化开发表格meta type
  */
 export type RhTableMeta = {
   columns: RhColumns[];
-
   toolbar?: RhToolbarMeta;
   tableActions?: RhActionMeta[];
-};
+} & Pick<RhTableProps<any, any, any>, 'searchPlacement' | 'headerTitle'>;
 
-// RhTable 自加的属性
+/**
+ * RhTable 扩展的属性
+ */
 export type RhTableSelfProps = {
+  /**
+   * 配置化开发表格属性
+   */
   meta?: RhTableMeta;
+
+  /**
+   * 查询表单渲染位置 'header' | 'toolbar'
+   * @default 'header'
+   */
+  searchPlacement?: string;
   /**
    * 隐藏request 请求 loading效果
    */

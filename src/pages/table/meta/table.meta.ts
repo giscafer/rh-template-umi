@@ -1,6 +1,8 @@
-const tableMeta: any = {
+import { RhTableMeta } from 'packages/rh-components/src/RhTable/types';
+
+const tableMeta: RhTableMeta = {
   headerTitle: '配置化开发表格示例',
-  pagination: false,
+  searchPlacement: 'toolbar',
   columns: [
     {
       title: '标题',
@@ -30,12 +32,13 @@ const tableMeta: any = {
     },
   ],
   toolbar: {
+    settings: undefined,
     // 按钮
     actions: [
       {
         name: '导入/停止',
         action: 'batch',
-        disabled: true,
+        disabled: false,
         type: 'primary',
         ghost: true,
         children: [
@@ -52,7 +55,7 @@ const tableMeta: any = {
     ],
   },
   // 行操作列按钮
-  rowActions: [
+  tableActions: [
     {
       name: '编辑',
       action: 'edit',

@@ -1,5 +1,14 @@
 .rh-table {
   position: relative;
+  .ant-pro-table-list-toolbar-filter {
+    .rh-table-query {
+      &-filter-form {
+        .ant-form-item {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
   &-header {
     display: flex;
     justify-content: space-between;
@@ -27,9 +36,17 @@
         }
       }
     }
+    &-light-form-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .reset {
+        padding: 0 10px 12px 16px;
+      }
+    }
     &-light-form {
       .ant-form-item {
-        margin-bottom: 0;
+        margin-bottom: 4px;
       }
       .ant-pro-form-light-filter-item {
         margin-top: 0 !important;
@@ -52,14 +69,6 @@
   .ant-alert-info {
     background-color: #f5f7fa !important;
     border: none !important;
-  }
-
-  &-column-setting {
-    position: absolute;
-    display: inline-block;
-    right: 20px; // 这样定位可能有问题，TODO
-    top: 62px;
-    z-index: 999;
   }
 
   // 可编辑cell

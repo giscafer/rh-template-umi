@@ -299,7 +299,7 @@ function QueryLightFilter(props: QueryFilterType, ref: any) {
       )}
 
       {lightFilterColumns.length > 0 && (
-        <div className="flex-start align-center">
+        <div className="rh-table-query-light-form-container">
           <LightFilter
             className="rh-table-query-light-form"
             formRef={lightFilterFormRef}
@@ -309,7 +309,7 @@ function QueryLightFilter(props: QueryFilterType, ref: any) {
               return renderProFormItem(column);
             })}
           </LightFilter>
-          <div style={{ padding: '0 10px 8px 16px' }}>
+          <div className="reset">
             <a
               onClick={() => {
                 lightFilterFormRef.current?.resetFields();

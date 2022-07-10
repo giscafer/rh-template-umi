@@ -68,8 +68,8 @@ export default () => {
     >
       <RhTable<any>
         rowKey="id"
-        headerTitle="这里是表格标题"
         columns={columns}
+        toolBarRender={false}
         actionRef={actionRef}
         pagination={{
           pageSize: 10,
