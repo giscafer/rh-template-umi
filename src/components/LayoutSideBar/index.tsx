@@ -8,6 +8,7 @@
 
 import IconFont from '@/components/IconFont';
 import { RhSidebar } from '@roothub/components';
+import { useMount } from 'ahooks';
 import { Layout } from 'antd';
 import { useCallback, useState } from 'react';
 import commonConfig from '../../../config';
@@ -21,6 +22,10 @@ const mfsuBugFlag = process.env.NODE_ENV === 'development' && commonConfig.mfsu;
 function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   const [isSideCollapsed, setIsSideCollapsed] = useState<boolean>(false);
 
+  useMount(() => {
+    const contentEl: any = document.querySelector(contentSelector);
+    contentEl.className = `ant-layout ${mfsuBugFlag ? 'sidebar-expand' : ''}`;
+  });
   // 动态改content左边margin
   const leftDistanceFn = useCallback((collapse: any) => {
     const contentEl: any = document.querySelector(contentSelector);
