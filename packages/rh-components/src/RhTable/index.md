@@ -7,9 +7,9 @@ order: 1
 
 用于修改查询条件规范，使用方式和 [ProTable - 高级表格](https://procomponents.ant.design/components/table?current=1&pageSize=5) 一致
 
+- 简化使用，高效开发
 - 改造查询条件 UI 交互
-- 通用配置统一
-- 简化使用
+- 支持配置化开发 Low-Code
 - 虚拟表格（必须设置 scroll.y，如没有使用默认值 600）
 
 精简写法：

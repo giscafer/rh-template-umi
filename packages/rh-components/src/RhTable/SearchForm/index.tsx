@@ -26,7 +26,7 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import { RhColumns } from './types';
+import { RhColumns } from '../types';
 
 type SpanConfig =
   | number
@@ -62,7 +62,7 @@ const compTypeList = [
   'color',
 ];
 
-function QueryLightFilter(props: QueryFilterType, ref: any) {
+function SearchForm(props: QueryFilterType, ref: any) {
   const { columns = [], onChange = noop } = props;
   const onConfirmRef = useRef<() => void>();
   const queryFilterFormRef = useRef<ProFormInstance>();
@@ -76,7 +76,7 @@ function QueryLightFilter(props: QueryFilterType, ref: any) {
         const lightFormData =
           lightFilterFormRef.current?.getFieldsValue() || {};
         const queryParams = { ...queryFormData, ...lightFormData };
-        console.log('queryParams=', queryParams);
+        // console.log('queryParams=', queryParams);
 
         return queryParams;
       },
@@ -325,4 +325,4 @@ function QueryLightFilter(props: QueryFilterType, ref: any) {
   );
 }
 
-export default forwardRef(QueryLightFilter);
+export default forwardRef(SearchForm);

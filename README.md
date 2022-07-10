@@ -7,8 +7,7 @@
 ## 技术栈
 
 - Umi 4.x ([Umi Max 简介](https://next.umijs.org/zh-CN/docs/max/introduce))
-- axios
-- ……
+- React18 + TypeScript + RxJS
 
 ## 功能特点
 
@@ -28,7 +27,7 @@ packages/rh-shared # 函数共享库，导入别名： @roothub/shared
 ## TODO
 
 - [x] yarn workspaces
-- [ ] 配置化表格开发封装
+- [ ] 配置化表格开发封装(WIP)
 - [ ] 动态表单
 - [ ] 高效中后台前端开发方案
 

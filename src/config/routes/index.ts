@@ -43,9 +43,9 @@ const routes = [
         component: './table/meta/index',
       },
       {
-        name: ' CRUD 示例',
-        path: '/table/curd',
-        component: './table/curd',
+        name: '表格多选',
+        path: '/table/selection',
+        component: './table/selection/index',
       },
       {
         path: '/table/mock',

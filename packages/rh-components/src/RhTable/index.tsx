@@ -18,8 +18,9 @@ import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
 import TableMulSelect from '../RhTableMulSelected';
 import RhTitle from '../RhTitle';
+import useRowSelection from './hooks/useRowSelection';
 import './index.less';
-import QueryLightFilter from './QueryLightFilter';
+import SearchForm from './SearchForm';
 import {
   RhActionMeta,
   RhActionType,
@@ -67,6 +68,10 @@ const RhTable = <
   const actionRef = (mergeProps.actionRef ||
     defaultActionRef) as React.MutableRefObject<RhActionType>;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { rowSelection, selectedRows, selectedRowKey, resetSelection } =
+    useRowSelection();
+
   const handleReload = useCallback(() => {
     actionRef.current.pageInfo.current = 1;
     return actionRef.current?.reload(resetPageIndex);
@@ -81,11 +86,8 @@ const RhTable = <
       if (resetPageInParams) {
         queryRef.current?.clearQueryParams();
       }
-
       const queryParams = queryRef.current?.getQueryParams();
-      console.log('queryParams====================================');
-      console.log(queryParams);
-      console.log('====================================');
+
       if (actionRef?.current) {
         actionRef.current.pageInfo.params = queryParams;
       }
@@ -128,9 +130,9 @@ const RhTable = <
     return <RhTitle title={headerTitle} />;
   }, [headerTitle]);
 
-  const queryFilterNode = useMemo(() => {
+  const searchFormNode = useMemo(() => {
     return (
-      <QueryLightFilter
+      <SearchForm
         ref={queryRef}
         columns={columns as RhColumns[]}
         onChange={handleReload}
@@ -139,8 +141,8 @@ const RhTable = <
   }, [columns, handleReload]);
 
   const headerNode = useMemo(() => {
-    return <div className="rh-table-header">{queryFilterNode}</div>;
-  }, [queryFilterNode]);
+    return <div className="rh-table-header">{searchFormNode}</div>;
+  }, [searchFormNode]);
 
   const toolbarNode = useMemo(() => {
     if (!meta?.toolbar) {
@@ -191,7 +193,7 @@ const RhTable = <
       });
       metaToolBar.actions = actionsNode as any;
       if (searchPlacement === 'toolbar') {
-        metaToolBar.filter = queryFilterNode;
+        metaToolBar.filter = searchFormNode;
       }
       return metaToolBar;
     }
@@ -220,6 +222,13 @@ const RhTable = <
           ignoreRules: false,
         }}
         dateFormatter="string"
+        rowSelection={
+          meta?.rowSelectionType &&
+          ({
+            type: meta.rowSelectionType === 'single' ? 'radio' : 'checkbox',
+            ...rowSelection,
+          } as any)
+        }
         tableAlertRender={({ selectedRowKeys, onCleanSelected }) => {
           if (tableAlertRenderProps?.tableMulSelectProps?.display) {
             return (

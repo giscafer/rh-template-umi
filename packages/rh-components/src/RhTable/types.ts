@@ -37,7 +37,18 @@ export type RhToolbarMeta = {
  */
 export type RhTableMeta = {
   columns: RhColumns[];
+  /**
+   * 表格多选方式 'multiple' | 'single'
+   * @default ''
+   */
+  rowSelectionType?: string;
+  /**
+   * 工具条，参数和 ProTable 一致，但支持配置化
+   */
   toolbar?: RhToolbarMeta;
+  /**
+   * 表格内行操作
+   */
   tableActions?: RhActionMeta[];
 } & Pick<RhTableProps<any, any, any>, 'searchPlacement' | 'headerTitle'>;
 
