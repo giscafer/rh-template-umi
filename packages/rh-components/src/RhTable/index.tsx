@@ -21,6 +21,7 @@ import { genTableAlertOptionRender, genTableAlertRender } from './alert';
 import useDataSource from './hooks/useDataSource';
 import useRowSelection from './hooks/useRowSelection';
 import { DefaultObservable } from './hooks/useTable';
+import useTableColumn from './hooks/useTableColumn';
 import './index.less';
 import SearchForm from './search';
 import {
@@ -69,9 +70,12 @@ const RhTable = <
   const actionRef = (mergeProps.actionRef ||
     defaultActionRef) as React.MutableRefObject<RhActionType>;
   const [ts, setTs] = useState<number>(0); // 借助刷新请求
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { rowSelection, selectedRows, selectedRowKey, resetSelection } =
-    useRowSelection();
+
+  const rowSelectionOption = restProps.rowSelection || {};
+  const { rowSelection } = useRowSelection(
+    rowSelectionOption,
+    actionObservable$,
+  );
 
   const handleReload = useCallback(() => {
     actionRef.current.pageInfo.current = 1;
@@ -136,7 +140,6 @@ const RhTable = <
             label: c.name,
             key: c.action ?? c.name,
           }));
-          console.log(menuItems);
 
           // 下拉按钮
           return (
@@ -194,13 +197,15 @@ const RhTable = <
     return pagination;
   }, [pagination, data?.total]);
 
+  const { tableColumns } = useTableColumn(columns, meta, actionObservable$);
+
   return (
     <div className="rh-table">
       {searchPlacement === 'header' && headerNode}
-      <ProTable
+      <ProTable<any, any, any>
         rowKey={restProps.rowKey || 'id'}
         actionRef={actionRef}
-        columns={columns}
+        columns={tableColumns}
         loading={loading}
         search={false}
         scroll={scroll}

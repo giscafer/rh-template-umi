@@ -61,7 +61,7 @@ const tableMeta: RhTableMeta = {
       action: 'edit',
     },
     { name: '复制', action: 'copy', isMore: true },
-    { name: '删除', action: 'delete', isMore: true, className: 'red' },
+    { name: '删除', action: 'delete', isMore: true, danger: true },
   ],
 };
 

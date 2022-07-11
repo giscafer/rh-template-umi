@@ -9,9 +9,11 @@ import { TableRowSelection } from '@ant-design/pro-table/lib/typing';
 import { Table, TableProps } from 'antd';
 import { RowSelectMethod } from 'antd/lib/table/interface';
 import { Key, useCallback, useMemo, useState } from 'react';
+import { RhObservable } from './useTable';
 
 function useRowSelection(
   options: TableRowSelection & { selectedRows?: any[] } = {},
+  actionObservable$: RhObservable<any>,
 ) {
   const [selectedRows, setSelectedRows] = useState(options.selectedRows || []);
   const [selectedRowKey, setSelectedRowKeys] = useState(
@@ -40,6 +42,11 @@ function useRowSelection(
         if (options.onChange) {
           options.onChange(selectedRowKeys, selectedRows, info);
         }
+
+        actionObservable$.next({
+          action: 'table/selection',
+          payload: { selectedRowKeys, selectedRows, info },
+        });
       },
     };
   }, [selectedRows, selectedRowKey, options]);

@@ -21,10 +21,16 @@ interface RightExtraBtnByKeyType {
 
 type rightExtraBtn = ExtraBtnAType | RightExtraBtnByKeyType[];
 
+interface BooleanGetter {
+  (...arg: any[]): boolean;
+}
+
 export type RhActionMeta = {
   name: string;
   action: string;
   isMore?: boolean;
+  visibleOn?: string | boolean | BooleanGetter;
+  disabledOn?: string | boolean | BooleanGetter;
   className?: string;
   children?: any[];
 } & Omit<BaseButtonProps, 'key' | 'children'>;
@@ -82,6 +88,7 @@ export type RhTableSelfProps = {
    * 配置化开发表格属性
    */
   meta?: RhTableMeta;
+
   /**
    * 列表分页请求接口 url，支持restful 和参数模板
    * eg: https://giscafer.com/post/${postId}/detail
@@ -98,6 +105,8 @@ export type RhTableSelfProps = {
    * @default 'GET'
    */
   apiMethod?: string;
+
+  columns: RhColumns[];
   /**
    * rxjs Subject Observable
    * 用于事件流处理，使用 useTable hook获取
@@ -154,10 +163,7 @@ export type RhTableProps<DataType, Params, ValueType> = ProTableProps<
 > &
   RhTableSelfProps;
 
-export type RhColumns<T = any, ValueType = 'text'> = ProColumns<
-  T,
-  ValueType
-> & {
+export type RhColumns<T = any, ValueType = any> = ProColumns<T, ValueType> & {
   /**
    * 查询展示方式
    * @string 'query' | 'light'

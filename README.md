@@ -27,7 +27,7 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
     "mismatchedWorkspaceDependencies": ["@roothub/helper/src"]
   },
   "@roothub/helper/src": {
-    "location": "packages/rh-shared",
+    "location": "packages/rh-helper",
     "workspaceDependencies": [],
     "mismatchedWorkspaceDependencies": []
   }

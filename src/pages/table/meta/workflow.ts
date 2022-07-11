@@ -15,4 +15,8 @@ export default function workflow(actionObservable$: RhObservable<SubjectStateTyp
   actionObservable$.take(['startAll', 'stopAll', 'batchStart', 'batchStop'], (state: SubjectStateType) => {
     message.info('action=' + state.action);
   });
+  // 批量订阅 tableAction 数组
+  actionObservable$.take(['edit', 'copy', 'delete'], (state: SubjectStateType) => {
+    message.info('action=' + state.action);
+  });
 }
