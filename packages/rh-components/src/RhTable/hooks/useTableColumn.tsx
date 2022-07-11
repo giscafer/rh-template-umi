@@ -5,6 +5,7 @@ import cls from 'classnames';
 import { ItemType } from 'rc-menu/lib/interface';
 import { useMemo } from 'react';
 import { RhActionMeta, RhColumns, RhTableMeta } from '../types';
+import { convertDataIndex } from '../utils';
 import getValOrFnResult from '../utils/getValOrFnResult';
 import { RhObservable } from './useTable';
 
@@ -14,8 +15,12 @@ function useTableColumn(
   actionObservable$: RhObservable<any>,
 ) {
   const tableColumns: ProColumns[] = useMemo(() => {
+    const cList = columns.map((c: any) => ({
+      ...c,
+      dataIndex: convertDataIndex(c.dataIndex),
+    }));
     if (!meta?.tableActions?.length) {
-      return columns;
+      return cList;
     }
     const actions = meta?.tableActions;
     const optionColumn = {
@@ -91,7 +96,10 @@ function useTableColumn(
         );
       },
     };
-    return columns.concat(optionColumn as RhColumns);
+    console.log('cList====================================');
+    console.log(cList);
+    console.log('====================================');
+    return cList.concat(optionColumn as RhColumns);
   }, [columns]);
 
   return { tableColumns };

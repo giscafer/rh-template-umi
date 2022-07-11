@@ -1,7 +1,8 @@
 import { RhTableMeta } from 'packages/rh-components/src/RhTable/types';
 
 const tableMeta: RhTableMeta = {
-  headerTitle: '配置化开发表格示例',
+  headerTitle: 'LeekHub/leek-fund 仓库',
+  api: '/api/repos/LeekHub/leek-fund/issues',
   searchPlacement: 'toolbar',
   columns: [
     {
@@ -9,7 +10,7 @@ const tableMeta: RhTableMeta = {
       dataIndex: 'title',
       ellipsis: true,
       searchType: 'query',
-      tip: '标题过长会自动收缩',
+      tip: '韭菜盒子插件issue标题',
     },
     {
       title: '状态',
@@ -24,16 +25,17 @@ const tableMeta: RhTableMeta = {
       },
     },
     {
+      title: '创建人',
+      dataIndex: 'user.login',
+    },
+    {
       title: '创建时间',
-      key: 'showTime',
       dataIndex: 'created_at',
       valueType: 'dateTime',
-      hideInSearch: true,
     },
   ],
   toolbar: {
     settings: undefined,
-    // 按钮
     actions: [
       {
         name: '导入/停止',

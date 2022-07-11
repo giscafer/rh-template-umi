@@ -7,22 +7,22 @@
  */
 export default {
   development: {
-    '/api/': {
-      target: 'http://192.168.68.241:8076',
-      changeOrigin: true,
-      pathRewrite: { '^': '' },
-    },
     '/github/': {
       target: 'https://proapi.azurewebsites.net',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
+      pathRewrite: { '^/github/': '/github/' },
+    },
+    '/api/': {
+      target: 'https://api.github.com',
+      changeOrigin: true,
+      pathRewrite: { '^/api/': '/' },
     },
   },
   test: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'https://api.github.com',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
+      pathRewrite: { '^/api/': '/' },
     },
   },
   pre: {

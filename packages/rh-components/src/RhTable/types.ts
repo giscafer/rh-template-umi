@@ -106,7 +106,7 @@ export type RhTableSelfProps = {
    */
   apiMethod?: string;
 
-  columns: RhColumns[];
+  columns?: RhColumns[];
   /**
    * rxjs Subject Observable
    * 用于事件流处理，使用 useTable hook获取

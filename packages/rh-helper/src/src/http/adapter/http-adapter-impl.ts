@@ -4,11 +4,10 @@
  * 比如此实现类依赖 antd message组件，如果是 RN 或 Vue 技术栈，只需要实现 HttpAdapter 接口即可，别的地方都不需要变更
  */
 
-import { baseURL, isMockMode } from '@/config/constant';
-import { getToken, saveToken, signOut } from '@roothub/helper/src/auth/auth';
 import { message } from 'antd';
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
+import { getToken, saveToken, signOut } from '../../auth/auth';
 import { HttpAdapter } from './http-adapter';
 import {
   ERR_MESSAGE_SHOW_DURATION,
@@ -26,10 +25,11 @@ export interface Token {
   ispassword?: boolean;
 }
 
+const isMockMode = process.env.MOCK;
 export class RNHttpAdapterImp implements HttpAdapter {
   baseURL: string;
   constructor() {
-    this.baseURL = baseURL;
+    this.baseURL = process.env.BASE_URL || '';
   }
 
   async getToken<T = Token>(): Promise<T> {
@@ -104,7 +104,9 @@ export class RNHttpAdapterImp implements HttpAdapter {
   handleResponse(response: AxiosResponse<any> & { config: { silent?: boolean } }) {
     const res = response.data || {};
     const { silent = false } = response.config;
-
+    if (Array.isArray(res)) {
+      return { data: res };
+    }
     if (res.code === RES_SUCCESS_DEFAULT_CODE) {
       // 成功
       return res;

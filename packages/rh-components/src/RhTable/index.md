@@ -5,12 +5,14 @@ order: 1
 
 # RhTable
 
-用于修改查询条件规范，使用方式和 [ProTable - 高级表格](https://procomponents.ant.design/components/table?current=1&pageSize=5) 一致
+基于 [ProTable](https://procomponents.ant.design/components/table?current=1&pageSize=5) 扩展，探索高效研发实践，做到**基本不写**可能重复的代码。基本没机会写 React 的 `tsx` 代码
 
-- 简化使用，高效开发
-- 改造查询条件 UI 交互
-- 支持配置化开发 Low-Code
-- 虚拟表格（必须设置 scroll.y，如没有使用默认值 600）
+- ProTable 能做的都有，只做扩展
+- 支持原生写法，对齐 ProTable 没有 breaking change
+- 扩展 Low-Code 配置化开发，复杂的列表页只需要 100 行代码，可能没有机会写 ReactElement 代码
+- 改造查询条件 UI 交互，支持 2+ 种查询布局
+- 缓存请求，延迟 loading 增强体验（如非首次渲染，重新请求 300ms 内能拿到数据的话 loading 不显示静默刷新，类似 SWR 和 React Query）
+- 虚拟滚动
 
 精简写法：
 
