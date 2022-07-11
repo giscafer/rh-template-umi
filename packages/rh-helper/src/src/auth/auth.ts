@@ -1,4 +1,4 @@
-import storage from '@roothub/shared/storage';
+import storage from '@roothub/helper/src/storage';
 
 export const TOKEN_KEY = '_rh_token';
 export const USER_INFO_KEY = '_rh_token';

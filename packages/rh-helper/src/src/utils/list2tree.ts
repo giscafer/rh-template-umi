@@ -9,10 +9,7 @@ type TreeNode = {
 
 const defaultOptions = { parentId: '' };
 
-const list2tree = (
-  dataSource: TreeNode[] = [],
-  options = defaultOptions,
-): TreeNode[] => {
+const list2tree = (dataSource: TreeNode[] = [], options = defaultOptions): TreeNode[] => {
   if (!Array.isArray(dataSource)) {
     console.error('源数据有误');
     return [];

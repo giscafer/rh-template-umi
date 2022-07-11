@@ -4,8 +4,7 @@ import { RNHttpAdapterImp } from './adapter/http-adapter-impl';
 
 export type QueryParamsType = Record<string | number, any>;
 
-export interface FullRequestParams
-  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -26,8 +25,7 @@ export interface FullRequestParams
 
 export type RequestParams = Omit<FullRequestParams, 'method' | 'path'>;
 
-export interface ApiConfig<SecurityDataType = unknown>
-  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
   securityWorker?: (
     securityData: SecurityDataType | null,
   ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
@@ -54,12 +52,7 @@ export class HttpClient<SecurityDataType = unknown> extends RNHttpAdapterImp {
 
   private cancellationToken = axios.CancelToken.source();
 
-  constructor({
-    securityWorker,
-    secure,
-    format,
-    ...axiosConfig
-  }: ApiConfig<SecurityDataType> = {}) {
+  constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
     super();
 
     this.instance = axios.create({
@@ -76,10 +69,7 @@ export class HttpClient<SecurityDataType = unknown> extends RNHttpAdapterImp {
     this.interceptRequestConfig(this.instance, { silent: this.silent });
   }
 
-  private mergeRequestParams(
-    params1: AxiosRequestConfig,
-    params2?: AxiosRequestConfig,
-  ): AxiosRequestConfig {
+  private mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
     return {
       ...this.instance.defaults,
       ...params1,
@@ -132,9 +122,7 @@ export class HttpClient<SecurityDataType = unknown> extends RNHttpAdapterImp {
     return this.instance.request({
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData
-          ? { 'Content-Type': type }
-          : {}),
+        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
         ...(requestParams.headers || {}),
       },
       params: query,

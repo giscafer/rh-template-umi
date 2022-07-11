@@ -1,5 +1,5 @@
 {
-  "name": "@roothub/shared",
+  "name": "@roothub/helper",
   "version": "1.0.0",
   "description": "Roothub 工具函数共享库",
   "keywords": [],

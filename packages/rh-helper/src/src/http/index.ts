@@ -9,11 +9,7 @@ const httpClient = new HttpClient();
  * @param data post参数
  * @param params http params
  */
-export function httpGet(
-  url: string,
-  query: AnyObject = {},
-  params: RequestParams = {},
-) {
+export function httpGet(url: string, query: AnyObject = {}, params: RequestParams = {}) {
   return httpClient.request({
     path: url,
     method: 'GET',
@@ -27,11 +23,7 @@ export function httpGet(
  * @param data post参数
  * @param params http params
  */
-export function httpPost(
-  url: string,
-  data: AnyObject = {},
-  params: RequestParams = {},
-) {
+export function httpPost(url: string, data: AnyObject = {}, params: RequestParams = {}) {
   return httpClient.request({
     path: url,
     method: 'POST',
@@ -45,11 +37,7 @@ export function httpPost(
  * @param url 接口url
  * @param params http params
  */
-export function httpPut(
-  url: string,
-  data: AnyObject = {},
-  params: RequestParams = {},
-) {
+export function httpPut(url: string, data: AnyObject = {}, params: RequestParams = {}) {
   return httpClient.request({
     path: url,
     method: 'PUT',

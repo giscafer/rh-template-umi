@@ -5,7 +5,7 @@
  * @description Low-Code 之 jsonschema 动态渲染 tab-table ModalForm 复杂弹窗
  */
 
-import { httpPost, httpPut } from '@roothub/shared/http';
+import { httpPost, httpPut } from '@roothub/helper/src/http';
 import { message, Modal, ModalProps } from 'antd';
 import { isFunction, noop, template } from 'lodash';
 import { useCallback, useMemo } from 'react';

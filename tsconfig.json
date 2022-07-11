@@ -4,7 +4,7 @@
     "target": "ES5",
     "paths": {
       "@roothub/components": ["packages/rh-components/src/index"],
-      "@roothub/shared": ["packages/rh-shared/src"]
+      "@roothub/helper": ["packages/rh-helper"]
     }
   }
 }

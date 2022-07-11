@@ -7,12 +7,7 @@
  */
 
 import type { IStorage } from './interface';
-import type {
-  StorageOptions,
-  StoreDataType,
-  StoreType,
-  ValueType,
-} from './types';
+import type { StorageOptions, StoreDataType, StoreType, ValueType } from './types';
 
 const serialize = (data: ValueType) => {
   try {

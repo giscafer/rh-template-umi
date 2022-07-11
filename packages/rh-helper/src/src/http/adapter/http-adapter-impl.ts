@@ -5,7 +5,7 @@
  */
 
 import { baseURL, isMockMode } from '@/config/constant';
-import { getToken, saveToken, signOut } from '@roothub/shared/auth/auth';
+import { getToken, saveToken, signOut } from '@roothub/helper/src/auth/auth';
 import { message } from 'antd';
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
@@ -82,9 +82,9 @@ export class RNHttpAdapterImp implements HttpAdapter {
       }
       // 判断当前日期是否晚于tokenExpireTime，如果是表示token已经过期，需要用refreshToken去换一个新的token
       if (dayjs().isAfter(dayjs(tokenExpireTime))) {
-        const result = await fetch(
-          `${this.baseURL}/auth/token/refresh?refreshToken=${refreshToken}`,
-        ).then((response) => response.json());
+        const result = await fetch(`${this.baseURL}/auth/token/refresh?refreshToken=${refreshToken}`).then((response) =>
+          response.json(),
+        );
         const { data } = result || {};
         accessToken = data.accessToken;
         saveToken(data);
@@ -101,9 +101,7 @@ export class RNHttpAdapterImp implements HttpAdapter {
     signOut();
   }
 
-  handleResponse(
-    response: AxiosResponse<any> & { config: { silent?: boolean } },
-  ) {
+  handleResponse(response: AxiosResponse<any> & { config: { silent?: boolean } }) {
     const res = response.data || {};
     const { silent = false } = response.config;
 
@@ -112,10 +110,7 @@ export class RNHttpAdapterImp implements HttpAdapter {
       return res;
     } else if (res.code === RES_UNAUTHORIZED_CODE) {
       if (!silent) {
-        message.info(
-          '您已经登出，您可以取消以停留在此页面，或再次登录',
-          ERR_MESSAGE_SHOW_DURATION,
-        );
+        message.info('您已经登出，您可以取消以停留在此页面，或再次登录', ERR_MESSAGE_SHOW_DURATION);
       }
       this.handleLogout();
     } else if (res.code === RES_PERMISSION_DENIED_CODE) {

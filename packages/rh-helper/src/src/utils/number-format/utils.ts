@@ -6,10 +6,7 @@ import type { Options, Separators } from './types';
  * @param opts
  * @returns
  */
-export function getSeparators({
-  thousandSeparator = true,
-  decimalSeparator = '.',
-}: any = {}) {
+export function getSeparators({ thousandSeparator = true, decimalSeparator = '.' }: any = {}) {
   if (thousandSeparator === true) {
     thousandSeparator = ',';
   }
@@ -73,10 +70,7 @@ export function applyThousandSeparator(str: string, thousandSeparator: string) {
   index = index === -1 ? str.length : index;
 
   return (
-    str.substring(0, index) +
-    str
-      .substring(index, str.length)
-      .replace(thousandsGroupRegex, '$1' + thousandSeparator)
+    str.substring(0, index) + str.substring(index, str.length).replace(thousandsGroupRegex, '$1' + thousandSeparator)
   );
 }
 

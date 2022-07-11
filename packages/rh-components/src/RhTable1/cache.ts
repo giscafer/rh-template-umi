@@ -6,7 +6,7 @@
  * 缺陷：无版本控制，临时存储sessionStorage
  */
 
-import { sessionStore } from '@roothub/shared/storage';
+import { sessionStore } from '@roothub/helper/src/storage';
 import { intersection, map } from 'lodash';
 import { useCallback, useState } from 'react';
 

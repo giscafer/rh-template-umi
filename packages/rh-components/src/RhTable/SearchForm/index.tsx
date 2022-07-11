@@ -17,7 +17,7 @@ import {
   ProFormSelect,
   ProFormText,
 } from '@ant-design/pro-components';
-import { useDebounceFn } from 'ahooks';
+import { useThrottleFn } from 'ahooks';
 import { isNil, noop } from 'lodash';
 import {
   forwardRef,
@@ -65,31 +65,29 @@ const compTypeList = [
 function SearchForm(props: QueryFilterType, ref: any) {
   const { columns = [], onChange = noop } = props;
   const onConfirmRef = useRef<() => void>();
-  const queryFilterFormRef = useRef<ProFormInstance>();
-  const lightFilterFormRef = useRef<ProFormInstance>();
+  const queryFormRef = useRef<ProFormInstance>();
+  const lightFormRef = useRef<ProFormInstance>();
 
   useImperativeHandle(ref, () => {
     return {
       getQueryParams: () => {
-        const queryFormData =
-          queryFilterFormRef.current?.getFieldsValue() || {};
-        const lightFormData =
-          lightFilterFormRef.current?.getFieldsValue() || {};
+        const queryFormData = queryFormRef.current?.getFieldsValue() || {};
+
+        const lightFormData = lightFormRef.current?.getFieldsValue() || {};
         const queryParams = { ...queryFormData, ...lightFormData };
-        // console.log('queryParams=', queryParams);
 
         return queryParams;
       },
       clearQueryParams: () => {
-        queryFilterFormRef.current?.resetFields();
-        lightFilterFormRef.current?.resetFields();
+        queryFormRef.current?.resetFields();
+        lightFormRef.current?.resetFields();
       },
     };
   });
 
-  const { run } = useDebounceFn(onChange, { wait: debounceTime });
+  const { run } = useThrottleFn(onChange, { wait: debounceTime });
 
-  const { run: lightRun } = useDebounceFn(onChange, { wait: 10 });
+  const { run: lightRun } = useThrottleFn(onChange, { wait: debounceTime });
 
   // 查询列定义
   const filterColumns: RhColumns[] = useMemo(() => {
@@ -136,7 +134,8 @@ function SearchForm(props: QueryFilterType, ref: any) {
             onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Enter') {
                 onConfirmRef.current?.();
-                run();
+                console.log('Enter', 'run');
+                // run();
               }
             },
           },
@@ -268,7 +267,7 @@ function SearchForm(props: QueryFilterType, ref: any) {
           layoutType="QueryFilter"
           // span={span || 5}
           submitter={false}
-          formRef={queryFilterFormRef}
+          formRef={queryFormRef}
           columns={queryFilterColumns}
           onFieldsChange={(changedFields: any[]) => {
             // 获取当前所选择的项
@@ -290,8 +289,8 @@ function SearchForm(props: QueryFilterType, ref: any) {
               selectedColumns.linkChildrenKey?.forEach((item: any) => {
                 resetValueObject[item] = undefined;
               });
-              queryFilterFormRef?.current?.setFieldsValue(resetValueObject);
-              lightFilterFormRef?.current?.setFieldsValue(resetValueObject);
+              queryFormRef?.current?.setFieldsValue(resetValueObject);
+              lightFormRef?.current?.setFieldsValue(resetValueObject);
             }
           }}
           onValuesChange={run}
@@ -302,7 +301,7 @@ function SearchForm(props: QueryFilterType, ref: any) {
         <div className="rh-table-query-light-form-container">
           <LightFilter
             className="rh-table-query-light-form"
-            formRef={lightFilterFormRef}
+            formRef={lightFormRef}
             onFinish={lightRun as any}
           >
             {lightFilterColumns.map((column: any) => {
@@ -312,7 +311,7 @@ function SearchForm(props: QueryFilterType, ref: any) {
           <div className="reset">
             <a
               onClick={() => {
-                lightFilterFormRef.current?.resetFields();
+                lightFormRef.current?.resetFields();
                 onChange();
               }}
             >

@@ -1,12 +1,6 @@
-export type StoreType = typeof window.localStorage &
-  typeof window.sessionStorage;
+export type StoreType = typeof window.localStorage & typeof window.sessionStorage;
 
-export type ValueType =
-  | Record<string, any>
-  | number
-  | string
-  | undefined
-  | null;
+export type ValueType = Record<string, any> | number | string | undefined | null;
 
 export type StorageOptions = {
   /**

@@ -24,10 +24,7 @@ export function numberFormat(options: Options = {}) {
 
   const formatAsNumber = (numStr: string) => {
     const hasDecimalSeparator = numStr.indexOf('.') !== -1;
-    let { beforeDecimal, afterDecimal, addNegation } = splitDecimal(
-      numStr + '',
-      opts.allowNegative,
-    );
+    let { beforeDecimal, afterDecimal, addNegation } = splitDecimal(numStr + '', opts.allowNegative);
 
     if (thousandSeparator) {
       beforeDecimal = applyThousandSeparator(beforeDecimal, thousandSeparator);
@@ -44,11 +41,7 @@ export function numberFormat(options: Options = {}) {
     /** restore negation sign */
     if (addNegation) beforeDecimal = '-' + beforeDecimal;
 
-    return (
-      beforeDecimal +
-      ((hasDecimalSeparator && decimalSeparator) || '') +
-      afterDecimal
-    );
+    return beforeDecimal + ((hasDecimalSeparator && decimalSeparator) || '') + afterDecimal;
   };
 
   const formatNumString = (numStr: string = '') => {

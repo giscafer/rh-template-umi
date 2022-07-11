@@ -1,9 +1,5 @@
-import {
-  LogoutOutlined,
-  SettingOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import { queryStringToObject } from '@roothub/shared/utils/queryString';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { queryStringToObject } from '@roothub/helper/src/utils/queryString';
 import { Avatar, Menu, Spin } from 'antd';
 import { stringify } from 'querystring';
 import React, { useCallback } from 'react';
@@ -104,12 +100,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar
-          size="small"
-          className={styles.avatar}
-          src={currentUser.avatarUrl}
-          alt="avatar"
-        />
+        <Avatar size="small" className={styles.avatar} src={currentUser.avatarUrl} alt="avatar" />
         <span>{currentUser.username}</span>
       </span>
     </HeaderDropdown>

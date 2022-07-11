@@ -37,7 +37,6 @@ export type RhToolbarMeta = {
  * 配置化开发表格meta type
  */
 export type RhTableMeta = {
-  columns: RhColumns[];
   /**
    * 表格多选方式 'multiple' | 'single'
    * @default ''
@@ -51,7 +50,10 @@ export type RhTableMeta = {
    * 表格内行操作
    */
   tableActions?: RhActionMeta[];
-} & Pick<RhTableProps<any, any, any>, 'searchPlacement' | 'headerTitle'>;
+} & Pick<
+  RhTableProps<any, any, any>,
+  'columns' | 'searchPlacement' | 'headerTitle' | 'api'
+>;
 
 /**
  * RhTable 扩展的属性
@@ -61,6 +63,22 @@ export type RhTableSelfProps = {
    * 配置化开发表格属性
    */
   meta?: RhTableMeta;
+  /**
+   * 列表分页请求接口 url，支持restful 和参数模板
+   * eg: https://giscafer.com/post/${postId}/detail
+   */
+  api?: string;
+  /**
+   * api参数
+   * eg: { "postId": 123 }
+   * 最后请求 api url 解析为：https://giscafer.com/post/123/detail
+   */
+  apiParams?: Record<string, string | number>;
+  /**
+   * 接口请求方式 GET 或 POST
+   * @default 'GET'
+   */
+  apiMethod?: string;
   /**
    * rxjs Subject Observable
    * 用于事件流处理，使用 useTable hook获取
@@ -72,14 +90,6 @@ export type RhTableSelfProps = {
    * @default 'header'
    */
   searchPlacement?: string;
-  /**
-   * 隐藏request 请求 loading效果
-   */
-  hideLoading?: boolean;
-  /**
-   * title是否和toolbar同一行
-   */
-  titleInline?: boolean;
   /**
    * 可编辑表格，和 virtual 冲突不能同时使用
    */
@@ -124,13 +134,6 @@ export type RhTableSelfProps = {
      */
     tableMulSelectProps?: TableMulSelectProps;
   };
-  /**
-   * 左侧输入框 / 选择框中每个表单占据的格子大小
-   * 总宽度 = searchSpan * colSize
-   * colSize 默认为 1
-   */
-  searchSpan?: number;
-  toolBarClassName?: string;
   /**
    * 自定义渲染右侧toolbar
    */

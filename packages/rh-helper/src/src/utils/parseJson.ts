@@ -1,9 +1,6 @@
 import { isNil } from 'lodash';
 
-export default function parseJsonString(
-  jsonString: string,
-  defaultValue: any = null,
-) {
+export default function parseJsonString(jsonString: string, defaultValue: any = null) {
   if (isNil(jsonString)) return defaultValue;
   let json;
   try {

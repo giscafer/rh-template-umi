@@ -1,0 +1,18 @@
+{
+  "name": "@roothub/helper",
+  "version": "1.0.0",
+  "description": "Roothub 工具函数共享库",
+  "keywords": [],
+  "license": "MIT",
+  "author": "giscafer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.3",
+    "downloadjs": "^1.4.7",
+    "jsencrypt": "^3.2.1",
+    "lodash": "^4.17.21"
+  }
+}

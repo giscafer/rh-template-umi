@@ -11,13 +11,13 @@ import { ListToolBarProps } from '@ant-design/pro-components';
 import type { ParamsType } from '@ant-design/pro-provider';
 import ProTable from '@ant-design/pro-table';
 import { Button, Dropdown, Menu, Popconfirm } from 'antd';
-import { SortOrder } from 'antd/lib/table/interface';
-import { cloneDeep, isFunction, isNumber } from 'lodash';
+import { cloneDeep, isNumber } from 'lodash';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
 import TableMulSelect from '../RhTableMulSelected';
 import RhTitle from '../RhTitle';
+import useDataSource from './hooks/useDataSource';
 import useRowSelection from './hooks/useRowSelection';
 import { DefaultObservable } from './hooks/useTable';
 import './index.less';
@@ -50,7 +50,6 @@ const RhTable = <
     virtual = false,
     resetPageIndex = true,
     resetPageInParams = false,
-    extraParams = {},
     tableAlertRenderProps = {},
     pagination = {},
     locale = { emptyText: RhEmpty },
@@ -60,7 +59,6 @@ const RhTable = <
 
   const queryRef = useRef<any>();
   const defaultActionRef = useRef<RhActionType>();
-  const [loading, setLoading] = useState(false);
   const [vt] = useVT(() => {
     return {
       scroll: { y: isNumber(scroll?.y) ? scroll!.y : 600 },
@@ -69,58 +67,28 @@ const RhTable = <
 
   const actionRef = (mergeProps.actionRef ||
     defaultActionRef) as React.MutableRefObject<RhActionType>;
-
+  const [ts, setTs] = useState<number>(0); // 借助刷新请求
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { rowSelection, selectedRows, selectedRowKey, resetSelection } =
     useRowSelection();
 
   const handleReload = useCallback(() => {
     actionRef.current.pageInfo.current = 1;
+    setTs(Date.now());
     return actionRef.current?.reload(resetPageIndex);
   }, [actionRef, resetPageIndex]);
 
-  const handleRequest = useCallback(
-    async (
-      pageInfo: { current: any; pageSize: any },
-      sort: Record<string, SortOrder>,
-    ) => {
-      setLoading(true);
-      if (resetPageInParams) {
-        queryRef.current?.clearQueryParams();
-      }
-      const queryParams = queryRef.current?.getQueryParams();
-
-      if (actionRef?.current) {
-        actionRef.current.pageInfo.params = queryParams;
-      }
-
-      const { current, pageSize } = pageInfo;
-
-      // current 是兼容老写法
-      const params = {
-        page: current,
-        current,
-        pageSize,
-        ...queryParams,
-        ...extraParams,
-      };
-      if (isFunction(request)) {
-      }
-
-      const res: any = await request?.(params, sort, queryParams);
-
-      setLoading(false);
-      // 兼容老写法
-      const total = res.total ?? Number(res.totalSize);
-      return {
-        ...res,
-        success: true,
-        total,
-        totalPages: Number(res.totalPages) || 0,
-      };
-    },
-    [actionRef, extraParams, request, resetPageInParams],
-  );
+  const dsParams = {
+    api: restProps.api,
+    apiParams: restProps.apiParams,
+    apiMethod: restProps.apiMethod,
+    params: restProps.params,
+    resetPageInParams,
+    actionRef,
+    queryRef,
+    request,
+  };
+  const { onChange, loading, data } = useDataSource(dsParams, [ts]);
 
   const headerTitleNode = useMemo(() => {
     if (!headerTitle) {
@@ -220,14 +188,14 @@ const RhTable = <
       {searchPlacement === 'header' && headerNode}
       <ProTable
         rowKey={restProps.rowKey || 'id'}
-        locale={locale as any}
         actionRef={actionRef}
         columns={columns}
+        loading={loading}
         search={false}
         scroll={scroll}
         headerTitle={headerTitleNode}
+        locale={locale as any}
         toolbar={toolbarNode as ListToolBarProps}
-        loading={isFunction(request) ? loading : restProps.loading}
         form={{
           ignoreRules: false,
         }}
@@ -281,8 +249,9 @@ const RhTable = <
           });
         }}
         {...restProps}
+        dataSource={restProps.dataSource ?? (data?.data || [])}
+        onChange={onChange}
         components={virtual ? vt : restProps.components}
-        request={handleRequest as any}
         pagination={
           pagination !== false
             ? {
@@ -293,6 +262,7 @@ const RhTable = <
                 showQuickJumper: true,
                 showSizeChanger: true,
                 ...pagination,
+                total: data?.total,
               }
             : false
         }

@@ -2,9 +2,9 @@ import Footer from '@/components/Footer';
 import { THEME_KEY } from '@/config/constant';
 import { colorSet } from '@/config/theme';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
-import { saveToken } from '@roothub/shared/auth/auth';
-import { encrypt } from '@roothub/shared/utils/encrypt';
-import { queryStringToObject } from '@roothub/shared/utils/queryString';
+import { saveToken } from '@roothub/helper/src/auth/auth';
+import { encrypt } from '@roothub/helper/src/utils/encrypt';
+import { queryStringToObject } from '@roothub/helper/src/utils/queryString';
 import { Alert, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { history, Link, useModel } from 'umi';
@@ -105,12 +105,7 @@ const Login: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.left}>
           <Link to="/">
-            <img
-              alt="logo"
-              className={styles.logo}
-              src="/logo.svg"
-              width={32}
-            />
+            <img alt="logo" className={styles.logo} src="/logo.svg" width={32} />
             <Divider type="vertical" />
             <span className={styles.title}>RootHub Scaffold</span>
           </Link>
@@ -146,10 +141,9 @@ const Login: React.FC = () => {
               },
             }}
           >
-            {userLoginState.status === 'fail' &&
-              userLoginState.msg !== undefined && (
-                <LoginMessage content={userLoginState.msg} />
-              )}
+            {userLoginState.status === 'fail' && userLoginState.msg !== undefined && (
+              <LoginMessage content={userLoginState.msg} />
+            )}
             <ProFormText
               name="mobile"
               label="手机号码"

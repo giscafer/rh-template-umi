@@ -7,11 +7,7 @@ import dayjs from 'dayjs';
  * @param formatter 格式化方式 'YYYY-MM-DD HH:mm:ss'
  * @returns
  */
-export function formatDate(
-  secondTimestamp: number,
-  defaultValue = '',
-  formatter = 'YYYY-MM-DD HH:mm:ss',
-) {
+export function formatDate(secondTimestamp: number, defaultValue = '', formatter = 'YYYY-MM-DD HH:mm:ss') {
   if (!secondTimestamp) {
     return defaultValue;
   }

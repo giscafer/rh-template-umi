@@ -10,7 +10,7 @@
  * 3、不同tab下（channel）渲染模版数据，支持分别选择记录新增
  */
 import { EditableFormInstance, EditableProTable } from '@ant-design/pro-table';
-import { httpGet } from '@roothub/shared/http';
+import { httpGet } from '@roothub/helper/src/http';
 import { Button, Radio, Tabs } from 'antd';
 import {
   cloneDeep,

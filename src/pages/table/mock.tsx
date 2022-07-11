@@ -1,6 +1,6 @@
 import { PageContainer } from '@ant-design/pro-layout';
 import { RhTable } from '@roothub/components';
-import { httpGet } from '@roothub/shared/http';
+import { httpGet } from '@roothub/helper/src/http';
 import { useRouteData } from '@umijs/max';
 import React from 'react';
 

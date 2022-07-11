@@ -17,11 +17,21 @@
   <!-- - Swagger Doc Api TypeScript 接口代码生成 -->
   <!-- - 主题换色 -->
 
-yarn workspaces
+yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
-```yml
-packages/rh-components # 组件库，导入别名： @roothub/components
-packages/rh-shared # 函数共享库，导入别名： @roothub/shared
+```json
+{
+  "@roothub/components": {
+    "location": "packages/rh-components",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": ["@roothub/helper/src"]
+  },
+  "@roothub/helper/src": {
+    "location": "packages/rh-shared",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  }
+}
 ```
 
 ## TODO

@@ -2640,6 +2640,14 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@roothub/helper/src@file:./packages/rh-shared":
+  version "1.0.0"
+  dependencies:
+    dayjs "^1.11.3"
+    downloadjs "^1.4.7"
+    jsencrypt "^3.2.1"
+    lodash "^4.17.21"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.npmmirror.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
