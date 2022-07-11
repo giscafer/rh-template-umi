@@ -36,7 +36,7 @@ const RhTable = <
   ValueType = 'text',
 >({
   meta,
-  observable$ = DefaultObservable,
+  actionObservable$ = DefaultObservable,
   ...props
 }: RhTableProps<DataType, Params, ValueType>) => {
   const mergeProps = Object.assign({}, props, meta || {});
@@ -175,7 +175,7 @@ const RhTable = <
               overlay={
                 <Menu
                   onClick={async ({ key }) => {
-                    observable$.next({ action: key });
+                    actionObservable$.next({ action: key });
                   }}
                   items={menuItems}
                 />
@@ -194,7 +194,7 @@ const RhTable = <
             size={size}
             {...rest}
             onClick={() => {
-              observable$.next({ action });
+              actionObservable$.next({ action });
             }}
           >
             {name}

@@ -24,31 +24,40 @@ type Listener = (state: SubjectStateType) => void;
 
 export type RhObservable<T> = {
   next: (state: SubjectStateType) => void;
-  take: (action: string, cb: (state: SubjectStateType) => void) => void;
+  take: (
+    action: string | string[],
+    cb: (state: SubjectStateType) => void,
+  ) => void;
   subscribe(observer: Partial<Observer<T>>): Unsubscribable;
 };
 
 export const DefaultObservable = {
-  take: (action: string, cb: (state: SubjectStateType) => void) => cb,
+  take: (action: string | string[], cb: (state: SubjectStateType) => void) =>
+    cb,
   next: (state: SubjectStateType) => state,
   subscribe: (observer?: any) => observer,
 };
 
-const map = new Map();
+const actionMap = new Map<string, any>();
 
 function useTable(workflow = noop) {
   const subject = new Subject();
 
-  const observable$: RhObservable<any> = {
-    take: (action: string, listener: Listener) => {
-      map.set(action, listener);
+  const actionObservable$: RhObservable<any> = {
+    take: (action: string | string[], listener: Listener) => {
+      if (Array.isArray(action)) {
+        action.map((act) => actionMap.set(act, listener));
+      } else {
+        actionMap.set(action, listener);
+      }
     },
     next: (state: SubjectStateType) => subject.next(state),
     subscribe: (observer?: any) => subject.subscribe(observer),
   };
 
   const subscribe$ = subject.subscribe((state: any) => {
-    const listener = map.get(state?.action);
+    // 不支持1对多的情况
+    const listener = actionMap.get(state?.action);
     if (listener && isFunction(listener)) {
       listener(state);
     }
@@ -56,15 +65,15 @@ function useTable(workflow = noop) {
 
   useEffect(() => {
     if (isFunction(workflow)) {
-      workflow(observable$);
+      workflow(actionObservable$);
     }
     return () => {
-      map.clear();
+      actionMap.clear();
       subscribe$.unsubscribe();
     };
   }, [workflow]);
 
-  return { observable$ };
+  return { actionObservable$ };
 }
 
 export default useTable;

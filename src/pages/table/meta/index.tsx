@@ -16,7 +16,7 @@ export default () => {
   const actionRef = React.useRef<any>();
   const { route }: any = useRouteData();
 
-  const { observable$ } = useTable(workflow);
+  const tableWorkFlow = useTable(workflow);
 
   return (
     <PageContainer
@@ -30,7 +30,7 @@ export default () => {
     >
       <RhTable<any>
         meta={tableMeta}
-        observable$={observable$}
+        {...tableWorkFlow}
         actionRef={actionRef}
         pagination={{
           pageSize: 10,

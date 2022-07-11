@@ -65,7 +65,7 @@ export type RhTableSelfProps = {
    * rxjs Subject Observable
    * 用于事件流处理，使用 useTable hook获取
    */
-  observable$?: RhObservable<any>;
+  actionObservable$?: RhObservable<any>;
 
   /**
    * 查询表单渲染位置 'header' | 'toolbar'
