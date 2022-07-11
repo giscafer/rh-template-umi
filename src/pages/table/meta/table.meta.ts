@@ -2,7 +2,7 @@ import { RhTableMeta } from 'packages/rh-components/src/RhTable/types';
 
 const tableMeta: RhTableMeta = {
   headerTitle: 'LeekHub/leek-fund 仓库',
-  api: '/api/repos/LeekHub/leek-fund/issues',
+  api: '/repos/LeekHub/leek-fund/issues',
   searchPlacement: 'toolbar',
   columns: [
     {
@@ -18,10 +18,20 @@ const tableMeta: RhTableMeta = {
       searchType: 'query',
       valueType: 'select',
       valueEnum: {
-        all: '全部',
-        open: '未解决',
-        closed: '已解决',
-        processing: '解决中',
+        all: { text: '全部', status: 'Default' },
+        open: {
+          text: '未解决',
+          status: 'Error',
+        },
+        closed: {
+          text: '已解决',
+          status: 'Success',
+          disabled: true,
+        },
+        processing: {
+          text: '解决中',
+          status: 'Processing',
+        },
       },
     },
     {

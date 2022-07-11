@@ -99,13 +99,17 @@ function useDataSource(
         extraConfig.data = finalParams;
       }
 
-      resp = await httpClient.request({
-        path: realApi,
-        method: apiMethod,
-        ...extraConfig,
-      });
+      try {
+        resp = await httpClient.request({
+          path: realApi,
+          method: apiMethod,
+          ...extraConfig,
+        });
+      } catch (err) {
+        console.error('datasource err=', err);
+      }
     }
-    console.log('resp=', resp);
+    // console.log('resp=', resp);
 
     // TODO: 配置化，不同的后端团队规范不一致
     const total = resp.total ?? Number(resp.totalSize);

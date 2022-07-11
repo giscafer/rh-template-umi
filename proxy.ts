@@ -12,10 +12,10 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^/github/': '/github/' },
     },
-    '/api/': {
+    '/repos/': {
       target: 'https://api.github.com',
       changeOrigin: true,
-      pathRewrite: { '^/api/': '/' },
+      pathRewrite: { '^/repos/': '/repos/' },
     },
   },
   test: {
