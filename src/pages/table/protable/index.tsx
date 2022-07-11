@@ -5,8 +5,8 @@ import {
   PageContainer,
   ProDescriptions,
   ProDescriptionsItemProps,
-  ProTable,
 } from '@ant-design/pro-components';
+import { RhTable } from '@roothub/components';
 import { Button, Divider, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import CreateForm from './components/CreateForm';
@@ -141,9 +141,10 @@ const TableList: React.FC<unknown> = () => {
     <PageContainer
       header={{
         title: 'ProTable CRUD 原始写法示例',
+        subTitle: 'RhTable也完全和ProTable保持一致',
       }}
     >
-      <ProTable<API.UserInfo>
+      <RhTable<any>
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="id"
@@ -194,7 +195,7 @@ const TableList: React.FC<unknown> = () => {
         </FooterToolbar>
       )}
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
-        <ProTable<API.UserInfo, API.UserInfo>
+        <RhTable<API.UserInfo, API.UserInfo>
           onSubmit={async (value) => {
             const success = await handleAdd(value);
             if (success) {
