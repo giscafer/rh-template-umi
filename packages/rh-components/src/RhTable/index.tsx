@@ -10,18 +10,19 @@ import { DownOutlined } from '@ant-design/icons';
 import { ListToolBarProps } from '@ant-design/pro-components';
 import type { ParamsType } from '@ant-design/pro-provider';
 import ProTable from '@ant-design/pro-table';
-import { Button, Dropdown, Menu, Popconfirm } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
+import { TablePaginationConfig } from 'antd/es/table/interface';
 import { cloneDeep, isNumber } from 'lodash';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
-import TableMulSelect from '../RhTableMulSelected';
 import RhTitle from '../RhTitle';
+import { genTableAlertOptionRender, genTableAlertRender } from './alert';
 import useDataSource from './hooks/useDataSource';
 import useRowSelection from './hooks/useRowSelection';
 import { DefaultObservable } from './hooks/useTable';
 import './index.less';
-import SearchForm from './SearchForm';
+import SearchForm from './search';
 import {
   RhActionMeta,
   RhActionType,
@@ -177,11 +178,21 @@ const RhTable = <
     }
   }, [meta?.toolbar, toolbar, searchPlacement]);
 
-  const {
-    cleanMethod,
-    leftExtraBtn = [],
-    rightExtraBtn = [],
-  } = tableAlertRenderProps;
+  const memoPagination: false | TablePaginationConfig = useMemo(() => {
+    if (pagination !== false) {
+      return {
+        pageSize: 10,
+        showTotal: (total: number) => `总共 ${total} 条`,
+        size: 'default',
+        showQuickJumper: true,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '50', '100'],
+        ...(pagination ?? {}),
+        total: data?.total,
+      };
+    }
+    return pagination;
+  }, [pagination, data?.total]);
 
   return (
     <div className="rh-table">
@@ -207,65 +218,15 @@ const RhTable = <
             ...rowSelection,
           } as any)
         }
-        tableAlertRender={({ selectedRowKeys, onCleanSelected }) => {
-          if (tableAlertRenderProps?.tableMulSelectProps?.display) {
-            return (
-              <TableMulSelect {...tableAlertRenderProps.tableMulSelectProps} />
-            );
-          }
-          const clean = cleanMethod || onCleanSelected;
-          return (
-            <>
-              <div style={{ display: 'inline-flex', gap: 8 }}>
-                <div>已选择</div>
-                <div>{selectedRowKeys.length}</div>
-                <div>项</div>
-              </div>
-              {leftExtraBtn}
-              <a onClick={clean}>清空</a>
-            </>
-          );
-        }}
-        tableAlertOptionRender={({ selectedRowKeys, onCleanSelected }) => {
-          return rightExtraBtn.map((item: any) => {
-            if (item && item.key === 'delete') {
-              return (
-                <Popconfirm
-                  key="delete"
-                  placement="bottom"
-                  title="确定要删除吗？"
-                  onConfirm={async () => {
-                    await item.func?.(selectedRowKeys);
-                    onCleanSelected();
-                  }}
-                >
-                  <a key="delete" className="table-line-button-delete">
-                    批量删除
-                  </a>
-                </Popconfirm>
-              );
-            }
-            return item;
-          });
-        }}
+        tableAlertRender={genTableAlertRender(tableAlertRenderProps)}
+        tableAlertOptionRender={genTableAlertOptionRender(
+          tableAlertRenderProps,
+        )}
         {...restProps}
         dataSource={restProps.dataSource ?? (data?.data || [])}
         onChange={onChange}
         components={virtual ? vt : restProps.components}
-        pagination={
-          pagination !== false
-            ? {
-                pageSize: 10,
-                showTotal: (total) => `总共 ${total} 条`,
-                size: 'default',
-                pageSizeOptions: ['10', '20', '50', '100', '200'],
-                showQuickJumper: true,
-                showSizeChanger: true,
-                ...pagination,
-                total: data?.total,
-              }
-            : false
-        }
+        pagination={memoPagination}
       />
     </div>
   );

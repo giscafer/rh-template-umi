@@ -2,7 +2,7 @@ import { ListToolBarProps } from '@ant-design/pro-components';
 import { ActionType, ProColumns, ProTableProps } from '@ant-design/pro-table';
 import { PageInfo } from '@ant-design/pro-utils/lib/typing';
 import { BaseButtonProps } from 'antd/lib/button/button';
-import { TableMulSelectProps } from '../RhTableMulSelected';
+import { TableMulSelectProps } from './alert/MultiSelect';
 import { RhObservable } from './hooks/useTable';
 
 export declare type RecordKey = React.Key | React.Key[];
@@ -54,6 +54,25 @@ export type RhTableMeta = {
   RhTableProps<any, any, any>,
   'columns' | 'searchPlacement' | 'headerTitle' | 'api'
 >;
+
+export type TableAlertRenderProps = {
+  /**
+   * 清空选择项方法 （用于重置默认清空方法）
+   */
+  cleanMethod?: () => any;
+  /**
+   * 左侧额外渲染的按钮 (内容为多个a 元素)
+   */
+  leftExtraBtn?: ExtraBtnAType;
+  /**
+   * 右侧额外渲染的按钮 (内容为多个a 元素)
+   */
+  rightExtraBtn?: rightExtraBtn;
+  /**
+   * 表单多选功能内容
+   */
+  tableMulSelectProps?: TableMulSelectProps;
+};
 
 /**
  * RhTable 扩展的属性
@@ -116,24 +135,7 @@ export type RhTableSelfProps = {
   /**
    * tableAlertRenderProps 选择显示行的额外配置 (如需全部覆盖可使用 table 自带的 tableAlertRender)
    */
-  tableAlertRenderProps?: {
-    /**
-     * 清空选择项方法 （用于重置默认清空方法）
-     */
-    cleanMethod?: () => any;
-    /**
-     * 左侧额外渲染的按钮 (内容为多个a 元素)
-     */
-    leftExtraBtn?: ExtraBtnAType;
-    /**
-     * 右侧额外渲染的按钮 (内容为多个a 元素)
-     */
-    rightExtraBtn?: rightExtraBtn;
-    /**
-     * 表单多选功能内容
-     */
-    tableMulSelectProps?: TableMulSelectProps;
-  };
+  tableAlertRenderProps?: TableAlertRenderProps;
   /**
    * 自定义渲染右侧toolbar
    */

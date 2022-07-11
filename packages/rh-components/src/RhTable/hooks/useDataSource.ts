@@ -15,7 +15,7 @@ import {
   TableCurrentDataSource,
 } from 'antd/lib/table/interface';
 import { isFunction, template } from 'lodash';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { RhTableProps } from '../types';
 
 export type DataSourceType = {
@@ -31,25 +31,36 @@ export type DataSourceType = {
   'api' | 'apiParams' | 'apiMethod' | 'resetPageInParams' | 'params'
 >;
 
+const loadingDelayTime = 300; // loading 延迟显示
+const debounceWaitTime = 200; // 防抖200ms
+
 function useDataSource(
   {
     api,
-    apiMethod = 'GET',
     apiParams,
     params,
     queryRef,
     actionRef,
     resetPageInParams,
+    apiMethod = 'GET',
     request,
   }: DataSourceType,
   deps: any[],
 ) {
+  const [loadingDelay, setLoadingDelay] = useState<number>(0);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState({});
   const [pageInfo, setPageInfo] = useState<PaginationProps>({
     current: 1,
     pageSize: 10,
   });
+
+  useEffect(() => {
+    // fix: loadingDelay 在首次请求也会延迟loading问题
+    setTimeout(() => {
+      setLoadingDelay(loadingDelayTime);
+    }, 200);
+  }, []);
   /**
    * 外部自定义请求，为了
    */
@@ -94,7 +105,7 @@ function useDataSource(
         ...extraConfig,
       });
     }
-    // console.log('resp=', resp);
+    console.log('resp=', resp);
 
     // TODO: 配置化，不同的后端团队规范不一致
     const total = resp.total ?? Number(resp.totalSize);
@@ -118,10 +129,16 @@ function useDataSource(
     pageInfo,
   ]);
 
-  const { loading, data } = useRequest(handleRequest, {
-    loadingDelay: 300, // 300ms内请求结束不显示loading
-    debounceWait: 200, // 防抖200ms
+  const reqOptions: Record<string, any> = {
+    debounceWait: debounceWaitTime,
     refreshOnWindowFocus: false,
+  };
+  if (loadingDelay > 0) {
+    // 300ms内请求结束不显示loading
+    reqOptions.loadingDelay = loadingDelay;
+  }
+  const { loading, data } = useRequest(handleRequest, {
+    ...reqOptions,
     refreshDeps: [...deps, params, sort, filters],
   });
 
