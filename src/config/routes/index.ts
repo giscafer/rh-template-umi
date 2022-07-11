@@ -48,9 +48,9 @@ const routes = [
         component: './table/selection/index',
       },
       {
-        path: '/table/mock',
-        name: 'mock 表格',
-        component: './table/mock',
+        path: '/table/protable',
+        name: 'ProTable 原生写法',
+        component: './table/protable/index',
       },
     ],
   },
