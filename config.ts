@@ -10,6 +10,7 @@ import routes from './src/config/routes';
 import theme from './src/config/theme';
 
 const commonConfig = {
+  define: { BASE_URL: 'https://api.github.com' },
   routes,
   theme,
   initialState: {},

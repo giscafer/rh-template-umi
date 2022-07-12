@@ -119,11 +119,11 @@ function useDataSource(
       } catch (err) {
         console.error('useDataSource err=', err);
       }
+      console.log('resp=', realApi, resp);
     }
-    // console.log('resp=', tableRequestConfig, apiMethod);
 
     // TODO: 配置化，不同的后端团队规范不一致
-    const total = resp.total ?? Number(resp.totalSize);
+    const total = resp?.total ?? Number(resp?.totalSize);
     return {
       ...resp,
       success: true,
