@@ -24,12 +24,13 @@ export interface Token {
   userId?: number;
   ispassword?: boolean;
 }
-
-const isMockMode = process.env.MOCK;
+// 如果不是Umi，process.env.MOCK
+const isMockMode = MOCK;
 export class RNHttpAdapterImp implements HttpAdapter {
   baseURL: string;
   constructor() {
-    this.baseURL = process.env.BASE_URL ?? '';
+    // 如果不是Umi，process.env.BASE_URL
+    this.baseURL = BASE_URL ?? '';
   }
 
   async getToken<T = Token>(): Promise<T> {
