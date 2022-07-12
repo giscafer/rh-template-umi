@@ -11,13 +11,11 @@ import { RhSidebar } from '@roothub/components';
 import { useMount } from 'ahooks';
 import { Layout } from 'antd';
 import { useCallback, useState } from 'react';
-import commonConfig from '../../../config';
 import styles from './styles.less';
 
-const contentSelector =
-  '#root > div.ant-design-pro > section.ant-layout > div.ant-layout';
-// mfsu奇葩bug问题
-const mfsuBugFlag = process.env.NODE_ENV === 'development' && commonConfig.mfsu;
+const contentSelector = '#root > div.ant-design-pro > section.ant-layout > div.ant-layout';
+// mfsu奇葩bug问题（默认认为是开启）
+const mfsuBugFlag = process.env.NODE_ENV === 'development';
 
 function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   const [isSideCollapsed, setIsSideCollapsed] = useState<boolean>(false);
@@ -30,9 +28,7 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   const leftDistanceFn = useCallback((collapse: any) => {
     const contentEl: any = document.querySelector(contentSelector);
     if (collapse) {
-      contentEl.className = `ant-layout ${
-        mfsuBugFlag ? 'sidebar-collapse' : ''
-      }`;
+      contentEl.className = `ant-layout ${mfsuBugFlag ? 'sidebar-collapse' : ''}`;
     } else {
       contentEl.className = `ant-layout ${mfsuBugFlag ? 'sidebar-expand' : ''}`;
     }
@@ -66,9 +62,7 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
             textAlign: isSideCollapsed ? 'center' : 'right',
           }}
         >
-          <IconFont
-            type={isSideCollapsed ? 'rh-icon-arrow-right' : 'rh-icon-arrowleft'}
-          />
+          <IconFont type={isSideCollapsed ? 'rh-icon-arrow-right' : 'rh-icon-arrowleft'} />
         </div>
       }
     >

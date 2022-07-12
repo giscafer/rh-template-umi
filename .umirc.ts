@@ -1,10 +1,10 @@
 import { defineConfig } from '@umijs/max';
-import commonConfig from './config';
-import proxy from './proxy';
+import routes from './src/config/routes';
+import theme from './src/config/theme';
 
-const fs = require('fs-extra');
 const path = require('path');
 const glob = require('glob');
+const fs = require('fs-extra');
 
 const getWorkspaceAlias = () => {
   const basePath = path.resolve(__dirname, './');
@@ -21,12 +21,21 @@ const getWorkspaceAlias = () => {
       });
     });
   }
-  // console.log('alias=', results);
   return results;
 };
 
 export default defineConfig({
-  ...commonConfig,
+  define: {
+    'process.env.BASE_URL': 'https://api.github.com',
+  },
+  routes,
+  theme,
+  initialState: {},
+  layout: {
+    layout: 'mix',
+    fixedHeader: true,
+    title: 'RootHub Scaffold',
+  },
   antd: {
     // https://ant.design/components/config-provider-cn/
     configProvider: {
@@ -42,20 +51,17 @@ export default defineConfig({
     type: "antd",
     themeVariables: ["@primary-color"],
   }, */
-  proxy: proxy[process.env.NODE_ENV || 'development'],
   npmClient: 'yarn',
   monorepoRedirect: { srcDir: ['packages', 'src'] },
   // https://github.com/umijs/umi/issues/6576
   chainWebpack: (config: any, { webpack }) => {
     const alias = getWorkspaceAlias();
 
-    const includeArr: string[] = [];
+    // const includeArr: string[] = [];
     for (const key in alias) {
       // 设置 alias
       config.resolve.alias.set(key, alias[key]);
-      includeArr.push(path.join(__dirname, path.relative(__dirname, alias[key])));
+      // includeArr.push(path.join(__dirname, path.relative(__dirname, alias[key])));
     }
-    // undefined 了，不可用
-    // config.module.rules.get('ts-in-node_modules').include.add(includeArr);
   },
 });
