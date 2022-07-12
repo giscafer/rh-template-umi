@@ -109,7 +109,7 @@ function useDataSource(
       } else {
         extraConfig.data = finalParams;
       }
-
+      console.log('resp=', realApi, apiMethod, extraConfig, httpClient);
       try {
         resp = await httpClient.request({
           path: realApi,
@@ -119,7 +119,6 @@ function useDataSource(
       } catch (err) {
         console.error('useDataSource err=', err);
       }
-      console.log('resp=', realApi, resp);
     }
 
     // TODO: 配置化，不同的后端团队规范不一致
@@ -128,7 +127,7 @@ function useDataSource(
       ...resp,
       success: true,
       total,
-      totalPages: Number(resp.totalPages) || 0,
+      totalPages: Number(resp?.totalPages) || 0,
     };
   }, [
     api,

@@ -71,7 +71,7 @@ const tableMeta: RhTableMeta = {
     {
       name: '外部链接',
       action: 'view',
-      link: '${html_url}',
+      link: '${html_url}', // 表示用row.html_url 赋值
       targetBlank: true,
     },
     {
