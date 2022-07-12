@@ -9,8 +9,12 @@
 import routes from './src/config/routes';
 import theme from './src/config/theme';
 
+const BASE_URL = process.env.NODE_ENV === 'production' ? 'https://api.github.com' : '';
+
 const commonConfig = {
-  define: { BASE_URL: 'https://api.github.com' },
+  define: {
+    'process.env.BASE_URL': BASE_URL,
+  },
   routes,
   theme,
   initialState: {},

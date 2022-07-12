@@ -29,7 +29,7 @@ const isMockMode = process.env.MOCK;
 export class RNHttpAdapterImp implements HttpAdapter {
   baseURL: string;
   constructor() {
-    this.baseURL = process.env.BASE_URL || '';
+    this.baseURL = process.env.BASE_URL ?? '';
   }
 
   async getToken<T = Token>(): Promise<T> {
