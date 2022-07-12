@@ -28,6 +28,14 @@ interface BooleanGetter {
 export type RhActionMeta = {
   name: string;
   action: string;
+  /**
+   * 超链接&模板url，用来快速跳转页面
+   */
+  link?: string;
+  /**
+   * 超链接&模板url 跳转页面时是否为新开弹窗
+   */
+  targetBlank?: boolean;
   isMore?: boolean;
   visibleOn?: string | boolean | BooleanGetter;
   disabledOn?: string | boolean | BooleanGetter;
