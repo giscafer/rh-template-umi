@@ -6,6 +6,9 @@ import menuData from '@/config/menus';
 import { RhConfigProvider } from '@roothub/components';
 import { RunTimeLayoutConfig } from '@umijs/max';
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('process.env.BASE_URL', process.env.BASE_URL);
+
 RhConfigProvider.config({
   tableRequest: {
     pageInfoConfig: {

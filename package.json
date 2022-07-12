@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "max build",
+    "build": "cross-env NODE_ENV=production max build",
     "dev": "max dev",
     "postinstall": "max setup",
     "precommit": "lint-staged",
@@ -30,6 +30,7 @@
     "axios": "^0.27.2",
     "bizcharts": "^4.1.19",
     "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
     "rxjs": "^7.5.5",
     "rxjs-hooks": "^0.8.0-alpha.0"

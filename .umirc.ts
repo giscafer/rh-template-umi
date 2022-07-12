@@ -26,7 +26,7 @@ const getWorkspaceAlias = () => {
 
 export default defineConfig({
   define: {
-    'process.env.BASE_URL': 'https://api.github.com',
+    BASE_URL: process.env.NODE_ENV === 'production' ? 'https://api.github.com' : '',
   },
   routes,
   theme,

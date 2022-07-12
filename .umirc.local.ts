@@ -5,7 +5,7 @@ export const mfsu = {};
 
 export default defineConfig({
   define: {
-    'process.env.BASE_URL': '',
+    MOCK: true,
   },
   mfsu,
   proxy: proxy[process.env.NODE_ENV || 'development'],
