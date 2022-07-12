@@ -3,7 +3,17 @@
 import LayoutSideBar from '@/components/LayoutSideBar';
 import RightContent from '@/components/RightContent';
 import menuData from '@/config/menus';
+import { RhConfigProvider } from '@roothub/components';
 import { RunTimeLayoutConfig } from '@umijs/max';
+
+RhConfigProvider.config({
+  tableRequest: {
+    pageInfoConfig: {
+      pageSizeField: 'per_page',
+      currentField: 'page',
+    },
+  },
+});
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://next.umijs.org/docs/api/runtime-config#getinitialstate
@@ -26,13 +36,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
     menuRender: (menuProps: any) => {
       const { location } = menuProps;
       const { pathname } = location;
-      return (
-        <LayoutSideBar
-          collapsible={false}
-          menuData={menuData}
-          pathName={pathname}
-        />
-      );
+      return <LayoutSideBar collapsible={false} menuData={menuData} pathName={pathname} />;
     },
     // 默认布局调整
     // menuHeaderRender: undefined,

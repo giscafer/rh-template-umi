@@ -8,6 +8,7 @@ import RhTable from './RhTable';
 import useTable from './RhTable/hooks/useTable';
 import RhTree from './RhTree';
 
+export { default as RhConfigProvider } from './config-provider';
 export {
   RhDrawerForm,
   RhIcon,

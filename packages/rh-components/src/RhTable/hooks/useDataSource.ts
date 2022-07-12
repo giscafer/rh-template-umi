@@ -16,6 +16,7 @@ import {
 } from 'antd/lib/table/interface';
 import { isFunction, template } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+import { globalConfig } from '../../config-provider';
 import { RhTableProps } from '../types';
 
 export type DataSourceType = {
@@ -33,6 +34,11 @@ export type DataSourceType = {
 
 const loadingDelayTime = 300; // loading 延迟显示
 const debounceWaitTime = 200; // 防抖200ms
+
+let pageSizeField = 'limit';
+let currentField = 'page';
+
+const { getGlobalTableRequest } = globalConfig();
 
 function useDataSource(
   {
@@ -56,6 +62,11 @@ function useDataSource(
   });
 
   useEffect(() => {
+    // 全局配置
+    const tableRequestConfig = getGlobalTableRequest();
+    const pageInfoConfig = tableRequestConfig.pageInfoConfig;
+    pageSizeField = pageInfoConfig.pageSizeField;
+    currentField = pageInfoConfig.currentField;
     // fix: loadingDelay 在首次请求也会延迟loading问题
     setTimeout(() => {
       setLoadingDelay(loadingDelayTime);
@@ -79,8 +90,8 @@ function useDataSource(
     const finalParams = Object.assign(
       {},
       {
-        page: current,
-        pageSize,
+        [currentField]: current,
+        [pageSizeField]: pageSize,
       },
       queryParams,
       params ?? {},
@@ -106,10 +117,10 @@ function useDataSource(
           ...extraConfig,
         });
       } catch (err) {
-        console.error('datasource err=', err);
+        console.error('useDataSource err=', err);
       }
     }
-    // console.log('resp=', resp);
+    // console.log('resp=', tableRequestConfig, apiMethod);
 
     // TODO: 配置化，不同的后端团队规范不一致
     const total = resp.total ?? Number(resp.totalSize);
