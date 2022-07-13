@@ -9,8 +9,7 @@ export type RhTitleProps = {
    * 文本信息
    * @type string
    */
-  title: string | number;
-
+  title: string;
   /**
    * 布局方式，和 showCollapse 互斥
    * @type 'column' | 'default'
@@ -85,7 +84,7 @@ function RhTitle(props: RhTitleProps) {
       className={`${styles.rhTitle} ${
         layout === 'column' ? `${styles.rhTitleFlex}` : ''
       }`}
-      style={style}
+      style={{ marginBottom: collapseStatus ? '16px' : '2px', ...style }}
     >
       <div
         className={`${
@@ -121,14 +120,14 @@ function RhTitle(props: RhTitleProps) {
                 {showCollapseText && (
                   <span className={styles.collapseText}>收起</span>
                 )}
-                <UpOutlined />
+                <UpOutlined className={styles.arrowGray} />
               </span>
             ) : (
               <span>
                 {showCollapseText && (
                   <span className={styles.collapseText}>展开</span>
                 )}
-                <DownOutlined />
+                <DownOutlined className={styles.arrowGray} />
               </span>
             )}
           </div>
@@ -138,7 +137,7 @@ function RhTitle(props: RhTitleProps) {
         <div
           style={{
             display: collapseStatus ? 'none' : 'block',
-            padding: '16px 0',
+            paddingTop: '16px',
           }}
         >
           {children}
