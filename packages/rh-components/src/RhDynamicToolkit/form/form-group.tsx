@@ -54,7 +54,6 @@ function RhDynamicFormGroup({
             fontSize={groupProps?.fontSize}
             title={title || label}
             titleStyle={{ ...groupProps.titleStyle }}
-            style={{ marginBottom: '20px' }}
           >
             <div
               className={cls({ 'flex-start': !groupProps.block })}

@@ -15,7 +15,6 @@ const tableMeta: RhTableMeta = {
     {
       title: '状态',
       dataIndex: 'state',
-      searchType: 'query',
       valueType: 'select',
       valueEnum: {
         all: { text: '全部', status: 'Default' },
@@ -48,7 +47,7 @@ const tableMeta: RhTableMeta = {
     settings: undefined,
     actions: [
       {
-        name: '导入/停止',
+        name: '下拉按钮',
         action: 'batch',
         disabled: false,
         type: 'primary',
@@ -61,7 +60,11 @@ const tableMeta: RhTableMeta = {
         ],
       },
       {
-        name: '新建',
+        name: '复杂表单',
+        action: 'add-complex',
+      },
+      {
+        name: '简单表单',
         action: 'add',
       },
     ],

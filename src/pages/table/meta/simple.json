@@ -1,21 +1,21 @@
 {
   "type": "form",
-  "title": "属性配置",
-  "api": "/api/v1/xxxx/${id}/property",
-  "primaryField": "propertyId",
+  "title": "Issue数据",
+  "api": "/api/v1/xxxx/${id}/issue",
+  "primaryField": "issueId",
   "body": [
     {
-      "id": "propertyId",
-      "label": "属性ID",
+      "id": "issueId",
+      "label": "Issue编号",
       "dataType": "string",
       "renderType": "input",
       "required": true,
-      "disabledOn": "data.propertyId",
+      "disabledOn": "data.issueId",
       "validator": [{ "type": "maxLength", "value": "40" }]
     },
     {
       "id": "name",
-      "label": "属性名称",
+      "label": "Issue名称",
       "dataType": "string",
       "renderType": "input",
       "required": true,

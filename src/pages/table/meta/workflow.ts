@@ -8,10 +8,17 @@ export default function workflow(actionObservable$: RhObservable<SubjectAction>)
   // 监听按钮action
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   actionObservable$.take('add', (action: SubjectAction) => {
-    // 设置state
+    // 设置state，显示简单动态表单
     actionObservable$.put({
       type: '$merge',
-      payload: { drawerVisible: true },
+      payload: { drawerSimpleVisible: true },
+    });
+  });
+  actionObservable$.take('add-complex', () => {
+    // 设置state，显示简单动态表单
+    actionObservable$.put({
+      type: '$merge',
+      payload: { drawerComplexVisible: true },
     });
   });
   // 批量订阅 action 数组
