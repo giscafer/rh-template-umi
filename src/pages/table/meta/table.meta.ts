@@ -26,10 +26,10 @@ const tableMeta: RhTableMeta = {
         closed: {
           text: '已解决',
           status: 'Success',
-          disabled: true,
         },
         processing: {
           text: '解决中',
+          disabled: true,
           status: 'Processing',
         },
       },

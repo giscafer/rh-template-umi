@@ -5,43 +5,46 @@
  * @description 处理 action 副作用
  */
 
-import { isFunction, noop } from 'lodash';
-import { useEffect } from 'react';
-import { Observer, Subject, Unsubscribable } from 'rxjs';
+import { assign, cloneDeep, isFunction, merge, noop } from 'lodash';
+import { useEffect, useState } from 'react';
+import { map, Observer, Subject, Unsubscribable } from 'rxjs';
+import { useObservable } from 'rxjs-hooks';
 
-export type SubjectStateType = {
+export type SubjectAction = {
   /**
    * action type
    */
-  action: string;
+  type: string;
   /**
    * 数据
    */
   payload?: any;
 };
 
-type Listener = (state: SubjectStateType) => void;
+type Listener = (state: SubjectAction) => void;
 
 export type RhObservable<T> = {
-  next: (state: SubjectStateType) => void;
+  next: (action: SubjectAction) => void;
   take: (
     action: string | string[],
-    cb: (state: SubjectStateType) => void,
+    cb: (action: SubjectAction) => void,
   ) => void;
+  put: (actionState: SubjectAction) => void;
   subscribe(observer: Partial<Observer<T>>): Unsubscribable;
 };
 
 export const DefaultObservable = {
-  take: (action: string | string[], cb: (state: SubjectStateType) => void) =>
+  put: (actionState: SubjectAction) => actionState,
+  take: (action: string | string[], cb: (actionState: SubjectAction) => void) =>
     cb,
-  next: (state: SubjectStateType) => state,
+  next: (actionState: SubjectAction) => actionState,
   subscribe: (observer?: any) => observer,
 };
 
-const actionMap = new Map<string, any>();
-
 function useTable(workflow = noop) {
+  const [tableState, setTableState] = useState<Record<string, any>>({});
   const subject = new Subject();
+  const actionMap = new Map<string, any>();
 
   const actionObservable$: RhObservable<any> = {
     take: (action: string | string[], listener: Listener) => {
@@ -51,15 +54,33 @@ function useTable(workflow = noop) {
         actionMap.set(action, listener);
       }
     },
-    next: (state: SubjectStateType) => subject.next(state),
+    put: (actionState) => {
+      const { type = '$merge' } = actionState;
+      let payload = actionState.payload ?? {};
+      if (typeof payload !== 'object') {
+        payload = {};
+      }
+      let newSate = cloneDeep(tableState);
+      if (type === '$merge') {
+        setTableState(merge(newSate, payload));
+      }
+      if (type === '$assign') {
+        setTableState(assign(newSate, payload));
+      }
+      if (type === '$set') {
+        newSate = { ...payload };
+        setTableState(newSate);
+      }
+    },
+    next: (actionState: SubjectAction) => subject.next(actionState),
     subscribe: (observer?: any) => subject.subscribe(observer),
   };
 
-  const subscribe$ = subject.subscribe((state: any) => {
+  const subscribe$ = subject.subscribe((actionState: any) => {
     // 不支持1对多的情况
-    const listener = actionMap.get(state?.action);
+    const listener = actionMap.get(actionState?.type);
     if (listener && isFunction(listener)) {
-      listener(state);
+      listener(actionState);
     }
   });
 
@@ -73,7 +94,14 @@ function useTable(workflow = noop) {
     };
   }, [workflow]);
 
-  return { actionObservable$ };
+  // tableState 可观察数据流
+  const state$: Record<string, any> = useObservable(
+    (_, inputs$) => inputs$.pipe(map(([v]) => v)),
+    {},
+    [tableState],
+  );
+
+  return { state$, actionObservable$ };
 }
 
 export default useTable;

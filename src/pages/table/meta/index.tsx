@@ -6,15 +6,15 @@
  */
 
 import { PageContainer } from '@ant-design/pro-layout';
-import { RhTable, useTable } from '@roothub/components';
+import { RhDynamicDrawerForm, RhTable, useTable } from '@roothub/components';
 import { useRouteData } from '@umijs/max';
+import demoSchema from './form.json';
 import tableMeta from './table.meta';
 import workflow from './workflow';
 
 export default () => {
   const { route }: any = useRouteData();
-
-  const tableWorkFlow = useTable(workflow);
+  const { state$, actionObservable$ } = useTable(workflow);
 
   return (
     <PageContainer
@@ -26,7 +26,20 @@ export default () => {
         extra: [],
       }}
     >
-      <RhTable meta={tableMeta} {...tableWorkFlow} />
+      <RhTable meta={tableMeta} actionObservable$={actionObservable$} />
+      <RhDynamicDrawerForm
+        // initialValues={state$.selectedRow}
+        visible={state$.drawerVisible}
+        schema={demoSchema}
+        // params={{ id: id }}
+        onClose={() => {
+          actionObservable$.put({ type: '$merge', payload: { drawerVisible: false } });
+        }}
+        afterSubmit={() => {
+          // refresh table
+          actionObservable$.put({ type: '$table/refresh', payload: { drawerVisible: false } });
+        }}
+      />
     </PageContainer>
   );
 };

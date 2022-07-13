@@ -1,4 +1,10 @@
 import RhDrawerForm from './RhDrawerForm';
+import {
+  RhDynamicDrawerForm,
+  RhDynamicFormGroup,
+  RhDynamicFormItem,
+  RhDynamicModalForm,
+} from './RhDynamicToolkit/form';
 import RhEditableTagGroup from './RhEditableTagGroup';
 import RhIcon from './RhIcon';
 import RhModalForm, { useModalForm } from './RhModalForm';
@@ -20,4 +26,8 @@ export {
   RhTable,
   useTable,
   RhTree,
+  RhDynamicDrawerForm,
+  RhDynamicModalForm,
+  RhDynamicFormGroup,
+  RhDynamicFormItem,
 };

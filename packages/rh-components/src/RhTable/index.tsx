@@ -13,10 +13,17 @@ import ProTable from '@ant-design/pro-table';
 import { Button, Dropdown, Menu } from 'antd';
 import { TablePaginationConfig } from 'antd/es/table/interface';
 import { cloneDeep, isNumber } from 'lodash';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
 import RhTitle from '../RhTitle';
+import { ACTION_TABLE_FETCH } from './action';
 import { genTableAlertOptionRender, genTableAlertRender } from './alert';
 import useDataSource from './hooks/useDataSource';
 import useRowSelection from './hooks/useRowSelection';
@@ -50,6 +57,7 @@ const RhTable = <
     columns = [],
     searchPlacement = 'header',
     virtual = false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resetPageIndex = true,
     resetPageInParams = false,
     tableAlertRenderProps = {},
@@ -61,15 +69,16 @@ const RhTable = <
 
   const queryRef = useRef<any>();
   const defaultActionRef = useRef<RhActionType>();
+
+  const actionRef = (mergeProps.actionRef ||
+    defaultActionRef) as React.MutableRefObject<RhActionType>;
+  const [ts, setTs] = useState<number>(0); // 借助刷新请求
+
   const [vt] = useVT(() => {
     return {
       scroll: { y: isNumber(scroll?.y) ? scroll!.y : 600 },
     };
   });
-
-  const actionRef = (mergeProps.actionRef ||
-    defaultActionRef) as React.MutableRefObject<RhActionType>;
-  const [ts, setTs] = useState<number>(0); // 借助刷新请求
 
   const rowSelectionOption = restProps.rowSelection || {};
   const { rowSelection } = useRowSelection(
@@ -77,11 +86,17 @@ const RhTable = <
     actionObservable$,
   );
 
+  useEffect(() => {
+    actionObservable$.take(ACTION_TABLE_FETCH, () => {
+      setTs(Date.now());
+    });
+  }, []);
+
   const handleReload = useCallback(() => {
     actionRef.current.pageInfo.current = 1;
     setTs(Date.now());
-    return actionRef.current?.reload(resetPageIndex);
-  }, [actionRef, resetPageIndex]);
+    // return actionRef.current?.reload(resetPageIndex);
+  }, [actionRef]);
 
   const dsParams = {
     api: restProps.api,
@@ -147,7 +162,7 @@ const RhTable = <
               overlay={
                 <Menu
                   onClick={async ({ key }) => {
-                    actionObservable$.next({ action: key });
+                    actionObservable$.next({ type: key });
                   }}
                   items={menuItems}
                 />
@@ -166,7 +181,7 @@ const RhTable = <
             size={size}
             {...rest}
             onClick={() => {
-              actionObservable$.next({ action });
+              actionObservable$.next({ type: action });
             }}
           >
             {name}

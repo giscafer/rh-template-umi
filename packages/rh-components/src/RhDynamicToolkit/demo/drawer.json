@@ -1,7 +1,7 @@
 {
   "type": "drawer",
   "title": "属性配置",
-  "api": "/api/v1/datasource/${datasourceId}/property",
+  "api": "/api/v1/xxxx/${id}/property",
   "primaryField": "propertyId",
   "body": [
     {
@@ -26,17 +26,8 @@
           "validator": [{ "type": "maxLength", "value": "40" }]
         },
         {
-          "id": "scanCycle",
-          "label": "扫描周期（ms）",
-          "dataType": "int",
-          "renderType": "input",
-          "required": true,
-          "defaultValue": 1000,
-          "validator": [{ "type": "min", "value": 1000 }]
-        },
-        {
           "id": "transformType",
-          "label": "是否开启量程转换",
+          "label": "是否开启转换",
           "dataType": "string",
           "renderType": "radio",
           "required": true,
@@ -101,20 +92,8 @@
               "value": "2"
             },
             {
-              "label": "保持寄存器（WORD R/W）",
+              "label": "测试寄存器（WORD R/W）",
               "value": "3"
-            },
-            {
-              "label": "模拟量输入寄存器（WORD R）",
-              "value": "4"
-            },
-            {
-              "label": "扩展输出寄存器（WORD R/W）",
-              "value": "5"
-            },
-            {
-              "label": "扩展输入寄存器（WORD R）",
-              "value": "6"
             }
           ]
         },
@@ -140,18 +119,6 @@
             {
               "label": "Word",
               "value": "Word"
-            },
-            {
-              "label": "UWord",
-              "value": "UWord"
-            },
-            {
-              "label": "DWord",
-              "value": "DWord"
-            },
-            {
-              "label": "UDWord",
-              "value": "UDWord"
             },
             {
               "label": "Float",
@@ -194,18 +161,6 @@
                       "value": "Word"
                     },
                     {
-                      "label": "UWord",
-                      "value": "UWord"
-                    },
-                    {
-                      "label": "DWord",
-                      "value": "DWord"
-                    },
-                    {
-                      "label": "UDWord",
-                      "value": "UDWord"
-                    },
-                    {
                       "label": "Float",
                       "value": "Float"
                     },
@@ -222,17 +177,8 @@
           ]
         },
         {
-          "id": "startPosition",
-          "label": "起始地址",
-          "dataType": "int",
-          "defaultValue": 0,
-          "renderType": "input",
-          "required": false,
-          "validator": [{ "type": "range", "value": [0, 9999] }]
-        },
-        {
           "id": "offset",
-          "label": "位偏移",
+          "label": "偏移",
           "renderType": "input",
           "required": false,
           "dataType": "int",
@@ -247,17 +193,17 @@
           "validator": [{ "type": "range", "value": [0, 15] }]
         },
         {
-          "id": "bitCount",
-          "label": "位长度",
+          "id": "count",
+          "label": "长度",
           "dataType": "int",
           "renderType": "input",
           "defaultValue": 8,
           "required": false,
           "validator": [
             {
-              "type": "js",
-              "value": "(key,value,formValues)=>formValues.collection.offset+value<=16",
-              "message": "位偏移与位长度之和不能超过16"
+              "type": "expression",
+              "value": "${collection.offset+value<=16}",
+              "message": "偏移与长度之和不能超过16"
             }
           ],
           "dependencies": [

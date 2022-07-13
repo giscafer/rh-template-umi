@@ -1,5 +1,6 @@
 import {
   cloneDeep,
+  Dictionary,
   find,
   isArray,
   isNaN,
@@ -12,13 +13,16 @@ import {
 } from 'lodash';
 import { genValidatorRules } from './validator';
 
-export function includesValue(valueList = [], val) {
+export function includesValue(valueList = [], val: any) {
   // eslint-disable-next-line eqeqeq
   return valueList.some((item) => item == val);
 }
 
 // valueEnum 数组简化 成 对象
-export function formatValueEnum(originEnum, valueType = 'select') {
+export function formatValueEnum(
+  originEnum: Dictionary<any> | null | undefined,
+  valueType = 'select',
+) {
   if (valueType === 'select') {
     if (!isArray(originEnum)) return originEnum;
     const labelList = map(originEnum, 'label');
@@ -28,12 +32,47 @@ export function formatValueEnum(originEnum, valueType = 'select') {
   return originEnum;
 }
 
+function typeSafeDataIndex(id: any[]) {
+  if (Array.isArray(id)) return id.join('.');
+  return id;
+}
+
+function typeSafeGroupedName(id: any, prefix = []) {
+  const prefixList = Array.isArray(prefix) ? prefix : [prefix];
+  const idList = Array.isArray(id) ? id : [id];
+  return [...prefixList, ...idList];
+}
+
+export function getFormDataType(dataType = 'string') {
+  const type = dataType?.toLowerCase()?.trim();
+  if (['int', 'integer', 'number', 'float', 'double'].includes(type)) {
+    return 'number';
+  }
+
+  return dataType || 'text';
+}
+
 /**
  * 转换差异化属性为 antd Form 格式，方便日后直接用 antd proform schema 也可以
  * @param property
  * @returns fieldProps
  */
-export function unifiedProperty(property, namePrefix) {
+export function unifiedProperty(
+  property: {
+    dependencies?: any;
+    id?: any;
+    dataIndex?: any;
+    label?: any;
+    title?: any;
+    dataType?: any;
+    valueEnum?: any;
+    renderType?: any;
+    valueType?: any;
+    initialValue?: any;
+    defaultValue?: any;
+  },
+  namePrefix: never[] | undefined,
+) {
   const {
     id,
     dataIndex,
@@ -53,45 +92,57 @@ export function unifiedProperty(property, namePrefix) {
     fieldProps: { size: 'medium' },
     ...property,
     name,
-    width: 'md',
+    // width: 'md',
     dataIndex: typeSafeDataIndex(id) || dataIndex,
     title: label || title,
     valueType: renderType || valueType,
     dataType: getFormDataType(dataType),
     valueEnum: formatValueEnum(valueEnum, renderType || valueType),
     initialValue: isNil(defaultValue) ? initialValue : defaultValue,
-    depFieldNameList: property.dependencies?.map((item) => item.fieldName), // 联动依赖字段
+    depFieldNameList: property.dependencies?.map(
+      (item: { fieldName: any }) => item.fieldName,
+    ), // 联动依赖字段
     rules: genValidatorRules(property),
   };
 
   return newProperty;
 }
 
-function typeSafeDataIndex(id) {
-  if (Array.isArray(id)) return id.join('.');
-  return id;
-}
-
-function typeSafeGroupedName(id, prefix = []) {
-  const prefixList = Array.isArray(prefix) ? prefix : [prefix];
-  const idList = Array.isArray(id) ? id : [id];
-  return [...prefixList, ...idList];
-}
-
-export function getFormDataType(dataType = 'string') {
-  const type = dataType?.toLowerCase()?.trim();
-  if (['int', 'integer', 'number', 'float', 'double'].includes(type)) {
-    return 'number';
-  }
-
-  return dataType || 'text';
-}
-
 export function isNumberType(dataType = 'string') {
   return getFormDataType(dataType) === 'number';
 }
 
-export function convertDataTypeVal(dataType, val) {
+export function toStringValue(value: any): string {
+  let str = String(value);
+  if (str === 'undefined' || str === 'null' || str === 'NaN') {
+    str = '';
+  }
+  return str;
+}
+
+export function toNumberValue(value: any) {
+  if (isNil(value)) {
+    return value;
+  }
+  let num = Number(value);
+
+  if (isNaN(num)) {
+    return value;
+  }
+  return num;
+}
+
+export function isNotEmpty(value: any) {
+  if (isNil(value)) {
+    return false;
+  }
+  return value !== '';
+}
+
+export function convertDataTypeVal(
+  dataType: string | undefined,
+  val: string | null | undefined,
+) {
   if (getFormDataType(dataType) === 'number') {
     if ([undefined, null, ''].includes(val)) return undefined;
     return Number(val);
@@ -99,8 +150,8 @@ export function convertDataTypeVal(dataType, val) {
   return val;
 }
 
-export function flatSchemaList(schema) {
-  let schemaList = [];
+export function flatSchemaList(schema: { properties: never[] }) {
+  let schemaList: any[] = [];
   if (isArray(schema)) {
     // 不考虑字段重名的情况，基本也不可能
     for (const item of schema) {
@@ -119,10 +170,13 @@ export function flatSchemaList(schema) {
  * @returns
  *  { "rawMin,rawMax":[1,2] } 转换为 { "rawMin": 1, "rawMax": 2 }
  */
-export function transformDataIndexVal(fieldsValue = {}, schema): any {
+export function transformDataIndexVal(
+  fieldsValue: Record<string, any> = {},
+  schema: any,
+): any {
   const schemaList = flatSchemaList(schema);
   const keyList = keys(fieldsValue);
-  const obj = {};
+  const obj: Record<string, any> = {};
   for (const key of keyList) {
     // range字段规则
     const keyArr = key.split(',');
@@ -151,22 +205,25 @@ export function transformDataIndexVal(fieldsValue = {}, schema): any {
  * @returns
  *  { "rawMin": 1, "rawMax": 2 } 转换为 { "rawMin,rawMax":[1,2] }
  */
-export function transformInitVal(initialValues, schema): any {
+export function transformInitVal(
+  initialValues: Record<string, any>,
+  schema: any,
+): any {
   if (!initialValues || !isObject(initialValues)) {
     return initialValues;
   }
   const schemaList = flatSchemaList(schema);
   const keyList = map(schemaList, 'id');
-  const obj = cloneDeep(initialValues);
+  const obj: Record<string, any> = cloneDeep(initialValues);
   for (const key of keyList) {
     // range字段规则存在 时
-    const keyArr = key.split(',');
+    const keyArr: string[] = key.split(',');
     let val: any[] = [];
     if (keyArr.length > 1) {
       const fieldMeta = find(schemaList, (item) => item.id === key);
 
-      const firstVal = initialValues[keyArr[0]];
-      const secondVal = initialValues[keyArr[1]];
+      const firstVal = (initialValues as any)[keyArr[0]];
+      const secondVal = (initialValues as any)[keyArr[1]];
       if (
         fieldMeta.dataType === 'string' &&
         fieldMeta.renderType !== 'numberRange'
@@ -183,33 +240,6 @@ export function transformInitVal(initialValues, schema): any {
     }
   }
   return obj;
-}
-
-export function toStringValue(value: any): string {
-  let str = String(value);
-  if (str === 'undefined' || str === 'null' || str === 'NaN') {
-    str = '';
-  }
-  return str;
-}
-
-export function toNumberValue(value: any) {
-  if (isNil(value)) {
-    return value;
-  }
-  let num = Number(value);
-
-  if (isNaN(num)) {
-    return value;
-  }
-  return num;
-}
-
-export function isNotEmpty(value: any) {
-  if (isNil(value)) {
-    return false;
-  }
-  return value !== '';
 }
 
 /**
