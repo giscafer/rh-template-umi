@@ -41,7 +41,7 @@ export type RhTableMeta = {
   /**
    * 表格内行操作
    */
-  tableActions?: RhActionMeta[];
+  optionActions?: RhActionMeta[];
 } & Pick<
   RhTableProps<any, any, any>,
   'columns' | 'searchPlacement' | 'headerTitle' | 'api'

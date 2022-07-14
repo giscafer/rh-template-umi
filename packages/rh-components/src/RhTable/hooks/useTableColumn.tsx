@@ -43,10 +43,10 @@ function useTableColumn(
       key: isArray(c.dataIndex) ? c.dataIndex.join(',') : c.dataIndex,
       dataIndex: convertDataIndex(c.dataIndex),
     }));
-    if (!meta?.tableActions?.length) {
+    if (!meta?.optionActions?.length) {
       return cList;
     }
-    const actions = meta?.tableActions;
+    const actions = meta?.optionActions;
     const optionColumn = genOptionColumn(actions, handleClick);
     return cList.concat(optionColumn as RhColumns);
   }, [columns]);

@@ -44,7 +44,7 @@
         "valueType": "dateTime"
       }
     ],
-    "tableActions": [{ "name": "详情", "action": "viewDetail" }],
+    "optionActions": [{ "name": "详情", "action": "viewDetail" }],
     "pagination": {
       "pageSize": 5
     }

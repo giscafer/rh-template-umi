@@ -22,7 +22,6 @@ export default function genOptionColumn(
   actions: RhActionMeta[],
   handleClick = noop,
 ) {
-  let visibleLength = '1';
   const optionColumn: Record<string, any> = {
     title: '操作',
     dataIndex: 'option',
@@ -40,7 +39,6 @@ export default function genOptionColumn(
       );
       const actionInCell = visibleActionBtn.filter((a) => !a.isMore);
       const actionInMore = visibleActionBtn.filter((a) => a.isMore);
-      visibleLength = actionInCell.length + 1 + '';
 
       const items: ItemType[] = actionInMore.map(
         (item: RhActionMeta, idx: number) => {
@@ -93,6 +91,7 @@ export default function genOptionColumn(
       );
     },
   };
-  optionColumn.width = widthMap[visibleLength] || 180;
+  const len = actions.filter((a) => !a.isMore).length + 1 + '';
+  optionColumn.width = widthMap[len] || 200;
   return optionColumn;
 }

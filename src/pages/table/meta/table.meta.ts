@@ -70,7 +70,7 @@ const tableMeta: RhTableMeta = {
     ],
   },
   // 行操作列按钮
-  tableActions: [
+  optionActions: [
     {
       name: '外部链接',
       action: 'view',

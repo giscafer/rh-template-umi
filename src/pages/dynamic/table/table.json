@@ -63,7 +63,7 @@
         }
       ]
     },
-    "tableActions": [
+    "optionActions": [
       {
         "name": "外部链接",
         "action": "view",
