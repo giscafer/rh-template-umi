@@ -4,7 +4,7 @@ import {
   RhDynamicFormGroup,
   RhDynamicFormItem,
   RhDynamicModalForm,
-} from './RhDynamicToolkit/form';
+} from './RhDynamicToolkit';
 import RhEditableTagGroup from './RhEditableTagGroup';
 import RhIcon from './RhIcon';
 import RhModalForm, { useModalForm } from './RhModalForm';
@@ -26,8 +26,10 @@ export {
   RhTable,
   useTable,
   RhTree,
+  // 动态表单===start===
   RhDynamicDrawerForm,
   RhDynamicModalForm,
   RhDynamicFormGroup,
   RhDynamicFormItem,
+  // 动态表单===end===
 };

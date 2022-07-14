@@ -26,6 +26,8 @@ import { evalExpression } from '../utils/tpl';
 import FetchButton from '../widgets/FetchButton';
 import InputNumberRange from '../widgets/InputNumberRange';
 
+type AnyObject = Record<string, any>;
+
 function RhDynamicFormItem({
   widgetProps,
   namePrefix,

@@ -55,6 +55,18 @@ const routes = [
     ],
   },
   {
+    path: '/dynamic',
+    name: 'Json动态渲染',
+    icon: 'rh-icon-shiyongwendang',
+    routes: [
+      {
+        path: '/dynamic/table',
+        name: '动态表格',
+        component: './dynamic/table/index',
+      },
+    ],
+  },
+  {
     path: '/form',
     name: '表单',
     icon: 'rh-icon-shiyongwendang',

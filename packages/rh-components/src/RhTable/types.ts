@@ -29,6 +29,11 @@ export type RhActionMeta = {
   name: string;
   action: string;
   /**
+   * 按钮类型
+   * @type ButtonType
+   */
+  type?: string;
+  /**
    * 超链接&模板url，用来快速跳转页面
    */
   link?: string;
@@ -41,7 +46,7 @@ export type RhActionMeta = {
   disabledOn?: string | boolean | BooleanGetter;
   className?: string;
   children?: any[];
-} & Omit<BaseButtonProps, 'key' | 'children'>;
+} & Omit<BaseButtonProps, 'key' | 'children' | 'type'>;
 
 export type RhToolbarMeta = {
   actions?: RhActionMeta[];
@@ -177,7 +182,7 @@ export type RhColumns<T = any, ValueType = any> = ProColumns<T, ValueType> & {
    * @string 'query' | 'light'
    * @default 'query'
    */
-  searchType?: 'query' | 'light';
+  searchType?: string;
   /**
    * 联动的孩子key，但父节点修改时，清空子节点的数据
    * 目前只用于下拉选择框

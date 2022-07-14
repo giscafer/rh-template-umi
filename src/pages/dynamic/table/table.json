@@ -1,0 +1,87 @@
+{
+  "type": "table",
+  "body": {
+    "headerTitle": "LeekHub/leek-fund 仓库",
+    "api": "/repos/LeekHub/leek-fund/issues",
+    "searchPlacement": "toolbar",
+    "columns": [
+      {
+        "title": "标题",
+        "dataIndex": "title",
+        "ellipsis": true,
+        "searchType": "query",
+        "tip": "韭菜盒子插件issue标题"
+      },
+      {
+        "title": "状态",
+        "dataIndex": "state",
+        "valueType": "select",
+        "valueEnum": {
+          "all": { "text": "全部", "status": "Default" },
+          "open": {
+            "text": "未解决",
+            "status": "Error"
+          },
+          "closed": {
+            "text": "已解决",
+            "status": "Success"
+          },
+          "processing": {
+            "text": "解决中",
+            "disabled": true,
+            "status": "Processing"
+          }
+        }
+      },
+      {
+        "title": "创建人",
+        "dataIndex": "user.login"
+      },
+      {
+        "title": "创建时间",
+        "dataIndex": "created_at",
+        "valueType": "dateTime"
+      }
+    ],
+    "toolbar": {
+      "actions": [
+        {
+          "name": "下拉按钮",
+          "action": "batch",
+          "disabled": false,
+          "type": "primary",
+          "ghost": true,
+          "children": [
+            { "name": "全部启动", "action": "startAll" },
+            { "name": "全部停止", "action": "stopAll" },
+            { "name": "批量启动", "action": "batchStart" },
+            { "name": "批量停止", "action": "batchStop" }
+          ]
+        },
+        {
+          "name": "复杂表单",
+          "action": "add-complex"
+        },
+        {
+          "name": "简单表单",
+          "action": "add"
+        }
+      ]
+    },
+    "tableActions": [
+      {
+        "name": "外部链接",
+        "action": "view",
+        "link": "${html_url}",
+        "targetBlank": true
+      },
+      {
+        "name": "路由",
+        "action": "view",
+        "link": "/form/basic"
+      },
+      { "name": "复制", "action": "copy", "isMore": true },
+      { "name": "删除", "action": "delete", "isMore": true, "danger": true }
+    ]
+  }
+}
