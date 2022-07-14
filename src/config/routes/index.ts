@@ -61,8 +61,13 @@ const routes = [
     routes: [
       {
         path: '/dynamic/table',
-        name: '动态表格',
+        name: '表格',
         component: './dynamic/table/index',
+      },
+      {
+        path: '/dynamic/descriptions',
+        name: '高级定义列表',
+        component: './dynamic/descriptions/index',
       },
     ],
   },

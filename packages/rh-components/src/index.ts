@@ -1,5 +1,6 @@
 import RhDrawerForm from './RhDrawerForm';
 import {
+  RhDescriptions,
   RhDynamicDrawerForm,
   RhDynamicFormGroup,
   RhDynamicFormItem,
@@ -31,5 +32,6 @@ export {
   RhDynamicModalForm,
   RhDynamicFormGroup,
   RhDynamicFormItem,
+  RhDescriptions,
   // 动态表单===end===
 };

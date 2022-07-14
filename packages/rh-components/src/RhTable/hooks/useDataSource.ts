@@ -73,7 +73,7 @@ function useDataSource(
     }, 200);
   }, []);
   /**
-   * 外部自定义请求，为了
+   * 外部自定义请求，兼容 request 和 api 两种模式
    */
   const handleRequest = useCallback(async () => {
     if (resetPageInParams) {

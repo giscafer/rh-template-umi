@@ -1,7 +1,7 @@
 import { ListToolBarProps } from '@ant-design/pro-components';
 import { ActionType, ProColumns, ProTableProps } from '@ant-design/pro-table';
 import { PageInfo } from '@ant-design/pro-utils/lib/typing';
-import { BaseButtonProps } from 'antd/lib/button/button';
+import { CommonApiType, RhActionMeta } from '../types';
 import { TableMulSelectProps } from './alert/MultiSelect';
 import { RhObservable } from './hooks/useTable';
 
@@ -20,33 +20,6 @@ interface RightExtraBtnByKeyType {
 }
 
 type rightExtraBtn = ExtraBtnAType | RightExtraBtnByKeyType[];
-
-interface BooleanGetter {
-  (...arg: any[]): boolean;
-}
-
-export type RhActionMeta = {
-  name: string;
-  action: string;
-  /**
-   * 按钮类型
-   * @type ButtonType
-   */
-  type?: string;
-  /**
-   * 超链接&模板url，用来快速跳转页面
-   */
-  link?: string;
-  /**
-   * 超链接&模板url 跳转页面时是否为新开弹窗
-   */
-  targetBlank?: boolean;
-  isMore?: boolean;
-  visibleOn?: string | boolean | BooleanGetter;
-  disabledOn?: string | boolean | BooleanGetter;
-  className?: string;
-  children?: any[];
-} & Omit<BaseButtonProps, 'key' | 'children' | 'type'>;
 
 export type RhToolbarMeta = {
   actions?: RhActionMeta[];
@@ -93,6 +66,25 @@ export type TableAlertRenderProps = {
   tableMulSelectProps?: TableMulSelectProps;
 };
 
+export type RhColumns<T = any, ValueType = any> = ProColumns<T, ValueType> & {
+  /**
+   * 查询展示方式
+   * @string 'query' | 'light'
+   * @default 'query'
+   */
+  searchType?: string;
+  /**
+   * 联动的孩子key，但父节点修改时，清空子节点的数据
+   * 目前只用于下拉选择框
+   */
+  linkChildrenKey?: string[];
+
+  /**
+   * 编辑单元格
+   */
+  quickEdit?: Record<string, any>;
+};
+
 /**
  * RhTable 扩展的属性
  */
@@ -101,23 +93,6 @@ export type RhTableSelfProps = {
    * 配置化开发表格属性
    */
   meta?: RhTableMeta;
-
-  /**
-   * 列表分页请求接口 url，支持restful 和参数模板
-   * eg: https://giscafer.com/post/${postId}/detail
-   */
-  api?: string;
-  /**
-   * api参数
-   * eg: { "postId": 123 }
-   * 最后请求 api url 解析为：https://giscafer.com/post/123/detail
-   */
-  apiParams?: Record<string, string | number>;
-  /**
-   * 接口请求方式 GET 或 POST
-   * @default 'GET'
-   */
-  apiMethod?: string;
 
   columns?: RhColumns[];
   /**
@@ -161,13 +136,8 @@ export type RhTableSelfProps = {
   /**
    * 自定义渲染右侧toolbar
    */
-  customToolBarRender?: () => /* action: ActionType | undefined
-    rows: {
-      selectedRowKeys?: (string | number)[];
-      selectedRows?: T[];
-    } */
-  React.ReactNode[];
-};
+  customToolBarRender?: () => React.ReactNode[];
+} & CommonApiType;
 
 export type RhTableProps<DataType, Params, ValueType> = ProTableProps<
   DataType,
@@ -175,25 +145,6 @@ export type RhTableProps<DataType, Params, ValueType> = ProTableProps<
   ValueType
 > &
   RhTableSelfProps;
-
-export type RhColumns<T = any, ValueType = any> = ProColumns<T, ValueType> & {
-  /**
-   * 查询展示方式
-   * @string 'query' | 'light'
-   * @default 'query'
-   */
-  searchType?: string;
-  /**
-   * 联动的孩子key，但父节点修改时，清空子节点的数据
-   * 目前只用于下拉选择框
-   */
-  linkChildrenKey?: string[];
-
-  /**
-   * 编辑单元格
-   */
-  quickEdit?: Record<string, any>;
-};
 
 export type RhActionType = ActionType & {
   pageInfo: PageInfo & { params: Record<string, any> };

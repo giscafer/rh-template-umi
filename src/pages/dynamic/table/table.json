@@ -1,7 +1,7 @@
 {
   "type": "table",
   "body": {
-    "headerTitle": "LeekHub/leek-fund 仓库",
+    "headerTitle": "这是一个动态渲染表格",
     "api": "/repos/LeekHub/leek-fund/issues",
     "searchPlacement": "toolbar",
     "columns": [
@@ -46,24 +46,19 @@
     "toolbar": {
       "actions": [
         {
-          "name": "下拉按钮",
+          "name": "导入/导出",
           "action": "batch",
           "disabled": false,
           "type": "primary",
           "ghost": true,
           "children": [
-            { "name": "全部启动", "action": "startAll" },
-            { "name": "全部停止", "action": "stopAll" },
-            { "name": "批量启动", "action": "batchStart" },
-            { "name": "批量停止", "action": "batchStop" }
+            { "name": "导入", "action": "startAll" },
+            { "name": "批量导出", "action": "batchStart" },
+            { "name": "全部导出", "action": "batchStop" }
           ]
         },
         {
-          "name": "复杂表单",
-          "action": "add-complex"
-        },
-        {
-          "name": "简单表单",
+          "name": "新建",
           "action": "add"
         }
       ]
