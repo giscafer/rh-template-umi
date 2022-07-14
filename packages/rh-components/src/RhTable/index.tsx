@@ -23,6 +23,7 @@ import React, {
 import { useVT } from 'virtualizedtableforantd4';
 import RhEmpty from '../RhEmpty';
 import RhTitle from '../RhTitle';
+import { RhActionMeta } from '../types';
 import { ACTION_TABLE_FETCH } from './action';
 import { genTableAlertOptionRender, genTableAlertRender } from './alert';
 import useDataSource from './hooks/useDataSource';
@@ -31,13 +32,7 @@ import { DefaultObservable } from './hooks/useTable';
 import useTableColumn from './hooks/useTableColumn';
 import './index.less';
 import SearchForm from './search';
-import {
-  RhActionMeta,
-  RhActionType,
-  RhColumns,
-  RhTableProps,
-  RhToolbarMeta,
-} from './types';
+import { RhActionType, RhColumns, RhTableProps, RhToolbarMeta } from './types';
 
 const RhTable = <
   DataType extends Record<string, any>,
@@ -45,15 +40,16 @@ const RhTable = <
   ValueType = 'text',
 >({
   meta,
+  schema = {},
   actionObservable$ = DefaultObservable,
   ...props
 }: RhTableProps<DataType, Params, ValueType>) => {
-  const mergeProps = Object.assign({}, props, meta || {});
+  const mergeProps = Object.assign({}, props, meta || {}, schema);
 
   const {
     headerTitle,
     scroll,
-    toolbar,
+    toolbar = undefined,
     columns = [],
     searchPlacement = 'header',
     virtual = false,
@@ -136,7 +132,7 @@ const RhTable = <
 
   const toolbarNode = useMemo(() => {
     if (!meta?.toolbar) {
-      return toolbar;
+      return toolbar ?? { settings: undefined };
     }
     const metaToolBar: RhToolbarMeta = cloneDeep(meta?.toolbar);
     if (meta.toolbar.actions?.length) {
@@ -188,6 +184,10 @@ const RhTable = <
           </Button>
         );
       });
+
+      if (!meta.toolbar?.settings) {
+        metaToolBar.settings = undefined;
+      }
       metaToolBar.actions = actionsNode as any;
       if (searchPlacement === 'toolbar') {
         metaToolBar.filter = searchFormNode;
@@ -212,7 +212,11 @@ const RhTable = <
     return pagination;
   }, [pagination, data?.total]);
 
-  const { tableColumns } = useTableColumn(columns, meta, actionObservable$);
+  const { tableColumns } = useTableColumn(
+    columns,
+    meta ?? schema,
+    actionObservable$,
+  );
 
   return (
     <div className="rh-table">

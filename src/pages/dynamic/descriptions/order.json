@@ -1,0 +1,73 @@
+{
+  "type": "descriptions",
+  "body": {
+    "title": "高级定义列表",
+    "columns": [
+      {
+        "title": "订单号",
+        "key": "orderNumber",
+        "dataIndex": "orderNumber",
+        "copyable": true,
+        "ellipsis": true
+      },
+      {
+        "title": "订单类型",
+        "key": "orderTypeLabel",
+        "dataIndex": "orderTypeLabel"
+      },
+      {
+        "title": "状态",
+        "key": "status",
+        "dataIndex": "status",
+        "valueType": "select",
+        "valueEnum": {
+          "all": { "text": "全部", "status": "Default" },
+          "open": {
+            "text": "未解决",
+            "status": "Error"
+          },
+          "closed": {
+            "text": "已解决",
+            "status": "Success"
+          }
+        }
+      },
+      {
+        "title": "智能卡类型",
+        "key": "cardType",
+        "dataIndex": "cardType",
+        "valueType": "checkbox",
+        "fieldProps": {
+          "options": [
+            {
+              "label": "学生手环",
+              "value": "ring"
+            },
+            {
+              "label": "学生书包挂件",
+              "value": "bag"
+            },
+            {
+              "label": "家长卡",
+              "value": "parentCard"
+            },
+            {
+              "label": "教师卡",
+              "value": "teacherCard"
+            },
+            {
+              "label": "临时卡",
+              "value": "tempCard"
+            }
+          ]
+        }
+      }
+    ],
+    "dataSource": {
+      "orderNumber": "D23423423234",
+      "orderTypeLabel": "购买智能卡",
+      "cardType": ["ring", "bag"],
+      "status": "closed"
+    }
+  }
+}

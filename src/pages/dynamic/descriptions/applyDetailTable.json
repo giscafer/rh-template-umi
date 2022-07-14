@@ -1,0 +1,52 @@
+{
+  "type": "table",
+  "body": {
+    "headerTitle": "申请详情",
+    "api": "/repos/LeekHub/leek-fund/issues",
+    "columns": [
+      {
+        "title": "智能卡类型",
+        "dataIndex": "state",
+        "valueType": "select",
+        "valueEnum": {
+          "all": { "text": "全部", "status": "Default" },
+          "open": {
+            "text": "未解决",
+            "status": "Error"
+          },
+          "closed": {
+            "text": "已解决",
+            "status": "Success"
+          },
+          "processing": {
+            "text": "解决中",
+            "disabled": true,
+            "status": "Processing"
+          }
+        }
+      },
+      {
+        "title": "单价",
+        "dataIndex": "title",
+        "ellipsis": true
+      },
+      {
+        "title": "数量（件）",
+        "dataIndex": "user.login"
+      },
+      {
+        "title": "金额（元）",
+        "dataIndex": "user.login"
+      },
+      {
+        "title": "创建时间",
+        "dataIndex": "created_at",
+        "valueType": "dateTime"
+      }
+    ],
+    "tableActions": [{ "name": "详情", "action": "viewDetail" }],
+    "pagination": {
+      "pageSize": 5
+    }
+  }
+}

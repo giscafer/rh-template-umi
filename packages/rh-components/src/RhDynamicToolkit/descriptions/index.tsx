@@ -4,13 +4,22 @@ import {
 } from '@ant-design/pro-components';
 import httpClient from '@roothub/helper/src/http';
 import { useRequest } from 'ahooks';
-import { isFunction, noop, template } from 'lodash';
+import { isArray, isFunction, isString, noop, template } from 'lodash';
 import React, { useCallback, useMemo } from 'react';
 import genOptionColumn from '../../common/option-column';
+import RhTitle from '../../RhTitle';
 import { CommonApiType, RhActionMeta } from '../../types';
 import { convertDataIndex } from '../../utils';
 
 export type RhDescriptionsProps = {
+  /**
+   * 标题是否显示border，用RhTitle
+   */
+  title?: string | React.ReactNode;
+  /**
+   * 标题是否显示border，用RhTitle
+   */
+  borderTitle?: boolean;
   /**
    * 数据源
    */
@@ -24,7 +33,7 @@ export type RhDescriptionsProps = {
    */
   handleClick?: (...args: any[]) => void;
 } & CommonApiType &
-  ProDescriptionsProps;
+  Omit<ProDescriptionsProps, 'title'>;
 
 export type RhDescriptionsMeta = {
   schema: RhDescriptionsProps;
@@ -40,9 +49,17 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     params,
     columns,
     optionActions,
+    borderTitle = true,
     handleClick = noop,
     ...restProps
   } = props?.schema || {};
+
+  const titleNode =
+    borderTitle && isString(restProps.title) ? (
+      <RhTitle title={restProps.title} />
+    ) : (
+      restProps.title
+    );
 
   const finalColumns = useMemo(() => {
     if (!columns) {
@@ -50,6 +67,7 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     }
     const cList = columns.map((c: any) => ({
       ...c,
+      key: isArray(c.dataIndex) ? c.dataIndex.join(',') : c.dataIndex,
       dataIndex: convertDataIndex(c.dataIndex),
     }));
     if (!optionActions?.length) {
@@ -99,8 +117,8 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
 
   return (
     <ProDescriptions
+      title={titleNode}
       bordered={restProps.bordered ?? false}
-      title={restProps.title}
       loading={loading}
       dataSource={data}
       formProps={{

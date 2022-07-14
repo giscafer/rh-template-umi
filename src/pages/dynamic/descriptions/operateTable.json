@@ -1,0 +1,50 @@
+{
+  "type": "table",
+  "body": {
+    "headerTitle": "操作记录",
+    "api": "/repos/giscafer/blog/issues",
+    "columns": [
+      {
+        "title": "订单状态",
+        "dataIndex": "state",
+        "valueType": "select",
+        "valueEnum": {
+          "all": { "text": "全部", "status": "Default" },
+          "open": {
+            "text": "未解决",
+            "status": "Error"
+          },
+          "closed": {
+            "text": "已解决",
+            "status": "Success"
+          },
+          "processing": {
+            "text": "解决中",
+            "disabled": true,
+            "status": "Processing"
+          }
+        },
+        "width": 150
+      },
+      {
+        "title": "操作员",
+        "dataIndex": "user.login",
+        "width": 150
+      },
+      {
+        "title": "操作内容",
+        "dataIndex": "title",
+        "ellipsis": true
+      },
+      {
+        "title": "操作时间",
+        "dataIndex": "created_at",
+        "valueType": "dateTime",
+        "width": 300
+      }
+    ],
+    "pagination": {
+      "pageSize": 5
+    }
+  }
+}

@@ -6,6 +6,12 @@ import { ItemType } from 'rc-menu/lib/interface';
 import { RhActionMeta } from '../types';
 import { getValOrFnResult } from '../utils';
 
+const widthMap: Record<string, number> = {
+  '1': 80,
+  '2': 100,
+  '3': 160,
+};
+
 /**
  * 生成 action
  * @param{RhActionMeta[]} actions
@@ -16,7 +22,8 @@ export default function genOptionColumn(
   actions: RhActionMeta[],
   handleClick = noop,
 ) {
-  const optionColumn = {
+  let visibleLength = '1';
+  const optionColumn: Record<string, any> = {
     title: '操作',
     dataIndex: 'option',
     valueType: 'option',
@@ -33,6 +40,7 @@ export default function genOptionColumn(
       );
       const actionInCell = visibleActionBtn.filter((a) => !a.isMore);
       const actionInMore = visibleActionBtn.filter((a) => a.isMore);
+      visibleLength = actionInCell.length + 1 + '';
 
       const items: ItemType[] = actionInMore.map(
         (item: RhActionMeta, idx: number) => {
@@ -85,5 +93,6 @@ export default function genOptionColumn(
       );
     },
   };
+  optionColumn.width = widthMap[visibleLength] || 180;
   return optionColumn;
 }

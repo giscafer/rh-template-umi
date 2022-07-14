@@ -1,3 +1,4 @@
+import { ButtonType } from 'antd/es/button';
 import { BaseButtonProps } from 'antd/lib/button/button';
 
 interface BooleanGetter {
@@ -11,7 +12,7 @@ export type RhActionMeta = {
    * 按钮类型
    * @type ButtonType
    */
-  type?: string;
+  type?: string & ButtonType;
   /**
    * 超链接&模板url，用来快速跳转页面
    */

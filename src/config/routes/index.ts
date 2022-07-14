@@ -66,7 +66,7 @@ const routes = [
       },
       {
         path: '/dynamic/descriptions',
-        name: '高级定义列表',
+        name: '高级详情页',
         component: './dynamic/descriptions/index',
       },
     ],

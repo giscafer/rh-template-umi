@@ -1,4 +1,5 @@
 import { ProColumns } from '@ant-design/pro-components';
+import { isArray } from 'lodash';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import genOptionColumn from '../../common/option-column';
@@ -39,6 +40,7 @@ function useTableColumn(
   const tableColumns: ProColumns[] = useMemo(() => {
     const cList = columns.map((c: any) => ({
       ...c,
+      key: isArray(c.dataIndex) ? c.dataIndex.join(',') : c.dataIndex,
       dataIndex: convertDataIndex(c.dataIndex),
     }));
     if (!meta?.tableActions?.length) {

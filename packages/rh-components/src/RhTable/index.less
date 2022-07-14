@@ -1,5 +1,13 @@
 .rh-table {
   position: relative;
+  .ant-pro-table {
+    & > .ant-pro-card {
+      box-shadow: none !important;
+      & > .ant-pro-card-body {
+        padding: 0;
+      }
+    }
+  }
   .ant-pro-table-list-toolbar-filter {
     .rh-table-query {
       &-filter-form {

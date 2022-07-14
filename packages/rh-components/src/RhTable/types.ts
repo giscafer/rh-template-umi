@@ -93,7 +93,13 @@ export type RhTableSelfProps = {
    * 配置化开发表格属性
    */
   meta?: RhTableMeta;
-
+  /**
+   * 同meta，冗余字段，方便和动态表单统一
+   */
+  schema?: RhTableMeta;
+  /**
+   * 表格列配置
+   */
   columns?: RhColumns[];
   /**
    * rxjs Subject Observable
