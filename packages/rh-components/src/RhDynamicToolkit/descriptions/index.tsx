@@ -4,7 +4,7 @@ import {
 } from '@ant-design/pro-components';
 import httpClient from '@roothub/helper/src/http';
 import { useRequest } from 'ahooks';
-import { isArray, isFunction, isString, noop, template } from 'lodash';
+import { isArray, isFunction, isString, noop, omit, template } from 'lodash';
 import React, { useCallback, useMemo } from 'react';
 import genOptionColumn from '../../common/option-column';
 import RhTitle from '../../RhTitle';
@@ -41,6 +41,11 @@ export type RhDescriptionsMeta = {
 };
 
 const RhDescriptions = (props: RhDescriptionsMeta) => {
+  const mergeProps = Object.assign(
+    {},
+    omit(props, 'schema'),
+    props.schema ?? {},
+  );
   const {
     api,
     apiMethod,
@@ -52,7 +57,7 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     borderTitle = true,
     handleClick = noop,
     ...restProps
-  } = props?.schema || {};
+  } = mergeProps;
 
   const titleNode =
     borderTitle && isString(restProps.title) ? (
