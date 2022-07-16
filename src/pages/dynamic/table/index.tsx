@@ -18,6 +18,8 @@ function DemoRhDynamicTableModal() {
         extra: [
           <Button
             key="code"
+            ghost
+            type="primary"
             onClick={() => {
               codeRef.current?.showDrawer();
             }}

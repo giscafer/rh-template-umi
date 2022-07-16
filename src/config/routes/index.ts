@@ -47,11 +47,6 @@ const routes = [
         path: '/table/selection',
         component: './table/selection/index',
       },
-      {
-        path: '/table/protable',
-        name: 'ProTable 原生写法',
-        component: './table/protable/index',
-      },
     ],
   },
   {
@@ -72,14 +67,19 @@ const routes = [
     ],
   },
   {
-    path: '/form',
-    name: '表单',
+    path: '/origin',
+    name: '原始开发写法',
     icon: 'rh-icon-shiyongwendang',
     routes: [
       {
-        path: '/form/basic',
+        path: '/origin/basic-form',
         name: '基础表单',
-        component: './form/basic-form',
+        component: './origin/basic-form',
+      },
+      {
+        path: '/origin/protable',
+        name: 'ProTable 原生写法',
+        component: './origin/protable/index',
       },
     ],
   },

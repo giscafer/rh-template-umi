@@ -1,7 +1,7 @@
-import { request } from 'umi';
+import { httpPost } from '@roothub/helper/http';
 
 export async function fakeSubmitForm(params: any) {
-  return request('/api/basicForm', {
+  return httpPost('/api/basicForm', {
     method: 'POST',
     data: params,
   });

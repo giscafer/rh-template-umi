@@ -80,7 +80,7 @@ const tableMeta: RhTableMeta = {
     {
       name: '路由',
       action: 'view',
-      link: '/form/basic', // 如果要传参：'/form/basic/${id}'，id 为当前row.id
+      link: '/dynamic/descriptions', // 如果要传参：'/dynamic/descriptions/${id}'，id 为当前row.id
     },
     { name: '复制', action: 'copy', isMore: true },
     { name: '删除', action: 'delete', isMore: true, danger: true },

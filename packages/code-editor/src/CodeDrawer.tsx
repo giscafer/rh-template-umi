@@ -3,9 +3,21 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import CodeEditor from './CodeEditor';
 
 export type CodeFile = {
+  /**
+   * 代码字符串
+   */
   code?: string;
+  /**
+   * 支持显示代码 raw 地址，可以快速展示，不需要构建工具生成方案和省去代码字符串文件的麻烦
+   */
   codeLink?: string;
+  /**
+   * 文件名，带后缀
+   */
   name?: string;
+  /**
+   * 高亮代码语言
+   */
   language?: string;
 };
 

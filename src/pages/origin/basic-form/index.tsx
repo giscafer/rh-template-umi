@@ -167,8 +167,7 @@ const BasicForm: FC<Record<string, any>> = () => {
                   fieldProps={{
                     style: {
                       margin: '8px 0',
-                      display:
-                        publicType && publicType === '2' ? 'block' : 'none',
+                      display: publicType && publicType === '2' ? 'block' : 'none',
                     },
                   }}
                   options={[
