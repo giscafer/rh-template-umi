@@ -5,6 +5,7 @@ import theme from './src/config/theme';
 const path = require('path');
 const glob = require('glob');
 const fs = require('fs-extra');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const getWorkspaceAlias = () => {
   const basePath = path.resolve(__dirname, './');
@@ -63,5 +64,12 @@ export default defineConfig({
       config.resolve.alias.set(key, alias[key]);
       // includeArr.push(path.join(__dirname, path.relative(__dirname, alias[key])));
     }
+
+    // monaco-editor
+    config.plugin('monaco-editor-webpack-plugin').use(MonacoWebpackPlugin, [
+      // 按需配置
+      { languages: ['html', 'css', 'javascript', 'tsx', 'typescript'] },
+    ]);
+    return config;
   },
 });

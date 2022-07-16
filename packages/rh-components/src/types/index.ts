@@ -12,7 +12,7 @@ export type RhActionMeta = {
    * 按钮类型
    * @type ButtonType
    */
-  type?: string & ButtonType;
+  type?: string | ButtonType;
   /**
    * 超链接&模板url，用来快速跳转页面
    */

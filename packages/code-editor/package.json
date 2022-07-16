@@ -1,0 +1,16 @@
+{
+  "name": "@roothub/code-editor",
+  "version": "1.0.0",
+  "description": "代码编辑器",
+  "keywords": [],
+  "license": "MIT",
+  "author": "giscafer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.33.0",
+    "react-monaco-editor": "^4.17.21"
+  }
+}
