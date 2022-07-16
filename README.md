@@ -1,25 +1,26 @@
 # rh-template-umi
 
-基于 Umi 的中后台工程脚手架，在线预览：https://rh-umi.vercel.app
+基于 Umi 的中后台前端工程脚手架，在线预览：https://rh-umi.vercel.app
 
-遵守摸鱼最佳解决方案原则：
+遵守「摸鱼最佳解决方案」的三个原则：
 
-- 1、可扩展。组件完全无 breaking change，除动态配置写法外，保留支持原生写法。
-- 2、更少的代码。 不写可能重复写的任何代码逻辑。
-- 3、可扩展性/易维护性和复用性。换团队不管 UI 交互如何，只要是 Web 管理端，技术栈一致就要完全能用。
+- 1、**更少的代码**。 不写可能重复写的任何代码逻辑。
+- 2、**可扩展性，无技术债**。组件封装都无 breaking changed，在保留支持原生写法的前提下扩展动态配置开发方式。
+- 3、**保证易维护性、复用性**。换团队时组件、配置化开发方式都能复用。
 
 ## 技术栈
 
-- Umi 4.x ([Umi Max 简介](https://next.umijs.org/zh-CN/docs/max/introduce))
+- Umi 4.x
 - React18 + TypeScript + RxJS
 
 ## 功能特点
 
 - 自定义 Sidebar 菜单
 - 内置常用组件
-- Antd 样式覆写
-- 配置开发，json 动态渲染，少量代码完成重复一样的页面开发
-- RxJS 解决状态机问题，但你可以不写 RxJS
+- Antd 样式覆写 `styles/reset/*`
+- 配置化开发，json 动态渲染，少量代码完成重复一样的页面开发
+- 没有 Redux 等，用 RxJS 解决状态机问题，但你可以不写 RxJS
+- 更少的心智和学习成本，如果你熟悉 Antd ProComponent 组件，你就是摸鱼大师
 
 yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
@@ -49,9 +50,10 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
 - [x] yarn workspaces 组件库和共享库
 - [x] 配置化表格开发封装
-- [x] 表格数据共享通信方案
-- [ ] 动态表单(WIP)
+- [x] 表格数据共享通信方案 `state$` 和 `actionObservable$`
+- [x] 动态表单(需优化代码重构)
 - [ ] RxJS 封装全局数据状态管理
+- [ ] Json 配置化块级代码生成工具开发
 - [ ] 高效中后台前端开发方案
 
 ## 使用说明

@@ -1,8 +1,8 @@
 import { createFromIconfontCN } from '@ant-design/icons';
 
-// 菜单通用图标（平台）
+// 菜单通用图标
 const IconFont = createFromIconfontCN({
-  scriptUrl: 'https://at.alicdn.com/t/font_1464531_wtmw6sdb439.js',
+  scriptUrl: '//at.alicdn.com/t/font_2875265_3hj3tfxeec1.js',
 });
 
 export default IconFont;
