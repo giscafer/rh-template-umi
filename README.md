@@ -18,8 +18,8 @@
 - 自定义 Sidebar 菜单
 - 内置常用组件
 - Antd 样式覆写
-  <!-- - Swagger Doc Api TypeScript 接口代码生成 -->
-  <!-- - 主题换色 -->
+- 配置开发，json 动态渲染，少量代码完成重复一样的页面开发
+- RxJS 解决状态机问题，但你可以不写 RxJS
 
 yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
