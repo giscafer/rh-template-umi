@@ -2,7 +2,11 @@
 
 基于 Umi 的中后台工程脚手架，在线预览：https://rh-umi.vercel.app
 
-![](./demo.png)
+遵守摸鱼最佳解决方案原则：
+
+- 1、可扩展。组件完全无 breaking change，除动态配置写法外，保留支持原生写法。
+- 2、更少的代码。 不写可能重复写的任何代码逻辑。
+- 3、可扩展性/易维护性和复用性。换团队不管 UI 交互如何，只要是 Web 管理端，技术栈一致就要完全能用。
 
 ## 技术栈
 
@@ -21,12 +25,17 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
 ```json
 {
+  "@roothub/code-editor": {
+    "location": "packages/code-editor",
+    "workspaceDependencies": [],
+    "mismatchedWorkspaceDependencies": []
+  },
   "@roothub/components": {
     "location": "packages/rh-components",
-    "workspaceDependencies": [],
-    "mismatchedWorkspaceDependencies": ["@roothub/helper/src"]
+    "workspaceDependencies": ["@roothub/helper"],
+    "mismatchedWorkspaceDependencies": []
   },
-  "@roothub/helper/src": {
+  "@roothub/helper": {
     "location": "packages/rh-helper",
     "workspaceDependencies": [],
     "mismatchedWorkspaceDependencies": []
