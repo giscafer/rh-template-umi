@@ -21,7 +21,7 @@ const deserialize = (data: string | null) => {
   return data ? JSON.parse(data) : null;
 };
 
-const defaultPrefix: string = 'edge_ui_';
+const defaultPrefix: string = 'rh_';
 
 export class RhStorage implements IStorage {
   prefix: string;
