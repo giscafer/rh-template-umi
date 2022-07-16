@@ -12,7 +12,7 @@ export const tryRun = (job: { (): any; (): any; name: any }) => {
   try {
     return job();
   } catch (e) {
-    console.warn(`try run ${job.name ?? 'unkown'} failed`, e);
+    console.warn(`try run ${job.name ?? 'unknown'} failed`, e);
     return null;
   }
 };

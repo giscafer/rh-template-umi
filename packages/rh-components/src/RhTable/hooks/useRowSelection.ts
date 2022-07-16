@@ -9,6 +9,7 @@ import { TableRowSelection } from '@ant-design/pro-table/lib/typing';
 import { Table, TableProps } from 'antd';
 import { RowSelectMethod } from 'antd/lib/table/interface';
 import { Key, useCallback, useMemo, useState } from 'react';
+import { ACTION_TABLE_SELECTION } from '../action';
 import { RhObservable } from './useTable';
 
 function useRowSelection(
@@ -44,7 +45,7 @@ function useRowSelection(
         }
 
         actionObservable$.next({
-          action: 'table/selection',
+          type: ACTION_TABLE_SELECTION,
           payload: { selectedRowKeys, selectedRows, info },
         });
       },

@@ -12,6 +12,7 @@ import type { ParamsType } from '@ant-design/pro-provider';
 import ProTable from '@ant-design/pro-table';
 import { Button, Dropdown, Menu } from 'antd';
 import { TablePaginationConfig } from 'antd/es/table/interface';
+import { ButtonType } from 'antd/lib/button';
 import { cloneDeep, isNumber } from 'lodash';
 import React, {
   useCallback,
@@ -164,7 +165,7 @@ const RhTable = <
                 />
               }
             >
-              <Button type={type} size={size} {...rest}>
+              <Button type={type as ButtonType} size={size} {...rest}>
                 {name} <DownOutlined />
               </Button>
             </Dropdown>
@@ -173,7 +174,7 @@ const RhTable = <
         return (
           <Button
             key={action}
-            type={type}
+            type={type as ButtonType}
             size={size}
             {...rest}
             onClick={() => {
