@@ -5,7 +5,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@roothub/components": ["packages/rh-components/src/index"],
-      "@roothub/helper": ["packages/rh-helper"],
+      "@roothub/helper": ["packages/rh-helper/src"],
       "@roothub/code-editor": ["packages/code-editor/src/index"]
     }
   }

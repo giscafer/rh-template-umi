@@ -5,7 +5,7 @@
  * @description 封装自带请求行为动作的按钮
  */
 
-import { httpPost } from '@roothub/helper/src/http';
+import { httpPost } from '@roothub/helper/http';
 import { Button } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 

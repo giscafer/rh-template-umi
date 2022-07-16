@@ -5,7 +5,7 @@
  * @description Low-Code 之 jsonschema 动态渲染 ModalForm 弹窗
  */
 
-import { httpPost, httpPut } from '@roothub/helper/src/http';
+import { httpPost, httpPut } from '@roothub/helper/http';
 import { message } from 'antd';
 import { isFunction, isNil, noop, template } from 'lodash';
 import { useCallback, useMemo } from 'react';

@@ -1,5 +1,5 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { queryStringToObject } from '@roothub/helper/src/utils/queryString';
+import { queryStringToObject } from '@roothub/helper/utils/queryString';
 import { Avatar, Menu, Spin } from 'antd';
 import { stringify } from 'querystring';
 import React, { useCallback } from 'react';

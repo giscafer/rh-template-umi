@@ -6,7 +6,7 @@
  */
 
 import { ProTableProps } from '@ant-design/pro-components';
-import httpClient from '@roothub/helper/src/http';
+import httpClient from '@roothub/helper/http';
 import { useRequest } from 'ahooks';
 import { PaginationProps, TablePaginationConfig } from 'antd';
 import {

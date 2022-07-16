@@ -2,7 +2,7 @@ import {
   ProDescriptions,
   ProDescriptionsProps,
 } from '@ant-design/pro-components';
-import httpClient from '@roothub/helper/src/http';
+import httpClient from '@roothub/helper/http/index';
 import { useRequest } from 'ahooks';
 import { isArray, isFunction, isString, noop, omit, template } from 'lodash';
 import React, { useCallback, useMemo } from 'react';
