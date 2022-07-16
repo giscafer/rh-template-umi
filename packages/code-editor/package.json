@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "monaco-editor": "^0.33.0",
-    "react-monaco-editor": "^4.17.21"
+    "react-monaco-editor": "^0.49.0"
   }
 }

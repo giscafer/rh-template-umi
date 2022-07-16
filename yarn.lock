@@ -12504,9 +12504,9 @@ react-merge-refs@^1.1.0:
   resolved "https://registry.npmmirror.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
-react-monaco-editor@^4.17.21:
+react-monaco-editor@^0.49.0:
   version "0.49.0"
-  resolved "https://registry.npmjs.org/react-monaco-editor/-/react-monaco-editor-0.49.0.tgz#c5f0601dc0e3df07585560ed8de817c82d717334"
+  resolved "https://registry.npmmirror.com/react-monaco-editor/-/react-monaco-editor-0.49.0.tgz#c5f0601dc0e3df07585560ed8de817c82d717334"
   integrity sha512-KZTNn1vJh1rlzIRPXjr/5HWYMPfbOoDhR+prCR7mIQCssjlkn8+SfpN4lNsiCTECo/UdpnyAdqgaIyY3yYjVeg==
   dependencies:
     prop-types "^15.8.1"
