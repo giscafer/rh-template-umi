@@ -6,7 +6,6 @@
  * @desc 左侧菜单栏
  */
 
-import IconFont from '@/components/IconFont';
 import { RhSidebar } from '@roothub/components';
 import { useMount } from 'ahooks';
 import { Layout } from 'antd';
@@ -55,7 +54,7 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
       onCollapse={toggleSideCollapsed}
       collapsedWidth={56}
       width={224}
-      trigger={
+      /* trigger={
         <div
           style={{
             padding: '0 12px',
@@ -64,7 +63,7 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
         >
           <IconFont type={isSideCollapsed ? 'rh-icon-arrow-right' : 'rh-icon-arrowleft'} />
         </div>
-      }
+      } */
     >
       <RhSidebar
         menuOptions={{

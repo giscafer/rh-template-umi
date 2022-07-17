@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import { useState } from 'react';
 import RhSidebar from '.';
-import type { RhMenuData } from './type';
+import type { RhMenuData } from './types';
 
 const { Content, Header, Sider } = Layout;
 

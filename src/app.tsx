@@ -31,7 +31,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }: any) => {
     className: 'roothub',
     fixedHeader: true,
     backgroundColor: '#fff',
-    // disableContentMargin: false,
     rightContentRender: () => <RightContent />,
     /*  waterMarkProps: {
       content: initialState?.currentUser?.name,

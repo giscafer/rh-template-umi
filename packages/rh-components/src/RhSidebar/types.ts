@@ -110,7 +110,7 @@ export type RhSidebarProps = {
    */
   pathName?: string;
   /**
-   * iconfont自定义url
+   * iconFont自定义url
    * @type string
    */
   iconScriptUrl?: string;
@@ -126,7 +126,7 @@ export type RhSidebarProps = {
   onSelect?: () => void;
   /**
    * 点击子菜单标题
-   * @type function(target: RhMenuItem)
+   * @type function(key: string)
    */
-  onTitleClick?: (target: RhMenuItem) => void;
+  onTitleClick?: (key: string) => void;
 };

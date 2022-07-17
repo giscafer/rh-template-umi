@@ -26,21 +26,26 @@ body,
       // 配合菜单 end
       .ant-layout-sider-trigger {
         height: 40px;
-        color: @white-color;
-        background-color: @primary-color !important;
+        // color: @white-color;
+        // background-color: @primary-color !important;
       }
 
       .ant-layout {
         main.ant-pro-basicLayout-content {
-          .ant-pro-page-container-warp {
-            z-index: 999;
-          }
+          .ant-pro-page-container {
+            overflow: hidden !important;
+            height: calc(~'100vh -  55px');
 
-          .ant-pro-grid-content {
-            overflow-y: auto;
-            height: 100vh;
-            padding-bottom: 100px;
-            margin-top: 4px;
+            .ant-pro-page-container-warp {
+              z-index: 999;
+            }
+
+            .ant-pro-grid-content {
+              overflow-y: auto;
+              height: calc(~'100vh -  120px');
+              padding-bottom: 100px;
+              margin-top: 4px;
+            }
           }
         }
       }

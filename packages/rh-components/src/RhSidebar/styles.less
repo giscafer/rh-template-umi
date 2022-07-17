@@ -1,0 +1,54 @@
+@import '@/styles/variables.less';
+
+@menuPrimaryColor: @primary-color;
+
+.sideMenuHeaderTitle {
+  position: relative;
+  border-bottom: 1px solid #ebecef;
+  height: 48px;
+  flex: auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+  line-height: 48px;
+  padding: 0 12px;
+  .sideMenuHeaderTitleText {
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  .anticon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-top: 8px;
+    margin-right: 11px;
+    font-size: 20px;
+    border: 1px solid #bbd6fc;
+    border-radius: 50%;
+  }
+}
+
+.rh-sidebar {
+  .menuIcon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    line-height: 40px;
+  }
+  .ant-menu-item::after {
+    border-right: 0;
+  }
+
+  li.ant-menu-submenu.ant-menu-submenu-inline {
+    border-left: 4px solid #fff;
+    &.ant-menu-submenu-open.ant-menu-submenu-selected {
+      border-left: 4px solid @menuPrimaryColor;
+      background: #fafafa;
+    }
+  }
+}
