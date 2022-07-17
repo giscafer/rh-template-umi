@@ -138,8 +138,6 @@ const RhSidebar = (props: RhSidebarProps) => {
     setMenuSelectKeys(defaultSelectedOpenKeys);
   }, [menuItemList, pathName]);
 
-  console.log('menuSelectKeys=', menuSelectKeys);
-
   return (
     <>
       {renderMenuTitle}
