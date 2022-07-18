@@ -52,7 +52,11 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 - [x] yarn workspaces 组件库和共享库
 - [x] 配置化表格开发封装
 - [x] 表格数据共享通信方案 `state$` 和 `actionObservable$`
-- [x] 动态表单(需优化代码重构)
+- [x] 动态表单(WIP)
+  - [x] drawer form
+  - [ ] modal form (需测试)
+  - [ ] 单页 form
+  - [ ] form-item 代码优化
 - [ ] workflow 灵活写法扩展
 - [ ] RxJS 封装全局数据状态管理
 - [ ] Json 配置化块级代码生成工具开发

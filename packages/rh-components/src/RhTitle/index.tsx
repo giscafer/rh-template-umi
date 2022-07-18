@@ -96,7 +96,7 @@ function RhTitle(props: RhTitleProps) {
       >
         <div
           className={styles.flexDiv}
-          style={{ justifyContent, height: `${titleStyle.height}` }}
+          style={{ height: `${titleStyle.height}` }}
         >
           <div
             className={styles.borderDiv}
@@ -136,8 +136,9 @@ function RhTitle(props: RhTitleProps) {
       {children && (
         <div
           style={{
-            display: collapseStatus ? 'none' : 'block',
+            display: collapseStatus ? 'none' : 'flex',
             paddingTop: '16px',
+            justifyContent: justifyContent,
           }}
         >
           {children}

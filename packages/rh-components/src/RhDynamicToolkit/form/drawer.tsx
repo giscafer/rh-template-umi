@@ -127,7 +127,7 @@ function RhDynamicDrawerForm({
   );
 
   const drawerProps = useMemo((): RhDrawerProps => {
-    const initVal = transformInitVal(initialValues, schema.body);
+    const initVal = transformInitVal(initialValues ?? {}, schema.body);
     const options: RhDrawerProps = {
       text,
       title: `${primaryFieldValue ? '编辑' : '新增'}${schema.title || ''}`,

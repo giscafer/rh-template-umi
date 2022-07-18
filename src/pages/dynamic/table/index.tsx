@@ -32,7 +32,7 @@ function DemoRhDynamicTableModal() {
       <p className="f2">
         只需要简单的一行代码： &lt;RhTable meta={'{'}demoSchema.body{'}'} /&gt;
       </p>
-      {demoSchema?.type === 'table' && <RhTable meta={demoSchema.body} />}
+      <RhTable meta={demoSchema.body} />
       <CodeDrawer
         ref={codeRef}
         fileList={[

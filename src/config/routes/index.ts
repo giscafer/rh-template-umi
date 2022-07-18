@@ -69,6 +69,16 @@ const routes = [
         name: '高级详情页',
         component: './dynamic/descriptions/index',
       },
+      {
+        path: '/dynamic/page-form',
+        name: '单页表单',
+        component: './dynamic/page-form/index',
+      },
+      /* {
+        path: '/dynamic/form',
+        name: 'drawer和modal表单',
+        component: './dynamic/descriptions/index',
+      }, */
     ],
   },
   {

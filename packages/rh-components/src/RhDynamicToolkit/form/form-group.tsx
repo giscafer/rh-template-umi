@@ -28,19 +28,27 @@ export type RhDynamicFormGroupProps = {
   formInitialValues?: AnyObject;
 };
 
+const defaultGroupProps = {
+  width: '100%',
+  gap: '0 16px',
+  block: true,
+  justifyContent: 'center',
+  showCollapse: false,
+  showCollapseText: false,
+  titleStyle: {},
+};
+
 function RhDynamicFormGroup({
   schema,
-  groupProps = {
-    showCollapse: true,
-    showCollapseText: true,
-    titleStyle: {},
-    maxWidth: '1200px',
-    gap: '0 16px',
-    block: false,
-  },
   formInitialValues,
+  ...restProps
 }: RhDynamicFormGroupProps) {
   const renderFormNode = useMemo(() => {
+    const groupProps = Object.assign(
+      {},
+      defaultGroupProps,
+      restProps.groupProps ?? {},
+    );
     const schemaList = isArray(schema) ? schema : [schema];
 
     return schemaList?.map((group) => {
@@ -54,10 +62,15 @@ function RhDynamicFormGroup({
             fontSize={groupProps?.fontSize}
             title={title || label}
             titleStyle={{ ...groupProps.titleStyle }}
+            justifyContent={groupProps.justifyContent}
           >
             <div
               className={cls({ 'flex-start': !groupProps.block })}
-              style={{ maxWidth: groupProps.maxWidth, gap: groupProps.gap }}
+              style={{
+                width: groupProps.width,
+                maxWidth: groupProps.maxWidth,
+                gap: groupProps.gap,
+              }}
             >
               {fields.map((f: AnyObject) => (
                 <DynamicFormItem
@@ -83,7 +96,7 @@ function RhDynamicFormGroup({
         />
       );
     });
-  }, [formInitialValues, schema, groupProps]);
+  }, [formInitialValues, schema, restProps.groupProps]);
 
   return <div>{renderFormNode}</div>;
 }
