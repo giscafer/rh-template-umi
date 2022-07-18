@@ -1,65 +1,53 @@
-import {
-  Axis,
-  Chart,
-  Coordinate,
-  Interaction,
-  Interval,
-  Tooltip,
-} from 'bizcharts';
-import React from 'react';
+import { Pie } from '@ant-design/plots';
 
-function PieChart() {
+const PieChart = () => {
   const data = [
-    { item: '事例一', count: 40, percent: 0.4 },
-    { item: '事例二', count: 21, percent: 0.21 },
-    { item: '事例三', count: 17, percent: 0.17 },
-    { item: '事例四', count: 13, percent: 0.13 },
-    { item: '事例五', count: 9, percent: 0.09 },
-  ];
-
-  const cols = {
-    percent: {
-      formatter: (val: number) => {
-        const newVal = val * 100 + '%';
-        return newVal;
-      },
+    {
+      type: '分类一',
+      value: 27,
     },
+    {
+      type: '分类二',
+      value: 25,
+    },
+    {
+      type: '分类三',
+      value: 18,
+    },
+    {
+      type: '分类四',
+      value: 15,
+    },
+    {
+      type: '分类五',
+      value: 10,
+    },
+    {
+      type: '其他',
+      value: 5,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: 'value',
+    colorField: 'type',
+    radius: 0.75,
+    label: {
+      type: 'spider',
+      labelHeight: 28,
+      content: '{name}\n{percentage}',
+    },
+    interactions: [
+      {
+        type: 'element-selected',
+      },
+      {
+        type: 'element-active',
+      },
+    ],
   };
+  return <Pie {...config} />;
+};
 
-  return (
-    <Chart
-      height={400}
-      data={data}
-      scale={cols}
-      autoFit
-      onGetG2Instance={(c: any) => {
-        c.geometries[0].elements.forEach((e: any, idx: number) => {
-          e.setState('selected', idx === 0 ? true : false);
-        });
-      }}
-    >
-      <Coordinate type="theta" radius={0.75} />
-      <Tooltip showTitle={false} />
-      <Axis visible={false} />
-      <Interval
-        position="percent"
-        adjust="stack"
-        color="item"
-        style={{
-          lineWidth: 1,
-          stroke: '#fff',
-        }}
-        label={[
-          'count',
-          {
-            content: (d: any) => {
-              return `${d.item}: ${d.percent * 100}%`;
-            },
-          },
-        ]}
-      />
-      <Interaction type="element-single-selected" />
-    </Chart>
-  );
-}
 export default PieChart;

@@ -24,57 +24,53 @@ export interface TableMulSelectProps {
   rightLinkBtn?: React.ReactNode;
 }
 
-const TableMulSelect: React.FC<TableMulSelectProps> = React.forwardRef(
-  (props) => {
-    const {
-      display,
-      count,
-      total,
-      onSelectAll,
-      displaySelectAll,
-      displaySelect,
-      onSelected,
-      onCancel,
-      rightLinkBtn,
-      showTotal = true,
-    } = props;
-    return (
-      <>
-        {display && (
-          <div className="multi-select-statistic">
-            <div className="multi-select-statistic_total">
-              {/* 自定义文本 */}
-              {displaySelect ? (
-                <span>
-                  已选
-                  <a onClick={onSelected}>{count}</a>
-                  {showTotal ? `/${total}` : null}项
-                </span>
-              ) : showTotal ? (
-                `已选${count}/${total}项`
-              ) : (
-                `已选${count}项`
-              )}
-              {/* 全选 */}
-              {displaySelectAll && (
-                <a className="select-all primary-text" onClick={onSelectAll}>
-                  全选
-                </a>
-              )}
-
-              {/* 清空 */}
-              <a className="cancel primary-text" onClick={onCancel}>
-                清空
+const TableMulSelect: React.FC<TableMulSelectProps> = (props) => {
+  const {
+    display,
+    count,
+    total,
+    onSelectAll,
+    displaySelectAll,
+    displaySelect,
+    onSelected,
+    onCancel,
+    rightLinkBtn,
+    showTotal = true,
+  } = props;
+  return (
+    <>
+      {display && (
+        <div className="multi-select-statistic">
+          <div className="multi-select-statistic_total">
+            {/* 自定义文本 */}
+            {displaySelect ? (
+              <span>
+                已选
+                <a onClick={onSelected}>{count}</a>
+                {showTotal ? `/${total}` : null}项
+              </span>
+            ) : showTotal ? (
+              `已选${count}/${total}项`
+            ) : (
+              `已选${count}项`
+            )}
+            {/* 全选 */}
+            {displaySelectAll && (
+              <a className="select-all primary-text" onClick={onSelectAll}>
+                全选
               </a>
-            </div>
-            <div className="multi-select-statistic__actions">
-              {rightLinkBtn}
-            </div>
+            )}
+
+            {/* 清空 */}
+            <a className="cancel primary-text" onClick={onCancel}>
+              清空
+            </a>
           </div>
-        )}
-      </>
-    );
-  },
-);
+          <div className="multi-select-statistic__actions">{rightLinkBtn}</div>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default TableMulSelect;

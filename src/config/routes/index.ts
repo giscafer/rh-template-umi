@@ -47,6 +47,11 @@ const routes = [
         path: '/table/selection',
         component: './table/selection/index',
       },
+      {
+        name: 'toolbar自定义',
+        path: '/table/toolbar-menu',
+        component: './table/toolbar-menu/index',
+      },
     ],
   },
   {
@@ -88,12 +93,6 @@ const routes = [
     name: '图表',
     icon: 'rh-icon-tubiao-bingtu',
     component: './charts',
-  },
-  {
-    name: '权限演示',
-    path: '/access',
-    icon: 'rh-icon-permission',
-    component: './access',
   },
   {
     name: 'Github',

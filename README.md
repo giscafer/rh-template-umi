@@ -12,6 +12,7 @@
 
 - Umi 4.x
 - React18 + TypeScript + RxJS
+- @ant-design/charts
 
 ## 功能特点
 

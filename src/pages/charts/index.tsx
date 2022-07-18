@@ -7,8 +7,8 @@ function Charts() {
     <>
       <ProCard
         title="图表示例"
-        subTitle="使用：https://www.bizcharts.net"
-        extra="2021年10月22日"
+        subTitle="使用：https://charts.ant.design/"
+        extra="2022年07月16日"
         split={'vertical'}
         bordered
         headerBordered
