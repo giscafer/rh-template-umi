@@ -1,4 +1,4 @@
-import { Button, Drawer, message, Space, Tabs } from 'antd';
+import { Button, Drawer, message, Space, Spin, Tabs } from 'antd';
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import CodeEditor from './CodeEditor';
 
@@ -23,6 +23,7 @@ export type CodeFile = {
 
 function CodeDrawer({ fileList = [] }: { fileList: CodeFile[] }, ref: any) {
   const [codeList, setCodeList] = useState<CodeFile[]>([]);
+  const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -52,7 +53,9 @@ function CodeDrawer({ fileList = [] }: { fileList: CodeFile[] }, ref: any) {
         pureCodeList.push(fileList[i]);
       }
     }
+    setCodeList(pureCodeList);
     if (pList.length > 0) {
+      setLoading(true);
       Promise.all(pList)
         .then((result) => {
           const list: CodeFile[] = result.map((code, index) => {
@@ -66,6 +69,9 @@ function CodeDrawer({ fileList = [] }: { fileList: CodeFile[] }, ref: any) {
         .catch((err) => {
           console.log(err);
           message.error(`无法访问资源：${err}`);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [fileList]);
@@ -84,17 +90,19 @@ function CodeDrawer({ fileList = [] }: { fileList: CodeFile[] }, ref: any) {
           </Space>
         }
       >
-        <Tabs type="card">
-          {codeList?.map((item: CodeFile) => {
-            const { name = '代码', code, language } = item;
+        <Spin spinning={loading} tip="加载代码…">
+          <Tabs type="card">
+            {codeList?.map((item: CodeFile) => {
+              const { name = '代码', code, language } = item;
 
-            return (
-              <Tabs.TabPane tab={name} key={name}>
-                <CodeEditor code={code || ''} language={language} />
-              </Tabs.TabPane>
-            );
-          })}
-        </Tabs>
+              return (
+                <Tabs.TabPane tab={name} key={name}>
+                  <CodeEditor code={code || ''} language={language} />
+                </Tabs.TabPane>
+              );
+            })}
+          </Tabs>
+        </Spin>
       </Drawer>
     </div>
   );
