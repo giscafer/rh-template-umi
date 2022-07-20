@@ -112,7 +112,7 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     }
 
     return resp?.data;
-  }, [api, apiParams, apiMethod, params, restProps.request]);
+  }, [api, apiParams, apiMethod, params, dataSource, restProps.request]);
 
   const { loading, data } = useRequest(handleRequest, {
     debounceWait: 300,
