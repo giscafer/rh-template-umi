@@ -12,7 +12,7 @@ export default function DescriptionsDemo() {
       fixedHeader
       header={{
         title: 'Json动态表格渲染Demo',
-        subTitle: 'RhTable 和配置化开发类似，只是meta属性完全换成json',
+        subTitle: '万物都可以用json表示，如果不行或者麻烦，是你封装得不够好用而已',
         breadcrumb: {},
       }}
     >

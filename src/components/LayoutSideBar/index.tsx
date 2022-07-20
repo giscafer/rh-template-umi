@@ -1,11 +1,3 @@
-/**
- * @author giscafer
- * @email giscafer@outlook.com
- * @create date 2021-11-24 11:01:56
- * @modify date 2022-02-14 17:45:31
- * @desc 左侧菜单栏
- */
-
 import { RhSidebar } from '@roothub/components';
 import { useMount } from 'ahooks';
 import { Layout } from 'antd';
@@ -14,7 +6,8 @@ import styles from './styles.less';
 
 const contentSelector = '#root > div.ant-design-pro > section.ant-layout > div.ant-layout';
 // mfsu奇葩bug问题（默认认为是开启）
-const mfsuBugFlag = process.env.NODE_ENV === 'development';
+const mfsuBugFlag = true;
+// const mfsuBugFlag = process.env.NODE_ENV === 'development';
 
 function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
   const [isSideCollapsed, setIsSideCollapsed] = useState<boolean>(false);
@@ -40,10 +33,6 @@ function SideBar({ menuData, pathName = '/welcome' }: Record<string, any>) {
     },
     [menuData],
   );
-
-  /*   useEffect(() => {
-    leftDistanceFn();
-  }, [isSideCollapsed, leftDistanceFn]); */
 
   return (
     <Layout.Sider
