@@ -1,5 +1,6 @@
 {
-  "type": "form-group",
+  "type": "pro-form",
+  "api": "/api/v1/giscafer/rh-template-umi/issue",
   "body": [
     {
       "id": "basic",

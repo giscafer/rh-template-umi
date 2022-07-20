@@ -205,10 +205,7 @@ export function transformDataIndexVal(
  * @returns
  *  { "rawMin": 1, "rawMax": 2 } 转换为 { "rawMin,rawMax":[1,2] }
  */
-export function transformInitVal(
-  initialValues: Record<string, any>,
-  schema: any,
-): any {
+export function transformInitVal(initialValues: any, schema: any): any {
   if (!initialValues || !isObject(initialValues)) {
     return initialValues;
   }

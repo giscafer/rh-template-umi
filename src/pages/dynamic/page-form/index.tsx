@@ -1,7 +1,7 @@
 import { githubUrl } from '@/config/constant';
 import { PageContainer } from '@ant-design/pro-layout';
 import { CodeDrawer } from '@roothub/code-editor';
-import { RhDynamicFormGroup } from '@roothub/components';
+import { RhDynamicProForm } from '@roothub/components';
 import { Button } from 'antd';
 import { FC, useRef } from 'react';
 import formSchema from '../form.json';
@@ -30,7 +30,7 @@ const BasicForm: FC<Record<string, any>> = () => {
         ],
       }}
     >
-      <RhDynamicFormGroup schema={formSchema.body} groupProps={{ width: 600 }} />
+      <RhDynamicProForm schema={formSchema} />
       <CodeDrawer
         ref={codeRef}
         fileList={[
