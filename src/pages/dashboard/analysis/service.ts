@@ -195,6 +195,6 @@ export async function fakeChartData(): Promise<{ data: AnalysisData }> {
           ],
         },
       });
-    }, 1500);
+    }, 300);
   });
 }

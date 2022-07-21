@@ -20,14 +20,14 @@ import { getTimeDistance } from './utils/utils';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
-type PAGE_NAME_UPPER_CAMEL_CASEProps = {
+type AnalysisProps = {
   BLOCK_NAME_CAMEL_CASE: AnalysisData;
   loading: boolean;
 };
 
 type SalesType = 'all' | 'online' | 'stores';
 
-const PAGE_NAME_UPPER_CAMEL_CASE: FC<PAGE_NAME_UPPER_CAMEL_CASEProps> = () => {
+const Analysis: FC<AnalysisProps> = () => {
   const [salesType, setSalesType] = useState<SalesType>('all');
   const [rangePickerValue, setRangePickerValue] = useState<RangePickerValue>(getTimeDistance('year'));
 
@@ -138,4 +138,4 @@ const PAGE_NAME_UPPER_CAMEL_CASE: FC<PAGE_NAME_UPPER_CAMEL_CASEProps> = () => {
   );
 };
 
-export default PAGE_NAME_UPPER_CAMEL_CASE;
+export default Analysis;
