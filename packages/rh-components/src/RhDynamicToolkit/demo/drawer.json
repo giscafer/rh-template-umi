@@ -6,11 +6,11 @@
   "body": [
     {
       "id": "base",
-      "label": "基本信息",
+      "title": "基本信息",
       "properties": [
         {
-          "id": "issueId",
-          "label": "Issue编号",
+          "dataIndex": "issueId",
+          "title": "Issue编号",
           "dataType": "string",
           "renderType": "input",
           "required": true,
@@ -18,16 +18,16 @@
           "validator": [{ "type": "maxLength", "value": "40" }]
         },
         {
-          "id": "name",
-          "label": "Issue名称",
+          "dataIndex": "name",
+          "title": "Issue名称",
           "dataType": "string",
           "renderType": "input",
           "required": true,
           "validator": [{ "type": "maxLength", "value": "40" }]
         },
         {
-          "id": "transformType",
-          "label": "是否开启取值范围",
+          "dataIndex": "transformType",
+          "title": "是否开启取值范围",
           "dataType": "string",
           "renderType": "radio",
           "required": true,
@@ -37,8 +37,8 @@
           ]
         },
         {
-          "id": "rawMin,rawMax",
-          "label": "原始值范围",
+          "dataIndex": "rawMin,rawMax",
+          "title": "原始值范围",
           "dataType": "string",
           "renderType": "numberRange",
           "required": true,
@@ -51,8 +51,8 @@
           ]
         },
         {
-          "id": "targetMin,targetMax",
-          "label": "目标值范围",
+          "dataIndex": "targetMin,targetMax",
+          "title": "目标值范围",
           "dataType": "string",
           "renderType": "numberRange",
           "required": true,
@@ -65,8 +65,8 @@
           ]
         },
         {
-          "id": "description",
-          "label": "描述",
+          "dataIndex": "description",
+          "title": "描述",
           "renderType": "textArea"
         }
       ]
@@ -74,11 +74,11 @@
     {
       "id": "other",
       "namePrefix": "other",
-      "label": "其他配置",
+      "title": "其他配置",
       "properties": [
         {
-          "id": "registerType",
-          "label": "注册类型",
+          "dataIndex": "registerType",
+          "title": "注册类型",
           "dataType": "string",
           "renderType": "select",
           "required": true,
@@ -98,8 +98,8 @@
           ]
         },
         {
-          "id": "valueType",
-          "label": "数据类型",
+          "dataIndex": "valueType",
+          "title": "数据类型",
           "renderType": "select",
           "required": true,
           "dataType": "string",
@@ -177,8 +177,8 @@
           ]
         },
         {
-          "id": "offset",
-          "label": "偏移",
+          "dataIndex": "offset",
+          "title": "偏移",
           "renderType": "input",
           "required": false,
           "dataType": "int",
@@ -193,8 +193,8 @@
           "validator": [{ "type": "range", "value": [0, 15] }]
         },
         {
-          "id": "count",
-          "label": "长度",
+          "dataIndex": "count",
+          "title": "长度",
           "dataType": "int",
           "renderType": "input",
           "defaultValue": 8,
@@ -255,8 +255,8 @@
               "type": "linkage"
             }
           ],
-          "id": "authority",
-          "label": "读写类型",
+          "dataIndex": "authority",
+          "title": "读写类型",
           "renderType": "radio",
           "required": true,
           "valueEnum": [
@@ -275,8 +275,8 @@
           ]
         },
         {
-          "id": "length",
-          "label": "长度（字节）",
+          "dataIndex": "length",
+          "title": "长度（字节）",
           "dataType": "int",
           "dependencies": [
             {

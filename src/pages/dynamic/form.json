@@ -4,18 +4,18 @@
   "body": [
     {
       "id": "basic",
-      "label": "基础信息",
+      "title": "基础信息",
       "properties": [
         {
-          "id": "kindergartenName",
-          "label": "幼儿园名称",
+          "dataIndex": "kindergartenName",
+          "title": "幼儿园名称",
           "renderType": "input",
           "required": true,
           "maxLength": 30
         },
         {
-          "id": "kindergartenType",
-          "label": "幼儿园类型",
+          "dataIndex": "kindergartenType",
+          "title": "幼儿园类型",
           "dataType": "string",
           "renderType": "select",
           "required": true,
@@ -25,28 +25,28 @@
           ]
         },
         {
-          "id": "xkz",
-          "label": "办学许可证号",
+          "dataIndex": "xkz",
+          "title": "办学许可证号",
           "renderType": "input",
           "required": true,
           "maxLength": 60
         },
         {
-          "id": "xkz",
-          "label": "幼儿园地址",
+          "dataIndex": "xkz",
+          "title": "幼儿园地址",
           "renderType": "input",
           "required": false
         },
         {
-          "id": "xkz",
-          "label": "详细地址",
+          "dataIndex": "xkz",
+          "title": "详细地址",
           "renderType": "input",
           "required": false,
           "maxLength": 100
         },
         {
-          "id": "remark",
-          "label": "备注",
+          "dataIndex": "remark",
+          "title": "备注",
           "renderType": "textArea",
           "required": false,
           "maxLength": 200
@@ -55,18 +55,18 @@
     },
     {
       "id": "gardantId",
-      "label": "园长信息",
+      "title": "园长信息",
       "properties": [
         {
-          "id": "kindergartenName",
-          "label": "幼儿园名称",
+          "dataIndex": "kindergartenName",
+          "title": "幼儿园名称",
           "renderType": "input",
           "required": true,
           "maxLength": 30
         },
         {
-          "id": "kindergartenType",
-          "label": "幼儿园类型",
+          "dataIndex": "kindergartenType",
+          "title": "幼儿园类型",
           "dataType": "string",
           "renderType": "select",
           "required": true,
@@ -76,28 +76,28 @@
           ]
         },
         {
-          "id": "xkz",
-          "label": "办学许可证号",
+          "dataIndex": "xkz",
+          "title": "办学许可证号",
           "renderType": "input",
           "required": true,
           "maxLength": 60
         },
         {
-          "id": "xkz",
-          "label": "幼儿园地址",
+          "dataIndex": "xkz",
+          "title": "幼儿园地址",
           "renderType": "input",
           "required": false
         },
         {
-          "id": "xkz",
-          "label": "详细地址",
+          "dataIndex": "xkz",
+          "title": "详细地址",
           "renderType": "input",
           "required": false,
           "maxLength": 100
         },
         {
-          "id": "remark",
-          "label": "备注",
+          "dataIndex": "remark",
+          "title": "备注",
           "renderType": "textArea",
           "required": false,
           "maxLength": 200

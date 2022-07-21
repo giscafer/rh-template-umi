@@ -16,14 +16,14 @@
 
 | 属性名称         | 描述                                                                 |                   举例                   | 是否必须 |
 | ---------------- | :------------------------------------------------------------------- | :--------------------------------------: | :------: |
-| id               | 表单字段名称                                                         |               `authority`                |   `是`   |
-| label            | 表单 label/title（一般为字段含义的翻译）                             |                `读写类型`                |   `是`   |
+| dataIndex        | 表单字段名称                                                         |               `authority`                |   `是`   |
+| title            | 表单标题（一般为字段含义的翻译）                                     |                `读写类型`                |   `是`   |
 | placeholder      | 输入或选择提示                                                       |              `0/1，默认值0`              |   `否`   |
 | dataType         | 数据类型 （见下边 dataType 说明）                                    |                 `string`                 |   `是`   |
 | defaultValue     | 默认值 `1`                                                           |                   `否`                   |
 | required         | 是否必填 （可选`true`、`false`）                                     |                  `true`                  |   `否`   |
 | renderType       | 渲染组件类型（组件渲染类型见下边说明，不填则默认渲染为文本输入框）   |                 `radio`                  |   `否`   |
-| valueEnum        | 数据类型 （仅当 renderType 为 `select`、`radio`、`checkbox` 时必填） | ` [{ "label": "读写", "value": "All" }]` |    -     |
+| valueEnum        | 数据类型 （仅当 renderType 为 `select`、`radio`、`checkbox` 时必填） | ` [{ "title": "读写", "value": "All" }]` |    -     |
 | validator        | 表单校验规则配置                                                     |          `[{"range":[0,9999]}]`          |   `否`   |
 | dependencies     | 表单联动依赖规则，支持联动数据渲染、显示隐藏控制                     |               `见下边举例`               |   `是`   |
 | displayFormatter | 输入框值的展示时格式转换函数 （数据库的值在前端展示之前需要转换）    |            `"${value/1000}"`             |   `否`   |
@@ -99,22 +99,22 @@
 
 ```js
 {
-      "id": "authority",
-      "label": "读写类型",
+      "dataIndex": "authority",
+      "title": "读写类型",
       "dataType": "string",
       "renderType": "radio",
       "required": true,
       "valueEnum": [
         {
-          "label": "读写",
+          "title": "读写",
           "value": "All"
         },
         {
-          "label": "只读",
+          "title": "只读",
           "value": "Read"
         },
         {
-          "label": "只写",
+          "title": "只写",
           "value": "Write"
         }
       ],
@@ -135,15 +135,15 @@
               "valueList": ["1", "3", "5"],   // fieldName 指定字段可能的值，里边的值都会影响当前配置字段（authority）联动效果
               "valueEnum": [   // 联动后控制字段 authority 渲染的数据
                 {
-                  "label": "读写",
+                  "title": "读写",
                   "value": "All"
                 },
                 {
-                  "label": "只读",
+                  "title": "只读",
                   "value": "Read"
                 },
                 {
-                  "label": "只写",
+                  "title": "只写",
                   "value": "Write"
                 }
               ]
@@ -152,7 +152,7 @@
               "valueList": ["2", "4", "6"],
               "valueEnum": [
                 {
-                  "label": "只读",
+                  "title": "只读",
                   "value": "Read"
                 }
               ]

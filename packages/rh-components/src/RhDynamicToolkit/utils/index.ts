@@ -1,6 +1,5 @@
 import {
   cloneDeep,
-  Dictionary,
   find,
   isArray,
   isNaN,
@@ -11,33 +10,39 @@ import {
   omit,
   zipObject,
 } from 'lodash';
+import { DataIndex, ValueEnumType, WidgetProps } from '../form/types';
 import { genValidatorRules } from './validator';
 
-export function includesValue(valueList = [], val: any) {
+export function includesValue(valueList: any[] = [], val: any) {
   // eslint-disable-next-line eqeqeq
   return valueList.some((item) => item == val);
 }
 
 // valueEnum 数组简化 成 对象
 export function formatValueEnum(
-  originEnum: Dictionary<any> | null | undefined,
+  originEnum?: ValueEnumType[],
   valueType = 'select',
 ) {
   if (valueType === 'select') {
     if (!isArray(originEnum)) return originEnum;
     const labelList = map(originEnum, 'label');
-    const valueList = map(originEnum, 'value');
+    const valueList: any[] = map(originEnum, 'value');
     return zipObject(valueList, labelList);
   }
   return originEnum;
 }
 
-function typeSafeDataIndex(id: any[]) {
-  if (Array.isArray(id)) return id.join('.');
-  return id;
+function typeSafeDataIndex(id: DataIndex): string {
+  if (Array.isArray(id)) {
+    return id.join('.');
+  }
+  return id ? String(id) : '';
 }
 
-function typeSafeGroupedName(id: any, prefix = []) {
+function typeSafeGroupedName(id: any, prefix?: string | string[]) {
+  if (!prefix) {
+    return id;
+  }
   const prefixList = Array.isArray(prefix) ? prefix : [prefix];
   const idList = Array.isArray(id) ? id : [id];
   return [...prefixList, ...idList];
@@ -57,26 +62,9 @@ export function getFormDataType(dataType = 'string') {
  * @param property
  * @returns fieldProps
  */
-export function unifiedProperty(
-  property: {
-    dependencies?: any;
-    id?: any;
-    dataIndex?: any;
-    label?: any;
-    title?: any;
-    dataType?: any;
-    valueEnum?: any;
-    renderType?: any;
-    valueType?: any;
-    initialValue?: any;
-    defaultValue?: any;
-  },
-  namePrefix: never[] | undefined,
-) {
+export function unifiedProperty(property: WidgetProps, namePrefix?: string) {
   const {
-    id,
     dataIndex,
-    label,
     title,
     dataType,
     valueEnum,
@@ -86,15 +74,14 @@ export function unifiedProperty(
     defaultValue,
   } = property;
 
-  const name = typeSafeGroupedName(id ?? dataIndex, namePrefix);
+  const name = typeSafeGroupedName(dataIndex, namePrefix);
 
-  const newProperty = {
+  const newProperty: { dataIndex: string; [key: string]: any } = {
     fieldProps: { size: 'medium' },
     ...property,
     name,
-    // width: 'md',
-    dataIndex: typeSafeDataIndex(id) || dataIndex,
-    title: label || title,
+    dataIndex: typeSafeDataIndex(dataIndex),
+    title,
     valueType: renderType || valueType,
     dataType: getFormDataType(dataType),
     valueEnum: formatValueEnum(valueEnum, renderType || valueType),
@@ -181,7 +168,7 @@ export function transformDataIndexVal(
     // range字段规则
     const keyArr = key.split(',');
     if (keyArr.length > 1 && isArray(fieldsValue[key])) {
-      const fieldMeta = find(schemaList, (item) => item.id === key);
+      const fieldMeta = find(schemaList, (item) => item.dataIndex === key);
 
       if (fieldMeta.dataType === 'string') {
         obj[keyArr[0]] = fieldsValue[key][0] + '';
@@ -210,14 +197,14 @@ export function transformInitVal(initialValues: any, schema: any): any {
     return initialValues;
   }
   const schemaList = flatSchemaList(schema);
-  const keyList = map(schemaList, 'id');
+  const keyList = map(schemaList, 'dataIndex');
   const obj: Record<string, any> = cloneDeep(initialValues);
   for (const key of keyList) {
     // range字段规则存在 时
     const keyArr: string[] = key.split(',');
     let val: any[] = [];
     if (keyArr.length > 1) {
-      const fieldMeta = find(schemaList, (item) => item.id === key);
+      const fieldMeta = find(schemaList, (item) => item.dataIndex === key);
 
       const firstVal = (initialValues as any)[keyArr[0]];
       const secondVal = (initialValues as any)[keyArr[1]];

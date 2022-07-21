@@ -1,7 +1,7 @@
 /**
  * @author giscafer
  * @homepage http://giscafer.com
- * @created 2022-05-27 16:05:06
+ * @created 2022-07-21 20:16:18
  * @description 根据表单配置生成表单
  */
 
@@ -15,7 +15,7 @@ import {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { Button, Form } from 'antd';
-import { cloneDeep, get, omit } from 'lodash';
+import { assign, cloneDeep, get, omit, uniqueId } from 'lodash';
 import { useMemo } from 'react';
 import {
   formatValueEnum,
@@ -25,6 +25,7 @@ import {
 import { evalExpression } from '../utils/tpl';
 import FetchButton from '../widgets/FetchButton';
 import InputNumberRange from '../widgets/InputNumberRange';
+import { LinkageRuleType, ValueEnumType } from './types';
 
 type AnyObject = Record<string, any>;
 
@@ -39,7 +40,6 @@ function RhDynamicFormItem({
     let {
       dataIndex,
       title,
-      width,
       valueType,
       valueEnum,
       renderFormItem,
@@ -53,17 +53,24 @@ function RhDynamicFormItem({
     } = props;
 
     omit(restProps, ['validator', 'defaultValue']);
+    assign(restProps, {
+      name: dataIndex,
+      key: dataIndex,
+      label: title,
+    });
 
     // 自定义jsx渲染，优先级高于valueType/renderType，在jsx中使用本组件时会更灵活
     if (renderFormItem) {
       return renderFormItem();
     }
 
+    const key = (dataIndex as any) || uniqueId('form_item_key_');
+
     return (
       <Form.Item
         noStyle
         shouldUpdate
-        key={dataIndex}
+        key={key}
         className={restProps?.className}
       >
         {(form) => {
@@ -71,7 +78,7 @@ function RhDynamicFormItem({
             restProps.disabled = evalExpression(disabledOn, formInitialValues);
           }
           // 包含联动依赖字段处理渲染逻辑
-          if (depFieldNameList?.length) {
+          if (depFieldNameList?.length && dependencies) {
             const formValues = form.getFieldsValue();
             // 联动条件
             for (const depItem of dependencies) {
@@ -91,10 +98,12 @@ function RhDynamicFormItem({
               if (depFieldVal) {
                 // 有值时才显示隐藏联动逻辑
                 if (depType === 'linkage') {
-                  // 联动条件触发重新渲染valueEnum
-                  let newValueEnum = [];
-                  const valueEnumCache = cloneDeep(valueEnum);
-                  rules?.forEach((rule) => {
+                  // 联动条件触发重新渲染 valueEnum
+                  let newValueEnum: ValueEnumType[] = [];
+                  const valueEnumCache = cloneDeep(
+                    valueEnum,
+                  ) as ValueEnumType[];
+                  rules?.forEach((rule: LinkageRuleType) => {
                     if (includesValue(rule.valueList, depFieldVal)) {
                       // 有联动时，如果原本有值，联动后选项已经去掉，则清空(TODO)
                       const fieldVal = get(
@@ -102,7 +111,7 @@ function RhDynamicFormItem({
                         namePrefix ? `${namePrefix}.${dataIndex}` : dataIndex,
                       );
 
-                      if (fieldVal && !valueEnumCache[fieldVal]) {
+                      if (fieldVal && !valueEnumCache?.[fieldVal]) {
                         // issue: https://github.com/facebook/react/issues/15656
                         // form.setFieldsValue({
                         //   [namePrefix
@@ -110,7 +119,10 @@ function RhDynamicFormItem({
                         //     : dataIndex]: undefined,
                         // });
                       }
-                      newValueEnum = formatValueEnum(rule.valueEnum, valueType);
+                      newValueEnum = formatValueEnum(
+                        rule.valueEnum,
+                        valueType,
+                      ) as ValueEnumType[];
                     }
                   });
                   valueEnum = newValueEnum;
@@ -129,15 +141,10 @@ function RhDynamicFormItem({
             return (
               showEnumSelect && (
                 <ProFormSelect
-                  width={width}
-                  key={dataIndex}
-                  name={dataIndex}
-                  label={title}
                   valueEnum={valueEnum}
                   rules={rules}
                   fieldProps={fieldProps}
                   placeholder={restProps.placeholder || `选择`}
-                  type={dataType}
                   {...restProps}
                 />
               )
@@ -149,14 +156,9 @@ function RhDynamicFormItem({
             }
             return (
               <ProFormRadio.Group
-                width={width}
-                key={dataIndex}
-                name={dataIndex}
-                label={title}
                 rules={rules}
                 fieldProps={{ ...fieldProps, width: 'md' }}
                 options={valueEnum}
-                type={dataType}
                 {...restProps}
               />
             );
@@ -170,13 +172,8 @@ function RhDynamicFormItem({
           ) {
             return (
               <ProFormDigit
-                key={dataIndex}
-                name={dataIndex}
-                label={title}
-                width={width}
                 rules={rules}
                 fieldProps={fieldProps}
-                type={dataType}
                 {...restProps}
                 style={block ? { display: 'block' } : {}}
               />
@@ -186,13 +183,8 @@ function RhDynamicFormItem({
           if (valueType === 'date') {
             return (
               <ProFormDatePicker
-                key={dataIndex}
-                name={dataIndex}
-                label={title}
-                width={width}
                 rules={rules}
                 fieldProps={fieldProps}
-                type={dataType}
                 {...restProps}
               />
             );
@@ -201,13 +193,8 @@ function RhDynamicFormItem({
           if (valueType === 'dateRange') {
             return (
               <ProFormDateRangePicker
-                key={dataIndex}
-                name={dataIndex}
-                label={title}
-                width={width}
                 rules={rules}
                 fieldProps={fieldProps}
-                type={dataType}
                 {...restProps}
               />
             );
@@ -216,10 +203,8 @@ function RhDynamicFormItem({
           if (valueType === 'numberRange') {
             return (
               <InputNumberRange
+                separator={undefined}
                 form={form}
-                key={dataIndex}
-                name={dataIndex}
-                width={width}
                 rules={rules}
                 fieldProps={fieldProps}
                 type={dataType}
@@ -230,12 +215,8 @@ function RhDynamicFormItem({
           if (valueType === 'textArea') {
             return (
               <ProFormTextArea
-                key={dataIndex}
-                name={dataIndex}
-                width={width}
                 rules={rules}
                 fieldProps={fieldProps}
-                type={dataType}
                 {...restProps}
               />
             );
@@ -244,8 +225,8 @@ function RhDynamicFormItem({
           if (valueType === 'button') {
             if (restProps.params?.url) {
               if (restProps.params?.data) {
-                const paramObj = {};
-                Object.keys(restProps.params?.data).map((key) => {
+                const paramObj: Record<string, any> = {};
+                Object.keys(restProps.params?.data).forEach((key) => {
                   const val = form.getFieldValue(key);
                   paramObj[key] = val;
                 });
@@ -256,7 +237,6 @@ function RhDynamicFormItem({
                   key={dataIndex}
                   dataIndex={dataIndex}
                   title={title}
-                  type={dataType}
                   {...restProps}
                 />
               );
@@ -269,13 +249,8 @@ function RhDynamicFormItem({
           if (valueType === 'text' || valueType === 'input' || !valueType) {
             return (
               <ProFormText
-                width={width}
-                key={dataIndex}
-                name={dataIndex}
-                label={title}
                 fieldProps={fieldProps}
                 rules={rules}
-                type={dataType}
                 placeholder={restProps.placeholder || `请输入`}
                 {...restProps}
                 footerRender={() => {

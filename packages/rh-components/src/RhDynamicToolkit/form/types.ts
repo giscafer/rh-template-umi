@@ -5,6 +5,8 @@
  * @description 规范定义，但目前表单封装比较简单还未增强，基本都是业务需求渐进增强
  */
 
+import { FieldProps } from '@ant-design/pro-form/lib/interface';
+
 export interface FormHorizontal {
   left?: number;
   right?: number;
@@ -357,3 +359,105 @@ export interface FormSchemaBase {
    */
   labelWidth?: number | string;
 }
+
+export type ValueEnumType = {
+  label: string;
+  value: string | number | boolean;
+};
+
+export type LinkageRuleType = {
+  valueEnum: ValueEnumType[];
+  valueList: string[] | number[];
+};
+
+export type DependencyType = {
+  type: string;
+  fieldName: string;
+  rules?: LinkageRuleType[];
+  valueList: string[] | number[];
+};
+
+export type ValidatorType = {
+  type: string;
+  value: string;
+};
+
+export type DataIndex = string | number | readonly (string | number)[];
+
+export type WidgetProps = {
+  /**
+   * 字段名
+   */
+  dataIndex: DataIndex;
+  /**
+   * 字段名称
+   */
+  title: string;
+  /**
+   * 表单 placeholder
+   */
+  placeholder?: string;
+  /**
+   * valueEnum 数组
+   */
+  valueEnum?: ValueEnumType[];
+  /**
+   * 数据类型，表单提交时得到的表单值类型
+   */
+  dataType?: string;
+  /**
+   * 渲染组件 widget 类型 （也可以换成renderType），默认 input/text
+   */
+  valueType?: string;
+  /**
+   * 渲染组件 widget 类型 （也可以换成valueType）
+   */
+  renderType?: string;
+  /**
+   * 条件控制是否禁用，支持表达式
+   */
+  disabledOn?: string;
+  /**
+   * 是否必填
+   * @default false
+   */
+  disabled?: boolean;
+  /**
+   * 是否必填
+   * @default false
+   */
+  required?: boolean;
+  /**
+   * 初始化默认值
+   */
+  initialValue?: string | number | any[];
+  /**
+   * 默认值，同 initialValue
+   */
+  defaultValue?: string | number | any[];
+
+  /**
+   * 联动控制
+   */
+  dependencies?: DependencyType[];
+  /**
+   * 表单验证器
+   */
+  validator?: ValidatorType[];
+  /**
+   * 表单自定义 className
+   */
+  className?: string;
+  /**
+   * 输入框值的展示时格式转换函数 （数据库的值在前端展示之前需要转换）
+   */
+  displayFormatter?: string;
+  /**
+   * 输入框值的最终格式转换函数（目的是转换成接口格式）
+   */
+  submitFormatter?: string;
+  /**
+   * antd 组件的 props
+   */
+  fieldProps?: FieldProps<any>;
+};

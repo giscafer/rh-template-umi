@@ -17,7 +17,7 @@ import { isFunction, noop, template } from 'lodash';
 import { useCallback, useMemo, useRef } from 'react';
 import { transformDataIndexVal, transformInitVal } from '../utils';
 import RhDynamicFormGroup from './form-group';
-import { FormSchemaBase } from './type';
+import { FormSchemaBase } from './types';
 
 type AnyObject = Record<string, any>;
 

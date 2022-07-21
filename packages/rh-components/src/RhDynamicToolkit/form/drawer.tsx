@@ -12,7 +12,7 @@ import { useCallback, useMemo } from 'react';
 import RhDrawerForm, { RhDrawerProps } from '../../RhDrawerForm';
 import { transformDataIndexVal, transformInitVal } from '../utils';
 import RhDynamicFormGroup from './form-group';
-import { FormSchemaBase } from './type';
+import { FormSchemaBase } from './types';
 
 type AnyObject = Record<string, any>;
 

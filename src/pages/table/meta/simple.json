@@ -1,12 +1,12 @@
 {
   "type": "form",
   "title": "Issue数据",
-  "api": "/api/v1/xxxx/${id}/issue",
+  "api": "/api/v1/xxxx/${dataIndex}/issue",
   "primaryField": "issueId",
   "body": [
     {
-      "id": "issueId",
-      "label": "Issue编号",
+      "dataIndex": "issueId",
+      "title": "Issue编号",
       "dataType": "string",
       "renderType": "input",
       "required": true,
@@ -14,16 +14,16 @@
       "validator": [{ "type": "maxLength", "value": "40" }]
     },
     {
-      "id": "name",
-      "label": "Issue名称",
+      "dataIndex": "name",
+      "title": "Issue名称",
       "dataType": "string",
       "renderType": "input",
       "required": true,
       "validator": [{ "type": "maxLength", "value": "40" }]
     },
     {
-      "id": "scanCycle",
-      "label": "扫描周期（ms）",
+      "dataIndex": "scanCycle",
+      "title": "扫描周期（ms）",
       "dataType": "int",
       "renderType": "input",
       "required": true,
@@ -31,8 +31,8 @@
       "validator": [{ "type": "min", "value": 1000 }]
     },
     {
-      "id": "transformType",
-      "label": "是否开启量程转换",
+      "dataIndex": "transformType",
+      "title": "是否开启量程转换",
       "dataType": "string",
       "renderType": "radio",
       "required": true,
@@ -42,8 +42,8 @@
       ]
     },
     {
-      "id": "rawMin,rawMax",
-      "label": "原始值范围",
+      "dataIndex": "rawMin,rawMax",
+      "title": "原始值范围",
       "dataType": "string",
       "renderType": "numberRange",
       "required": true,
@@ -56,8 +56,8 @@
       ]
     },
     {
-      "id": "targetMin,targetMax",
-      "label": "目标值范围",
+      "dataIndex": "targetMin,targetMax",
+      "title": "目标值范围",
       "dataType": "string",
       "renderType": "numberRange",
       "required": true,
@@ -70,9 +70,13 @@
       ]
     },
     {
-      "id": "description",
-      "label": "描述",
-      "renderType": "textArea"
+      "dataIndex": "description",
+      "title": "描述",
+      "renderType": "textArea",
+      "fieldProps": {
+        "maxLength": 200,
+        "showCount": true
+      }
     }
   ]
 }
