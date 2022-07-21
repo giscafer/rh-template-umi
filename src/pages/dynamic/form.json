@@ -89,18 +89,23 @@
           "required": false
         },
         {
-          "dataIndex": "xkz",
+          "dataIndex": "address",
           "title": "详细地址",
           "renderType": "input",
           "required": false,
-          "maxLength": 100
+          "fieldProps": {
+            "maxLength": 100
+          }
         },
         {
           "dataIndex": "remark",
           "title": "备注",
           "renderType": "textArea",
           "required": false,
-          "maxLength": 200
+          "fieldProps": {
+            "maxLength": 200,
+            "showCount": true
+          }
         }
       ]
     }
