@@ -2,10 +2,10 @@ import RhDynamicDrawerForm from './drawer';
 import RhDynamicFormGroup from './form-group';
 import RhDynamicFormItem from './form-item';
 import RhDynamicModalForm from './modal-form';
-import RhDynamicProForm from './pro-form';
+import RhDynamicPageForm from './page-form';
 
 export {
-  RhDynamicProForm,
+  RhDynamicPageForm,
   RhDynamicDrawerForm,
   RhDynamicModalForm,
   RhDynamicFormGroup,

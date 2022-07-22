@@ -21,7 +21,7 @@ import { FormSchemaBase } from './types';
 
 type AnyObject = Record<string, any>;
 
-type RhDynamicProFormProps = {
+type RhDynamicPageFormProps = {
   /**
    * 动态表单的 schema
    */
@@ -74,7 +74,7 @@ const defaultGroupProps = {
   width: 600,
 };
 
-function RhDynamicProForm({
+function RhDynamicPageForm({
   schema,
   initialValues,
   params = {},
@@ -85,7 +85,7 @@ function RhDynamicProForm({
   onCancel = noop,
   afterSubmit = noop,
   ...restProps
-}: RhDynamicProFormProps) {
+}: RhDynamicPageFormProps) {
   const formRef = useRef<ProFormInstance>(null);
 
   // 主键id的值
@@ -176,8 +176,8 @@ function RhDynamicProForm({
     }
     if (schema.type !== 'form') {
       console.warn?.(
-        'RhDynamicProForm::',
-        `${schema.title}的 type 类型不是pro-form，但使用了pro-form组件渲染动态表单`,
+        'RhDynamicPageForm::',
+        `${schema.title}的 type 类型不是page-form，但使用了page-form组件渲染动态表单`,
       );
     }
     return (
@@ -209,4 +209,4 @@ function RhDynamicProForm({
   );
 }
 
-export default RhDynamicProForm;
+export default RhDynamicPageForm;

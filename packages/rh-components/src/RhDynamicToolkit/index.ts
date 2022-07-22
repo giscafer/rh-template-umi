@@ -3,14 +3,14 @@ import {
   RhDynamicFormGroup,
   RhDynamicFormItem,
   RhDynamicModalForm,
-  RhDynamicProForm,
+  RhDynamicPageForm,
 } from './form';
 
 import RhDescriptions from './descriptions';
 
 export {
   RhDynamicDrawerForm,
-  RhDynamicProForm,
+  RhDynamicPageForm,
   RhDynamicModalForm,
   RhDynamicFormGroup,
   RhDynamicFormItem,
