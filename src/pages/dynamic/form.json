@@ -32,13 +32,42 @@
           "maxLength": 60
         },
         {
-          "dataIndex": "xkz",
-          "title": "幼儿园地址",
-          "renderType": "input",
-          "required": false
+          "dataIndex": "xkzPicture",
+          "title": "办学许可证",
+          "renderType": "uploadButton",
+          "required": true,
+          "fieldProps": {
+            "action": "/common/upload"
+          }
         },
         {
-          "dataIndex": "xkz",
+          "dataIndex": "city",
+          "title": "幼儿园地址",
+          "renderType": "cascader",
+          "required": false,
+          "fieldProps": {
+            "options": [
+              {
+                "value": "zhejiang",
+                "label": "Zhejiang",
+                "children": [
+                  {
+                    "value": "hangzhou",
+                    "label": "Hangzhou",
+                    "children": [
+                      {
+                        "value": "xihu",
+                        "label": "West Lake"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "dataIndex": "address",
           "title": "详细地址",
           "renderType": "input",
           "required": false,
@@ -58,54 +87,132 @@
       "title": "园长信息",
       "properties": [
         {
-          "dataIndex": "kindergartenName",
-          "title": "幼儿园名称",
+          "dataIndex": "adminName",
+          "title": "园长姓名",
           "renderType": "input",
           "required": true,
           "maxLength": 30
         },
         {
-          "dataIndex": "kindergartenType",
-          "title": "幼儿园类型",
+          "dataIndex": "phonenumber",
+          "title": "园长手机号",
           "dataType": "string",
-          "renderType": "select",
+          "renderType": "input",
+          "required": true
+        },
+        {
+          "dataIndex": "password",
+          "title": "初始密码",
+          "renderType": "input",
           "required": true,
-          "valueEnum": [
-            { "label": "办公", "value": "Linear" },
-            { "label": "民办", "value": "None" }
+          "validator": [
+            {
+              "type": "pattern",
+              "value": "^\\S*(?=\\S{8,20})(?=\\S*\\d)(?=\\S*[A-Z])(?=\\S*[a-z])(?=\\S*[!@#$%^&*? ])\\S*$"
+            }
           ]
         },
         {
-          "dataIndex": "xkz",
-          "title": "办学许可证号",
+          "dataIndex": "rePassword",
+          "title": "确认密码",
           "renderType": "input",
           "required": true,
-          "maxLength": 60
+          "validator": [
+            {
+              "type": "pattern",
+              "value": "^\\S*(?=\\S{8,20})(?=\\S*\\d)(?=\\S*[A-Z])(?=\\S*[a-z])(?=\\S*[!@#$%^&*? ])\\S*$"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "order",
+      "title": "订购服务",
+      "properties": [
+        {
+          "dataIndex": "taocan",
+          "title": "订购套餐",
+          "renderType": "select",
+          "required": true,
+          "api": "/api/v1/taocan",
+          "params": {},
+          "apiParams": {}
         },
         {
-          "dataIndex": "xkz",
-          "title": "幼儿园地址",
+          "dataIndex": "timeType",
+          "title": "授权方式",
+          "dataType": "string",
+          "renderType": "radio",
+          "required": true,
+          "valueEnum": [
+            { "label": "按年", "value": "year" },
+            { "label": "按月", "value": "month" }
+          ]
+        },
+        {
+          "dataIndex": "time",
+          "title": "授权时长",
           "renderType": "input",
-          "required": false
+          "dataType": "int",
+          "required": true,
+          "validator": [{ "type": "rangeInt", "value": [1, 9999999] }]
         },
         {
-          "dataIndex": "address",
-          "title": "详细地址",
+          "dataIndex": "fee",
+          "title": "费用",
           "renderType": "input",
-          "required": false,
-          "fieldProps": {
-            "maxLength": 100
-          }
+          "dataType": "float",
+          "required": true,
+          "validator": [{ "type": "range", "value": [1, 999999999] }]
         },
         {
-          "dataIndex": "remark",
-          "title": "备注",
-          "renderType": "textArea",
-          "required": false,
-          "fieldProps": {
-            "maxLength": 200,
-            "showCount": true
-          }
+          "dataIndex": "limitTeacher",
+          "title": "是否限制教师使用人数",
+          "dataType": "string",
+          "renderType": "radio",
+          "required": true,
+          "defaultValue": "0",
+          "valueEnum": [
+            { "label": "限制", "value": "0" },
+            { "label": "不限制", "value": "1" }
+          ]
+        },
+        {
+          "dataIndex": "teacher",
+          "title": "教师使用人数",
+          "renderType": "input",
+          "dataType": "float",
+          "required": true,
+          "disabledOn": "${limitTeacher=='0'}",
+          "validator": [{ "type": "range", "value": [1, 999999999] }]
+        },
+        {
+          "dataIndex": "limitParent",
+          "title": "是否限制家长使用人数",
+          "dataType": "string",
+          "renderType": "radio",
+          "required": true,
+          "defaultValue": "0",
+          "valueEnum": [
+            { "label": "限制", "value": "0" },
+            { "label": "不限制", "value": "1" }
+          ]
+        },
+        {
+          "dataIndex": "parent",
+          "title": "家长使用人数",
+          "renderType": "input",
+          "dataType": "float",
+          "required": true,
+          "disabledOn": "${limitParent=='0'}",
+          "validator": [{ "type": "range", "value": [1, 999999999] }]
+        },
+        {
+          "dataIndex": "price",
+          "title": "总价",
+          "renderType": "input",
+          "disabled": true
         }
       ]
     }

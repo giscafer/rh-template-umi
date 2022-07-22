@@ -7,10 +7,11 @@
  *
  * 更多用法见：src\components\RhDynamicToolkit\utils\__tests__\fomula.test.ts
  */
-
+/* eslint-disable no-param-reassign */
 import { evaluate, parse } from 'amis-formula';
 
 // 缓存一下提升性能
+// eslint-disable-next-line @typescript-eslint/ban-types
 const EVAL_CACHE: { [key: string]: Function } = {};
 
 let customEvalExpressionFn: (expression: string, data?: any) => boolean;

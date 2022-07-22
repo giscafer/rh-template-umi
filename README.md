@@ -61,6 +61,9 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 - [ ] RxJS 封装全局数据状态管理
 - [ ] Json 配置化块级代码生成工具开发
 - [ ] 高效中后台前端开发方案
+- [ ] 组件完善
+  - [ ] RhSelect 组件接口返回结构
+  - [ ] RhCascaderSelect 组件接口返回结构
 
 ## 使用说明
 

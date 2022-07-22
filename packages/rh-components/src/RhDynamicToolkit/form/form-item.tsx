@@ -5,18 +5,22 @@
  * @description 根据表单配置生成表单
  */
 
+import { ProFormUploadButton } from '@ant-design/pro-components';
 import {
+  ProFormCascader,
   ProFormDatePicker,
   ProFormDateRangePicker,
   ProFormDigit,
+  ProFormDigitRange,
   ProFormRadio,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { Button, Form } from 'antd';
-import { assign, cloneDeep, get, omit, uniqueId } from 'lodash';
+import { assign, cloneDeep, get, omit } from 'lodash';
 import { useMemo } from 'react';
+import RhSelect from '../../RhSelect';
 import {
   formatValueEnum,
   includesValue,
@@ -24,7 +28,6 @@ import {
 } from '../utils/index';
 import { evalExpression } from '../utils/tpl';
 import FetchButton from '../widgets/FetchButton';
-import InputNumberRange from '../widgets/InputNumberRange';
 import { LinkageRuleType, ValueEnumType } from './types';
 
 type AnyObject = Record<string, any>;
@@ -43,19 +46,17 @@ function RhDynamicFormItem({
       valueType,
       valueEnum,
       renderFormItem,
-      fieldProps,
       dependencies,
       depFieldNameList,
       dataType,
-      rules,
       disabledOn,
       ...restProps
     } = props;
 
-    omit(restProps, ['validator', 'defaultValue']);
+    restProps = omit(restProps, ['validator', 'defaultValue']);
     assign(restProps, {
-      name: dataIndex,
       key: dataIndex,
+      name: dataIndex,
       label: title,
     });
 
@@ -64,7 +65,7 @@ function RhDynamicFormItem({
       return renderFormItem();
     }
 
-    const key = (dataIndex as any) || uniqueId('form_item_key_');
+    const key = `form_item_key_${dataIndex}`;
 
     return (
       <Form.Item
@@ -74,12 +75,15 @@ function RhDynamicFormItem({
         className={restProps?.className}
       >
         {(form) => {
+          const formValues = form.getFieldsValue();
           if (disabledOn) {
-            restProps.disabled = evalExpression(disabledOn, formInitialValues);
+            restProps.disabled = evalExpression(
+              disabledOn,
+              Object.assign(formValues, formInitialValues ?? {}),
+            );
           }
           // 包含联动依赖字段处理渲染逻辑
           if (depFieldNameList?.length && dependencies) {
-            const formValues = form.getFieldsValue();
             // 联动条件
             for (const depItem of dependencies) {
               const { type: depType, fieldName, rules, valueList } = depItem;
@@ -131,24 +135,23 @@ function RhDynamicFormItem({
             }
           }
 
-          if (
-            (valueType === 'select' && valueEnum) ||
-            (!valueType && valueEnum)
-          ) {
+          if (valueType === 'select') {
             const showEnumSelect: boolean =
               (valueEnum && Object.keys(valueEnum).length > 0) ||
-              !!fieldProps?.options?.length;
-            return (
-              showEnumSelect && (
+              !!restProps.fieldProps?.options?.length;
+            if (showEnumSelect) {
+              return (
                 <ProFormSelect
                   valueEnum={valueEnum}
-                  rules={rules}
-                  fieldProps={fieldProps}
                   placeholder={restProps.placeholder || `选择`}
                   {...restProps}
                 />
-              )
-            );
+              );
+            }
+            const { api } = restProps;
+            if (api) {
+              return <RhSelect isFormItem={true} {...restProps} />;
+            }
           }
           if (valueType === 'radio') {
             if (!valueEnum) {
@@ -156,8 +159,7 @@ function RhDynamicFormItem({
             }
             return (
               <ProFormRadio.Group
-                rules={rules}
-                fieldProps={{ ...fieldProps, width: 'md' }}
+                fieldProps={{ ...restProps.fieldProps, width: 'md' }}
                 options={valueEnum}
                 {...restProps}
               />
@@ -172,8 +174,6 @@ function RhDynamicFormItem({
           ) {
             return (
               <ProFormDigit
-                rules={rules}
-                fieldProps={fieldProps}
                 {...restProps}
                 style={block ? { display: 'block' } : {}}
               />
@@ -181,45 +181,23 @@ function RhDynamicFormItem({
           }
 
           if (valueType === 'date') {
-            return (
-              <ProFormDatePicker
-                rules={rules}
-                fieldProps={fieldProps}
-                {...restProps}
-              />
-            );
+            return <ProFormDatePicker {...restProps} />;
           }
 
           if (valueType === 'dateRange') {
-            return (
-              <ProFormDateRangePicker
-                rules={rules}
-                fieldProps={fieldProps}
-                {...restProps}
-              />
-            );
+            return <ProFormDateRangePicker {...restProps} />;
           }
 
           if (valueType === 'numberRange') {
             return (
-              <InputNumberRange
-                separator={undefined}
-                form={form}
-                rules={rules}
-                fieldProps={fieldProps}
-                type={dataType}
+              <ProFormDigitRange
+                separatorWidth={restProps?.separatorWidth || 60}
                 {...restProps}
               />
             );
           }
           if (valueType === 'textArea') {
-            return (
-              <ProFormTextArea
-                rules={rules}
-                fieldProps={fieldProps}
-                {...restProps}
-              />
-            );
+            return <ProFormTextArea {...restProps} />;
           }
 
           if (valueType === 'button') {
@@ -242,15 +220,26 @@ function RhDynamicFormItem({
               );
             }
             // TODO: 其他类型按钮
-            return <Button key={dataIndex}>{title}</Button>;
+            return <Button {...restProps}>{title}</Button>;
+          }
+          // 上传按钮
+          if (valueType === 'uploadButton') {
+            return (
+              <ProFormUploadButton
+                action={restProps.fieldProps?.action}
+                {...restProps}
+              />
+            );
+          }
+          // 级联
+          if (valueType === 'cascader') {
+            return <ProFormCascader {...restProps} />;
           }
 
           // 保持在最末尾，都匹配不到的时候渲染input
           if (valueType === 'text' || valueType === 'input' || !valueType) {
             return (
               <ProFormText
-                fieldProps={fieldProps}
-                rules={rules}
                 placeholder={restProps.placeholder || `请输入`}
                 {...restProps}
                 footerRender={() => {

@@ -6,6 +6,7 @@
  */
 
 import { FieldProps } from '@ant-design/pro-form/lib/interface';
+import { CommonApiType } from '../../types';
 
 export interface FormHorizontal {
   left?: number;
@@ -460,4 +461,4 @@ export type WidgetProps = {
    * antd 组件的 props
    */
   fieldProps?: FieldProps<any>;
-};
+} & CommonApiType;

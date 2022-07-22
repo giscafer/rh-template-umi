@@ -28,7 +28,9 @@ export const numberReg = /^\d{1,}$/;
 // 正负整数
 export const integerReg = /^-?[0-9]\d*$/;
 
-// 数据源编码：数字、字母、下划线、_和- 组成
+// 编码：数字、字母、下划线、_和- 组成
 export const numberNoReg = /[a-zA-Z0-9_-]{2,64}$/;
 // 字母开头，下划线和横杆
-export const letterNumberNoReg = /^[a-zA-Z][a-zA-Z0-9_-]{2,64}$/;
+export const letterNumberNoReg = /^[a-zA-Z][a-zA-Z0-9_-]{0,64}$/;
+
+export const password = /^\S*(?=\S{8,20})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/;
