@@ -109,7 +109,7 @@ function useDataSource(
       } else {
         extraConfig.data = finalParams;
       }
-      // console.log('resp=', realApi, apiMethod, extraConfig, httpClient);
+      console.log('resp=', realApi, apiMethod, extraConfig, httpClient);
       try {
         resp = await httpClient.request({
           path: realApi,

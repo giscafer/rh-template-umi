@@ -119,6 +119,9 @@ export class HttpClient<SecurityDataType = unknown> extends RNHttpAdapterImp {
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || void 0;
 
+    console.log(this.instance, path);
+    console.log('requestParams=', requestParams);
+
     return this.instance.request({
       ...requestParams,
       headers: {

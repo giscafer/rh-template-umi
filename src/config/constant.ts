@@ -2,7 +2,7 @@
  * @Description: 常量
  */
 
-export const baseURL = process.env.BASE_URL;
+export const baseURL = BASE_URL;
 
 export const THEME_KEY = 'rh_theme';
 
