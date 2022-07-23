@@ -10,6 +10,7 @@ export default function DescriptionsDemo() {
   return (
     <PageContainer
       fixedHeader
+      className="ghost"
       header={{
         title: '高级详情页-Json动态渲染',
         subTitle: '万物都可以用json表示，如果不行或者麻烦，是你封装得不够好用而已',
@@ -34,7 +35,7 @@ export default function DescriptionsDemo() {
         ],
       }}
     >
-      <div className="m1">
+      <div className="page-content">
         <RhDescriptions schema={orderJson.body as any} />
         <Divider />
         <RhDescriptions schema={customerJson.body as any} />

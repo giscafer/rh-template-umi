@@ -10,7 +10,7 @@ export default function DescriptionsDemo() {
   return (
     <PageContainer
       fixedHeader
-      ghost
+      className="ghost"
       header={{
         title: '高级详情页2',
         subTitle: <Tag color="processing">使用中</Tag>,

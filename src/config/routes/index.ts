@@ -66,13 +66,13 @@ const routes = [
       },
       {
         path: '/dynamic/descriptions',
-        name: '高级详情页',
+        name: '基础详情页',
         component: './dynamic/descriptions/index',
       },
       {
-        path: '/dynamic/descriptions2',
-        name: '高级详情页2',
-        component: './dynamic/descriptions2/index',
+        path: '/dynamic/advanced',
+        name: '高级详情页',
+        component: './dynamic/advanced/index',
       },
       {
         path: '/dynamic/page-form',
