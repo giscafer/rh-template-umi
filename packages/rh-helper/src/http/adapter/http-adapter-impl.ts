@@ -26,9 +26,6 @@ export interface Token {
 }
 // 如果不是Umi，process.env.MOCK
 const isMockMode = MOCK;
-console.log('====================================');
-console.log(MOCK, BASE_URL);
-console.log('====================================');
 export class RNHttpAdapterImp implements HttpAdapter {
   baseURL: string;
   constructor() {
