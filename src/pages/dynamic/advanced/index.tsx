@@ -20,7 +20,7 @@ export default function DescriptionsDemo() {
       fixedHeader
       className="ghost"
       header={{
-        title: '高级详情页2',
+        title: '高级详情页',
         subTitle: <Tag color="processing">使用中</Tag>,
         breadcrumb: {
           routes: [
@@ -30,7 +30,7 @@ export default function DescriptionsDemo() {
             },
             {
               path: '',
-              breadcrumbName: '修改幼儿园',
+              breadcrumbName: '幼儿园详情',
             },
           ],
         },
