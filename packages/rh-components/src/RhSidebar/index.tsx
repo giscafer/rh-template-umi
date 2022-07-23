@@ -125,7 +125,8 @@ const RhSidebar = (props: RhSidebarProps) => {
         defaultOpenKeys.push(item.key);
         if (item.children?.length > 0) {
           for (const subItem of (item as any).children) {
-            if (pathName.indexOf(subItem.key) === 0) {
+            if (pathName === subItem.key) {
+              // if (pathName.indexOf(subItem.key) === 0) {
               defaultSelectedOpenKeys.push(subItem.key);
               break;
             }

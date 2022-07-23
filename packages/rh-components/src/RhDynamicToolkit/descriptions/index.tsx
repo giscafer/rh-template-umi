@@ -1,4 +1,6 @@
 import {
+  ProCard,
+  ProCardProps,
   ProDescriptions,
   ProDescriptionsProps,
 } from '@ant-design/pro-components';
@@ -29,6 +31,12 @@ export type RhDescriptionsProps = {
    */
   optionActions?: RhActionMeta[];
   /**
+   * 展示类型 default、card
+   * @default 'default'
+   */
+  type?: string;
+  cardProps?: ProCardProps;
+  /**
    * 按钮回调
    */
   handleClick?: (...args: any[]) => void;
@@ -37,6 +45,7 @@ export type RhDescriptionsProps = {
 
 export type RhDescriptionsMeta = {
   schema: RhDescriptionsProps;
+  className?: string;
   children?: React.ReactNode | Element;
 };
 
@@ -55,6 +64,8 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     columns,
     optionActions,
     borderTitle = true,
+    type = 'default',
+    cardProps = {},
     handleClick = noop,
     ...restProps
   } = mergeProps;
@@ -120,9 +131,9 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
     refreshDeps: [params],
   });
 
-  return (
+  const descriptionNode = (
     <ProDescriptions
-      title={titleNode}
+      title={type === 'default' ? titleNode : null}
       bordered={restProps.bordered ?? false}
       loading={loading}
       dataSource={data}
@@ -131,10 +142,19 @@ const RhDescriptions = (props: RhDescriptionsMeta) => {
       }}
       editable={restProps.editable || undefined}
       columns={finalColumns}
+      className={type !== 'card' ? restProps.className : ''}
     >
       {restProps.children}
     </ProDescriptions>
   );
+  if (type === 'card') {
+    return (
+      <ProCard title={titleNode} className={restProps.className} {...cardProps}>
+        {descriptionNode}
+      </ProCard>
+    );
+  }
+  return descriptionNode;
 };
 
 export default RhDescriptions;

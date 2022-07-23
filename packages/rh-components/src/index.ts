@@ -14,6 +14,7 @@ import RhSearchInput from './RhSearchInput';
 import RhSidebar from './RhSidebar';
 import RhTable from './RhTable';
 import useTable from './RhTable/hooks/useTable';
+import RhTitle from './RhTitle';
 import RhTree from './RhTree';
 
 export { default as RhConfigProvider } from './config-provider';
@@ -28,6 +29,7 @@ export {
   RhTable,
   useTable,
   RhTree,
+  RhTitle,
   // 动态表单===start===
   RhDynamicPageForm,
   RhDynamicDrawerForm,

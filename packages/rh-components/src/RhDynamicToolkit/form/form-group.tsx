@@ -74,7 +74,7 @@ function RhDynamicFormGroup({
             >
               {fields.map((f: AnyObject) => (
                 <DynamicFormItem
-                  key={f.id}
+                  key={f.dataIndex}
                   widgetProps={f}
                   namePrefix={groupProps.namePrefix || namePrefix}
                   block={groupProps.block}

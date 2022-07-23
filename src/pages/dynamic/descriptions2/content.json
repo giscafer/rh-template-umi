@@ -1,0 +1,41 @@
+{
+  "columns": [
+    {
+      "title": "创建人",
+      "dataIndex": "creator"
+    },
+    {
+      "title": "创建时间",
+      "dataIndex": "createTime"
+    },
+    {
+      "title": "当前套餐",
+      "dataIndex": "package"
+    },
+    {
+      "title": "教师限制数量",
+      "dataIndex": "limitTeacher"
+    },
+    {
+      "title": "家长限制数量",
+      "dataIndex": "limitParent"
+    },
+    {
+      "title": "授权时长",
+      "dataIndex": "licenseTime"
+    },
+    {
+      "title": "到期时间",
+      "dataIndex": "outDate"
+    }
+  ],
+  "dataSource": {
+    "package": "D23423423234",
+    "limitParent": "100",
+    "limitTeacher": "100",
+    "creator": "张三",
+    "createTime": "2022-07-23 14:30:21",
+    "licenseTime": "一年",
+    "outDate": "2023-07-23"
+  }
+}

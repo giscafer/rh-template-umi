@@ -70,6 +70,11 @@ const routes = [
         component: './dynamic/descriptions/index',
       },
       {
+        path: '/dynamic/descriptions2',
+        name: '高级详情页2',
+        component: './dynamic/descriptions2/index',
+      },
+      {
         path: '/dynamic/page-form',
         name: '单页表单',
         component: './dynamic/page-form/index',

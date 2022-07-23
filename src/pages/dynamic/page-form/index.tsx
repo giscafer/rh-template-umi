@@ -12,6 +12,7 @@ const BasicForm: FC<Record<string, any>> = () => {
   return (
     <PageContainer
       fixedHeader
+      ghost={false}
       header={{
         title: '单页表单',
         breadcrumb: {},

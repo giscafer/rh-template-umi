@@ -1,0 +1,80 @@
+{
+  "type": "card",
+  "title": "基础信息",
+  "columns": [
+    {
+      "dataIndex": "kindergartenName",
+      "title": "幼儿园名称",
+      "renderType": "input",
+      "required": true,
+      "maxLength": 30
+    },
+    {
+      "dataIndex": "kindergartenType",
+      "title": "幼儿园类型",
+      "dataType": "string",
+      "renderType": "select",
+      "required": true,
+      "valueEnum": [
+        { "label": "办公", "value": "Linear" },
+        { "label": "民办", "value": "None" }
+      ]
+    },
+    {
+      "dataIndex": "city",
+      "title": "幼儿园地址",
+      "renderType": "cascader",
+      "required": false,
+      "fieldProps": {
+        "options": [
+          {
+            "value": "zhejiang",
+            "label": "Zhejiang",
+            "children": [
+              {
+                "value": "hangzhou",
+                "label": "Hangzhou",
+                "children": [
+                  {
+                    "value": "xihu",
+                    "label": "West Lake"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "dataIndex": "address",
+      "title": "详细地址",
+      "renderType": "input",
+      "required": false,
+      "maxLength": 100
+    },
+    {
+      "dataIndex": "xkz",
+      "title": "办学许可证号",
+      "renderType": "input",
+      "required": true,
+      "maxLength": 60
+    },
+    {
+      "dataIndex": "xkzPicture",
+      "title": "办学许可证",
+      "renderType": "uploadButton",
+      "required": true,
+      "fieldProps": {
+        "action": "/common/upload"
+      }
+    },
+    {
+      "dataIndex": "remark",
+      "title": "备注",
+      "renderType": "textArea",
+      "required": false,
+      "maxLength": 200
+    }
+  ]
+}

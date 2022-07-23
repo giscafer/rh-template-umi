@@ -1,0 +1,42 @@
+{
+  "type": "card",
+  "title": "园长信息",
+  "columns": [
+    {
+      "title": "幼儿园名称",
+      "dataIndex": "gardantName",
+      "ellipsis": true
+    },
+    {
+      "title": "幼儿园ID",
+      "dataIndex": "gardantId"
+    },
+    {
+      "title": "手机号",
+      "dataIndex": "phonenumber",
+      "copyable": true
+    },
+    {
+      "title": "联系人",
+      "dataIndex": "contact"
+    },
+    {
+      "title": "备注",
+      "dataIndex": "remark",
+      "ellipsis": true
+    },
+    {
+      "title": "联系地址",
+      "dataIndex": "address",
+      "ellipsis": true
+    }
+  ],
+  "dataSource": {
+    "gardantName": "丽影幼儿园",
+    "gardantId": "2323423",
+    "phonenumber": "1222222222",
+    "contact": "张三",
+    "address": "广东省广州市海珠区客村",
+    "remark": "closed"
+  }
+}
