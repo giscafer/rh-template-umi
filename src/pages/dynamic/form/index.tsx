@@ -16,7 +16,6 @@ export default function DynamicForm() {
       <Divider />
       <RhDynamicModalForm text="Modal Form" schema={simpleJson} />
       <Divider />
-
       <Button type="primary" onClick={() => setDrawerVisible(!drawerVisible)}>
         Drawer Form
       </Button>

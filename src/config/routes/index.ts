@@ -65,6 +65,11 @@ const routes = [
         component: './dynamic/table/index',
       },
       {
+        path: '/dynamic/form',
+        name: '弹出表单',
+        component: './dynamic/form/index',
+      },
+      {
         path: '/dynamic/page-form',
         name: '单页表单',
         component: './dynamic/page-form/index',
@@ -78,11 +83,6 @@ const routes = [
         path: '/dynamic/advanced',
         name: '高级详情页',
         component: './dynamic/advanced/index',
-      },
-      {
-        path: '/dynamic/form',
-        name: '弹出表单',
-        component: './dynamic/form/index',
       },
     ],
   },
