@@ -46,6 +46,7 @@ export type RhDescriptionsProps = {
 export type RhDescriptionsMeta = {
   schema: RhDescriptionsProps;
   className?: string;
+  cardProps?: ProCardProps;
   children?: React.ReactNode | Element;
 };
 

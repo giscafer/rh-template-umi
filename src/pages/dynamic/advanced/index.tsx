@@ -1,12 +1,20 @@
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { RhDescriptions, RhTable, RhTitle } from '@roothub/components';
 import { Button, Tag } from 'antd';
+import { map } from 'rxjs';
+import { useEventCallback } from 'rxjs-hooks';
 import baseJson from './base.json';
 import contentJson from './content.json';
 import operateTableJson from './deviceOrder.json';
 import gardenJson from './garden.json';
+import programJson from './program.json';
 
 export default function DescriptionsDemo() {
+  const [onTabChange, [tabActiveKey]] = useEventCallback<any, any>(
+    (event$) => event$.pipe(map((event) => [event])),
+    ['base'],
+  );
+
   return (
     <PageContainer
       fixedHeader
@@ -44,12 +52,42 @@ export default function DescriptionsDemo() {
           key: 'program',
         },
       ]}
+      tabActiveKey={tabActiveKey}
+      onTabChange={onTabChange}
     >
-      <RhDescriptions schema={baseJson as any} className="mt2" />
-      <RhDescriptions schema={gardenJson as any} className="mt2" />
-      <ProCard title={<RhTitle title="设备订单" />} extra={<Button type="primary">购买设备</Button>} className="mt2">
-        <RhTable schema={operateTableJson.body} />
-      </ProCard>
+      {tabActiveKey === 'base' && (
+        <div className="base-content">
+          <RhDescriptions schema={baseJson as any} className="mt2" />
+          <RhDescriptions schema={gardenJson as any} className="mt2" />
+          <ProCard
+            title={<RhTitle title="设备订单" />}
+            extra={<Button type="primary">购买设备</Button>}
+            className="mt2"
+          >
+            <RhTable schema={operateTableJson.body} />
+          </ProCard>
+        </div>
+      )}
+      {tabActiveKey === 'program' && (
+        <div className="program-content">
+          <RhDescriptions
+            schema={{ title: '园丁小程序', ...programJson } as any}
+            className="mt2"
+            cardProps={{
+              extra: (
+                <div>
+                  <Button ghost type="primary" className="mr2">
+                    解除绑定
+                  </Button>
+                  <Button type="primary">绑定</Button>
+                </div>
+              ),
+            }}
+          />
+          <RhDescriptions schema={{ title: '家长小程序', ...programJson } as any} className="mt2" />
+        </div>
+      )}
+
       <div style={{ height: '120px' }}></div>
     </PageContainer>
   );

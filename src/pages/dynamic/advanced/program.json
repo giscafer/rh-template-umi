@@ -1,0 +1,49 @@
+{
+  "type": "card",
+  "columns": [
+    {
+      "title": "小程序名称",
+      "dataIndex": "programName"
+    },
+    {
+      "title": "部署类型",
+      "dataIndex": "deployLabel"
+    },
+    {
+      "title": "AppID",
+      "dataIndex": "appID"
+    },
+    {
+      "title": "AppSecret",
+      "dataIndex": "appSecret"
+    },
+    {
+      "title": "小程序logo",
+      "dataIndex": "logoUrl",
+      "valueType": "image"
+    },
+    {
+      "title": "备注",
+      "dataIndex": "remark"
+    },
+    {
+      "title": "管理员姓名",
+      "dataIndex": "adminName"
+    },
+    {
+      "title": "管理员手机号",
+      "dataIndex": "adminPhone"
+    }
+  ],
+  "dataSource": {
+    "programName": "沃德天小程序园丁端",
+    "deployLabel": "品牌化",
+    "programTypeLabel": "园丁端",
+    "appID": "sfsdfsdfsdf",
+    "appSecret": "sfsdfsdfsdfsfsdfsdfsdf",
+    "logoUrl": "https://raw.githubusercontents.com/LeekHub/leek-fund/master/screenshot/leek-logo.png",
+    "remark": "备注信息",
+    "adminName": "李四",
+    "adminPhone": "133333333333"
+  }
+}
