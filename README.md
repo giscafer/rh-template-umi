@@ -54,16 +54,16 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 - [x] 表格数据共享通信方案 `state$` 和 `actionObservable$`
 - [x] 动态表单(WIP)
   - [x] drawer form
+  - [x] 单页 form
+  - [x] form-item 代码优化
   - [ ] modal form (需测试)
-  - [ ] 单页 form
-  - [ ] form-item 代码优化
 - [ ] workflow 灵活写法扩展
 - [ ] RxJS 封装全局数据状态管理
 - [ ] Json 配置化块级代码生成工具开发
-- [ ] 高效中后台前端开发方案
 - [ ] 组件完善
   - [ ] RhSelect 组件接口返回结构
   - [ ] RhCascaderSelect 组件接口返回结构
+- [ ] 开发方案文档&demo
 
 ## 使用说明
 

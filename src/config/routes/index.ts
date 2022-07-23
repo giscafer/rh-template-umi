@@ -65,6 +65,11 @@ const routes = [
         component: './dynamic/table/index',
       },
       {
+        path: '/dynamic/page-form',
+        name: '单页表单',
+        component: './dynamic/page-form/index',
+      },
+      {
         path: '/dynamic/descriptions',
         name: '基础详情页',
         component: './dynamic/descriptions/index',
@@ -75,15 +80,10 @@ const routes = [
         component: './dynamic/advanced/index',
       },
       {
-        path: '/dynamic/page-form',
-        name: '单页表单',
-        component: './dynamic/page-form/index',
-      },
-      /* {
         path: '/dynamic/form',
-        name: 'drawer和modal表单',
-        component: './dynamic/descriptions/index',
-      }, */
+        name: '弹出表单',
+        component: './dynamic/form/index',
+      },
     ],
   },
   {
