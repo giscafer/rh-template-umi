@@ -78,7 +78,7 @@ const tableMeta: RhTableMeta = {
       targetBlank: true,
     },
     {
-      name: '路由示例',
+      name: '路由',
       action: 'viewRoute',
       // 传参场景举例：'/dynamic/descriptions/${id}'，id 为当前row.id
       link: '/dynamic/descriptions',

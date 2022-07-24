@@ -8,8 +8,8 @@ import { getValOrFnResult } from '../utils';
 
 const widthMap: Record<string, number> = {
   '1': 80,
-  '2': 100,
-  '3': 160,
+  '2': 120,
+  '3': 180,
 };
 
 /**
