@@ -8,21 +8,18 @@ import { message } from 'antd';
  * take: 拿，取。监听action
  */
 export default function workflow(actionObservable$: RhObservable<SubjectAction>) {
+  const handleDrawerVisible = (payload = {}) => actionObservable$.put({ type: '$merge', payload });
+  const refreshTable = () => actionObservable$.put({ type: '$table/refresh' });
+
   // 监听按钮action
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   actionObservable$.take('add', (action: SubjectAction) => {
-    // 设置state，显示简单动态表单
-    actionObservable$.put({
-      type: '$merge',
-      payload: { drawerSimpleVisible: true },
-    });
+    // 显示简单drawer弹窗
+    handleDrawerVisible({ drawerSimpleVisible: true });
   });
   actionObservable$.take('add-complex', () => {
-    // 设置state，显示复杂动态表单
-    actionObservable$.put({
-      type: '$merge',
-      payload: { drawerComplexVisible: true },
-    });
+    // 显示复杂drawer弹窗
+    handleDrawerVisible({ drawerComplexVisible: true });
   });
   // 批量订阅 toolbar 的 action 数组
   actionObservable$.take(['startAll', 'stopAll', 'batchStart', 'batchStop'], (action: SubjectAction) => {
@@ -30,9 +27,12 @@ export default function workflow(actionObservable$: RhObservable<SubjectAction>)
   });
   // 批量订阅 optionActions 数组
   actionObservable$.take(['edit', 'copy', 'delete'], (action: SubjectAction) => {
-    message.info('action=' + action.type);
+    message.info('optionActions=' + action.type);
   });
 
-  // todo: 类似hooks的方式返回，改进或者支持更多灵活写法
-  // return {}
+  // 类似hooks的方式返回
+  return {
+    refreshTable,
+    hideDrawer: handleDrawerVisible,
+  };
 }

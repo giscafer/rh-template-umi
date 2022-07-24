@@ -47,23 +47,23 @@ yarn workspaces （[文章介绍](https://juejin.cn/post/7011024137707585544))
 
 ## TODO
 
-> RxJS 相关的使用封装，要做到心智成本低，易上手易维护，使用者可以不懂 RxJS，可提供写法方案但可以选择不写
+> RxJS 相关的使用封装，要做到心智成本低，易上手易维护，使用者使用时可以不懂 RxJS。
 
 - [x] yarn workspaces 组件库和共享库
 - [x] 配置化表格开发封装
 - [x] 表格数据共享通信方案 `state$` 和 `actionObservable$`
-- [x] 动态表单(WIP)
+- [x] 动态表单
   - [x] drawer form
   - [x] 单页 form
   - [x] form-item 代码优化
-  - [ ] modal form (需测试)
-- [ ] workflow 灵活写法扩展
+  - [x] modal form
+- [x] workflow 灵活写法扩展
 - [ ] RxJS 封装全局数据状态管理
-- [ ] Json 配置化块级代码生成工具开发
-- [ ] 组件完善
+- [ ] 组件完善(WIP)
   - [ ] RhSelect 组件接口返回结构
   - [ ] RhCascaderSelect 组件接口返回结构
 - [ ] 开发方案文档&demo
+- [ ] Json 配置化块级代码生成工具开发
 
 ## 使用说明
 
@@ -78,6 +78,25 @@ Start the dev server,
 ```bash
 $ yarn dev
 ```
+
+## Screenshots
+
+### 配置化开发代码示例
+
+- 在线 demo 页面：https://rh-umi.vercel.app/table/meta
+- 源码文件：https://github.com/giscafer/rh-template-umi/blob/main/src/pages/table/meta/index.tsx
+
+页面代码，逻辑和 UI 分离
+
+![](./screenshots/page.png)
+
+workflow.ts 处理页面逻辑/副作用
+
+![](./screenshots/workflow.png)
+
+table-meta.ts 列表配置代码
+
+![](./screenshots/table-meta.png)
 
 ## License
 

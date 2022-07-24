@@ -15,7 +15,8 @@ import workflow from './workflow';
 
 export default () => {
   const { route }: any = useRouteData();
-  const { state$, actionObservable$ } = useTable(workflow);
+  // 通过提供的 useTable 接收 workflow 控制状态和副作用
+  const { state$, actionObservable$, hideDrawer, refreshTable } = useTable(workflow);
 
   return (
     <PageContainer
@@ -27,29 +28,30 @@ export default () => {
         extra: [],
       }}
     >
+      {/* 配置化开发表格示例 */}
       <RhTable meta={tableMeta} actionObservable$={actionObservable$} />
+      {/* 简单弹窗示例代码 */}
       <RhDynamicDrawerForm
         visible={state$.drawerSimpleVisible}
         schema={demoSimpleSchema}
         onClose={() => {
-          actionObservable$.put({ type: '$merge', payload: { drawerSimpleVisible: false } });
+          hideDrawer({ drawerSimpleVisible: false });
         }}
         afterSubmit={() => {
-          // refresh table
-          actionObservable$.put({ type: '$table/refresh', payload: { drawerSimpleVisible: false } });
+          refreshTable();
         }}
       />
+      {/* 复杂弹窗例代码 */}
       <RhDynamicDrawerForm
         visible={state$.drawerComplexVisible}
         schema={demoComplexSchema}
         // initialValues={state$.selectedRow} // 编辑的情况
         // params={{ id: id }} // restful 接口
         onClose={() => {
-          actionObservable$.put({ type: '$merge', payload: { drawerComplexVisible: false } });
+          hideDrawer({ drawerComplexVisible: false });
         }}
         afterSubmit={() => {
-          // refresh table
-          actionObservable$.put({ type: '$table/refresh', payload: { drawerComplexVisible: false } });
+          refreshTable();
         }}
       />
     </PageContainer>

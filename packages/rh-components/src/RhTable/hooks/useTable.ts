@@ -41,7 +41,13 @@ export const DefaultObservable = {
   subscribe: (observer?: any) => observer,
 };
 
-function useTable(workflow = noop) {
+export type WorkflowType = {
+  state$: Record<string, any>;
+  actionObservable$: RhObservable<any>;
+  [key: string]: any;
+};
+
+function useTable(workflow = noop): WorkflowType {
   const [tableState, setTableState] = useState<Record<string, any>>({});
   const subject = new Subject();
   const actionMap = new Map<string, any>();
@@ -85,14 +91,11 @@ function useTable(workflow = noop) {
   });
 
   useEffect(() => {
-    if (isFunction(workflow)) {
-      workflow(actionObservable$);
-    }
     return () => {
       actionMap.clear();
       subscribe$.unsubscribe();
     };
-  }, [workflow]);
+  }, []);
 
   // tableState 可观察数据流
   const state$: Record<string, any> = useObservable(
@@ -101,7 +104,12 @@ function useTable(workflow = noop) {
     [tableState],
   );
 
-  return { state$, actionObservable$ };
+  if (isFunction(workflow)) {
+    const taskMap = workflow(actionObservable$) ?? {};
+    return { ...taskMap, state$, actionObservable$ };
+  } else {
+    return { state$, actionObservable$ };
+  }
 }
 
 export default useTable;
