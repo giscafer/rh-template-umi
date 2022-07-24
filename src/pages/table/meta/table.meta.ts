@@ -73,14 +73,15 @@ const tableMeta: RhTableMeta = {
   optionActions: [
     {
       name: '外部链接',
-      action: 'view',
+      action: 'viewLink',
       link: '${html_url}', // 表示用row.html_url 赋值
       targetBlank: true,
     },
     {
-      name: '路由',
-      action: 'view',
-      link: '/dynamic/descriptions', // 如果要传参：'/dynamic/descriptions/${id}'，id 为当前row.id
+      name: '路由示例',
+      action: 'viewRoute',
+      // 传参场景举例：'/dynamic/descriptions/${id}'，id 为当前row.id
+      link: '/dynamic/descriptions',
     },
     { name: '复制', action: 'copy', isMore: true },
     { name: '删除', action: 'delete', isMore: true, danger: true },

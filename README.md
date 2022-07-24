@@ -86,17 +86,17 @@ $ yarn dev
 - 在线 demo 页面：https://rh-umi.vercel.app/table/meta
 - 源码文件：https://github.com/giscafer/rh-template-umi/blob/main/src/pages/table/meta/index.tsx
 
-页面代码，逻辑和 UI 分离
+页面视图层代码，1、逻辑和 UI 分离；2、配置化开发表格，JSON 动态渲染表单（你没看错，整个页面就只有那么多 react tsx 代码）
 
 ![](./screenshots/page.png)
-
-workflow.ts 处理页面逻辑/副作用
-
-![](./screenshots/workflow.png)
 
 table-meta.ts 列表配置代码
 
 ![](./screenshots/table-meta.png)
+
+workflow.ts 处理页面逻辑/副作用
+
+![](./screenshots/workflow.png)
 
 ## License
 

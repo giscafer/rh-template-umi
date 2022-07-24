@@ -25,12 +25,11 @@ export default () => {
         title: route.name,
         subTitle: '动态表格&动态表单渲染',
         breadcrumb: {},
-        extra: [],
       }}
     >
       {/* 配置化开发表格示例 */}
       <RhTable meta={tableMeta} actionObservable$={actionObservable$} />
-      {/* 简单弹窗示例代码 */}
+      {/* 简单动态渲染弹窗示例代码 */}
       <RhDynamicDrawerForm
         visible={state$.drawerSimpleVisible}
         schema={demoSimpleSchema}
@@ -41,7 +40,7 @@ export default () => {
           refreshTable();
         }}
       />
-      {/* 复杂弹窗例代码 */}
+      {/* 复杂动态渲染弹窗例代码 */}
       <RhDynamicDrawerForm
         visible={state$.drawerComplexVisible}
         schema={demoComplexSchema}
